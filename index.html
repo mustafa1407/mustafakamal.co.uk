@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mustafa Kamal — Electronics Engineer & PCB Designer</title>
+<meta name="description" content="Electronics Engineer specialising in PCB design, power electronics, and hardware development. Available for freelance projects.">
+<style>
+  :root {
+    --teal: #1D9E75;
+    --teal-light: #E1F5EE;
+    --teal-mid: #5DCAA5;
+    --teal-dark: #0F6E56;
+    --teal-deeper: #085041;
+    --amber-light: #FAEEDA;
+    --amber-dark: #854F0B;
+    --blue-light: #E6F1FB;
+    --blue-dark: #185FA5;
+    --purple-light: #EEEDFE;
+    --purple-dark: #534AB7;
+    --text: #1a1a1a;
+    --text-sec: #6b6b6b;
+    --text-ter: #9a9a9a;
+    --bg: #ffffff;
+    --bg-sec: #f7f7f5;
+    --bg-ter: #f0efec;
+    --border: rgba(0,0,0,0.1);
+    --border-mid: rgba(0,0,0,0.18);
+    --radius: 8px;
+    --radius-lg: 12px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+  /* NAV */
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); border-bottom: 0.5px solid var(--border); padding: 0 40px; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .nav-logo { font-size: 15px; font-weight: 600; color: var(--text); letter-spacing: -0.01em; }
+  .nav-logo span { color: var(--teal); }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a { font-size: 13px; color: var(--text-sec); text-decoration: none; transition: color 0.15s; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-right { display: flex; align-items: center; gap: 12px; }
+  .nav-hire { font-size: 13px; padding: 7px 18px; background: var(--text); color: #fff; border-radius: var(--radius); border: none; cursor: pointer; font-weight: 500; text-decoration: none; transition: opacity 0.15s; }
+  .nav-hire:hover { opacity: 0.85; }
+  .nav-admin-btn { font-size: 12px; color: var(--text-ter); cursor: pointer; background: none; border: none; padding: 4px 8px; border-radius: var(--radius); transition: background 0.15s; }
+  .nav-admin-btn:hover { background: var(--bg-sec); color: var(--text-sec); }
+  .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+  .hamburger span { display: block; width: 20px; height: 1.5px; background: var(--text); margin: 4px 0; transition: all 0.2s; }
+  .mobile-menu { display: none; position: fixed; top: 60px; left: 0; right: 0; background: var(--bg); border-bottom: 0.5px solid var(--border); padding: 20px 24px; z-index: 99; flex-direction: column; gap: 16px; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { font-size: 15px; color: var(--text-sec); text-decoration: none; }
+
+  /* HERO */
+  .hero { padding: 72px 40px 64px; border-bottom: 0.5px solid var(--border); display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center; max-width: 1100px; margin: 0 auto; }
+  .hero-eyebrow { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-ter); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+  .hero-eyebrow::before { content: ''; display: inline-block; width: 28px; height: 1.5px; background: var(--teal); }
+  .hero h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; color: var(--text); line-height: 1.12; margin-bottom: 18px; letter-spacing: -0.02em; }
+  .hero h1 em { font-style: normal; color: var(--teal); }
+  .hero-desc { font-size: 15px; color: var(--text-sec); line-height: 1.75; max-width: 460px; margin-bottom: 28px; }
+  .hero-pills { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 32px; }
+  .pill { font-size: 12px; padding: 5px 13px; border-radius: 20px; border: 0.5px solid var(--border-mid); color: var(--text-sec); background: var(--bg); }
+  .pill.hi { border-color: var(--teal-mid); color: var(--teal-dark); background: var(--teal-light); }
+  .hero-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn-primary { font-size: 13px; padding: 10px 24px; background: var(--text); color: #fff; border: none; border-radius: var(--radius); cursor: pointer; font-weight: 500; text-decoration: none; transition: opacity 0.15s; display: inline-block; }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-secondary { font-size: 13px; padding: 10px 24px; background: transparent; color: var(--text); border: 0.5px solid var(--border-mid); border-radius: var(--radius); cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.15s; }
+  .btn-secondary:hover { background: var(--bg-sec); }
+  .hero-avatar { width: 120px; height: 120px; border-radius: 50%; background: var(--teal-light); border: 2px solid var(--teal-mid); display: flex; align-items: center; justify-content: center; font-size: 36px; font-weight: 600; color: var(--teal-dark); flex-shrink: 0; }
+
+  /* STATS */
+  .stats-bar { border-bottom: 0.5px solid var(--border); }
+  .stats-inner { display: grid; grid-template-columns: repeat(4, 1fr); max-width: 1100px; margin: 0 auto; }
+  .stat { padding: 24px 40px; border-right: 0.5px solid var(--border); }
+  .stat:last-child { border-right: none; }
+  .stat-n { font-size: 24px; font-weight: 600; color: var(--text); letter-spacing: -0.02em; }
+  .stat-l { font-size: 12px; color: var(--text-ter); margin-top: 4px; }
+
+  /* SECTIONS */
+  .section { padding: 56px 40px; border-bottom: 0.5px solid var(--border); }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .sec-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
+  .sec-title { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-ter); display: flex; align-items: center; gap: 10px; }
+  .sec-title::after { content: ''; display: inline-block; width: 40px; height: 0.5px; background: var(--border); }
+  .sec-link { font-size: 13px; color: var(--teal); text-decoration: none; cursor: pointer; }
+
+  /* ONGOING PROJECT */
+  .ongoing-card { border: 2px solid var(--teal); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 16px; }
+  .ongoing-top { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px 0; flex-wrap: wrap; gap: 8px; }
+  .in-progress { display: flex; align-items: center; gap: 7px; font-size: 11px; font-weight: 600; color: var(--teal-dark); background: var(--teal-light); border-radius: 4px; padding: 4px 12px; }
+  .pulse { width: 7px; height: 7px; border-radius: 50%; background: var(--teal); animation: pulse 1.6s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  .ongoing-img { margin: 14px 24px 0; height: 110px; background: var(--teal-light); border-radius: var(--radius); border: 0.5px solid var(--teal-mid); display: flex; align-items: center; justify-content: center; gap: 20px; }
+  .ongoing-img svg { width: 40px; height: 40px; stroke: var(--teal); fill: none; stroke-width: 1.5; }
+  .chip-label { font-size: 12px; font-weight: 500; color: var(--teal-dark); background: #fff; border: 0.5px solid var(--teal-mid); border-radius: 4px; padding: 5px 12px; }
+  .ongoing-body { padding: 18px 24px 24px; }
+  .ongoing-body h3 { font-size: 18px; font-weight: 600; color: var(--text); margin-bottom: 10px; }
+  .ongoing-body p { font-size: 14px; color: var(--text-sec); line-height: 1.7; margin-bottom: 20px; }
+  .progress-label { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-ter); margin-bottom: 7px; }
+  .progress-track { height: 4px; background: var(--bg-sec); border-radius: 2px; overflow: hidden; margin-bottom: 20px; }
+  .progress-fill { height: 100%; width: 45%; background: var(--teal); border-radius: 2px; }
+  .stages { display: flex; justify-content: space-between; position: relative; margin-bottom: 20px; }
+  .stages-line-bg { position: absolute; top: 5px; left: 5%; right: 5%; height: 1.5px; background: var(--border); z-index: 0; }
+  .stages-line-done { position: absolute; top: 5px; left: 5%; width: 38%; height: 1.5px; background: var(--teal); z-index: 1; }
+  .stage { display: flex; flex-direction: column; align-items: center; gap: 7px; flex: 1; position: relative; z-index: 2; }
+  .stage-dot { width: 11px; height: 11px; border-radius: 50%; background: var(--bg-sec); border: 1.5px solid var(--border-mid); }
+  .stage-dot.done { background: var(--teal); border-color: var(--teal); }
+  .stage-dot.active { background: #fff; border: 2.5px solid var(--teal); box-shadow: 0 0 0 3px var(--teal-light); }
+  .stage-lbl { font-size: 10px; color: var(--text-ter); text-align: center; line-height: 1.3; }
+  .stage-lbl.active { color: var(--teal-dark); font-weight: 600; }
+  .tag-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+  .tag { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase; padding: 3px 9px; border-radius: 4px; font-weight: 500; }
+  .tag-motor { background: var(--teal-light); color: var(--teal-dark); }
+  .tag-power { background: var(--amber-light); color: var(--amber-dark); }
+  .tag-iot { background: var(--blue-light); color: var(--blue-dark); }
+  .tag-usb { background: var(--purple-light); color: var(--purple-dark); }
+  .tag-fpga { background: var(--purple-light); color: var(--purple-dark); }
+  .tag-dsp { background: var(--teal-light); color: var(--teal-dark); }
+
+  /* PROJECT GRID */
+  .proj-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 0.5px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+  .proj-card { background: var(--bg); padding: 22px; cursor: default; transition: background 0.12s; display: flex; flex-direction: column; }
+  .proj-card:hover { background: var(--bg-sec); }
+  .proj-card.span2 { grid-column: span 2; }
+  .proj-card-img { height: 88px; border-radius: var(--radius); margin-bottom: 16px; display: flex; align-items: center; justify-content: center; border: 0.5px solid var(--border); }
+  .proj-card-img svg { width: 32px; height: 32px; stroke-width: 1.5; fill: none; }
+  .img-teal { background: var(--teal-light); border-color: var(--teal-mid) !important; }
+  .img-teal svg { stroke: var(--teal); }
+  .img-amber { background: var(--amber-light); }
+  .img-amber svg { stroke: var(--amber-dark); }
+  .img-blue { background: var(--blue-light); }
+  .img-blue svg { stroke: var(--blue-dark); }
+  .img-purple { background: var(--purple-light); }
+  .img-purple svg { stroke: var(--purple-dark); }
+  .proj-card h3 { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 7px; line-height: 1.4; }
+  .proj-card p { font-size: 12px; color: var(--text-sec); line-height: 1.65; margin-bottom: 14px; flex: 1; }
+  .chips { display: flex; flex-wrap: wrap; gap: 4px; }
+  .chip { font-size: 10px; color: var(--text-ter); background: var(--bg-sec); border-radius: 4px; padding: 2px 8px; border: 0.5px solid var(--border); }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .about-block { background: var(--bg-sec); border-radius: var(--radius-lg); padding: 22px; }
+  .about-block h3 { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .about-block h3 svg { width: 16px; height: 16px; stroke: var(--teal); fill: none; stroke-width: 2; }
+  .about-row { display: flex; justify-content: space-between; align-items: baseline; font-size: 13px; padding: 7px 0; border-bottom: 0.5px solid var(--border); gap: 12px; }
+  .about-row:last-child { border-bottom: none; }
+  .about-row .label { color: var(--text-sec); }
+  .about-row .value { color: var(--text); font-weight: 500; font-size: 12px; text-align: right; }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .skill-card { background: var(--bg-sec); border-radius: var(--radius-lg); padding: 18px; }
+  .skill-card h4 { font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 10px; display: flex; align-items: center; gap: 7px; }
+  .skill-card h4 svg { width: 15px; height: 15px; stroke: var(--teal); fill: none; stroke-width: 2; }
+  .skill-items { font-size: 12px; color: var(--text-sec); line-height: 2; }
+
+  /* CONTACT */
+  .contact-bar { background: var(--bg-sec); border-radius: var(--radius-lg); padding: 32px 36px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+  .contact-bar h3 { font-size: 18px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .contact-bar p { font-size: 13px; color: var(--text-sec); }
+  .contact-bar p a { color: var(--teal); text-decoration: none; }
+  .contact-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  /* FOOTER */
+  footer { padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  footer p { font-size: 12px; color: var(--text-ter); }
+  .footer-links { display: flex; gap: 20px; }
+  .footer-links a { font-size: 12px; color: var(--text-ter); text-decoration: none; }
+  .footer-links a:hover { color: var(--text-sec); }
+
+  /* ADMIN MODAL */
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
+  .modal-overlay.open { display: flex; }
+  .modal { background: var(--bg); border-radius: var(--radius-lg); width: 100%; max-width: 560px; max-height: 90vh; overflow-y: auto; }
+  .modal-header { padding: 20px 24px; border-bottom: 0.5px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .modal-header h2 { font-size: 15px; font-weight: 600; }
+  .modal-close { background: none; border: none; cursor: pointer; font-size: 20px; color: var(--text-sec); line-height: 1; padding: 2px 6px; }
+  .modal-body { padding: 24px; }
+  .modal-tabs { display: flex; gap: 0; border: 0.5px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 24px; }
+  .modal-tab { flex: 1; padding: 9px; font-size: 12px; font-weight: 500; background: var(--bg); border: none; cursor: pointer; color: var(--text-sec); transition: all 0.15s; }
+  .modal-tab.active { background: var(--text); color: #fff; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+  .form-group { margin-bottom: 16px; }
+  .form-group label { display: block; font-size: 12px; font-weight: 500; color: var(--text-sec); margin-bottom: 6px; }
+  .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 9px 12px; border: 0.5px solid var(--border-mid); border-radius: var(--radius); font-size: 13px; font-family: inherit; background: var(--bg); color: var(--text); outline: none; transition: border 0.15s; }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--teal); }
+  .form-group textarea { resize: vertical; min-height: 80px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .form-submit { width: 100%; padding: 11px; background: var(--teal); color: #fff; border: none; border-radius: var(--radius); font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; transition: opacity 0.15s; }
+  .form-submit:hover { opacity: 0.88; }
+  .project-list { display: flex; flex-direction: column; gap: 8px; }
+  .project-list-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; background: var(--bg-sec); border-radius: var(--radius); font-size: 13px; }
+  .project-list-item .proj-name { font-weight: 500; color: var(--text); }
+  .project-list-item .proj-cat { font-size: 11px; color: var(--text-ter); margin-top: 2px; }
+  .item-actions { display: flex; gap: 6px; }
+  .btn-del { font-size: 11px; padding: 4px 10px; background: #FCEBEB; color: #A32D2D; border: none; border-radius: 4px; cursor: pointer; font-family: inherit; }
+  .btn-del:hover { background: #F7C1C1; }
+  .login-form { max-width: 320px; margin: 0 auto; }
+  .login-form h3 { font-size: 15px; font-weight: 600; margin-bottom: 6px; text-align: center; }
+  .login-form p { font-size: 13px; color: var(--text-sec); text-align: center; margin-bottom: 24px; }
+  .admin-logged { display: none; }
+  .success-msg { font-size: 13px; color: var(--teal-dark); background: var(--teal-light); border-radius: var(--radius); padding: 10px 14px; margin-bottom: 16px; display: none; }
+  .ongoing-badge { font-size: 10px; font-weight: 600; background: var(--teal-light); color: var(--teal-dark); border-radius: 4px; padding: 2px 7px; margin-left: 8px; vertical-align: middle; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .skills-grid { grid-template-columns: repeat(2, 1fr); }
+    .proj-grid { grid-template-columns: repeat(2, 1fr); }
+    .proj-card.span2 { grid-column: span 2; }
+  }
+  @media (max-width: 680px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .hamburger { display: block; }
+    .hero { grid-template-columns: 1fr; padding: 40px 20px; }
+    .hero-avatar { display: none; }
+    .stats-inner { grid-template-columns: repeat(2, 1fr); }
+    .stat { padding: 18px 20px; }
+    .section { padding: 40px 20px; }
+    .proj-grid { grid-template-columns: 1fr; }
+    .proj-card.span2 { grid-column: span 1; }
+    .about-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: repeat(2, 1fr); }
+    .contact-bar { padding: 24px 20px; }
+    footer { padding: 16px 20px; }
+    .ongoing-img { gap: 12px; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 420px) {
+    .skills-grid { grid-template-columns: 1fr; }
+    .stats-inner { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Mustafa <span>Kamal</span></div>
+  <div class="nav-links">
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="nav-right">
+    <button class="nav-admin-btn" onclick="openAdmin()">Admin</button>
+    <a href="#contact" class="nav-hire">Hire me</a>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#projects" onclick="toggleMenu()">Projects</a>
+  <a href="#skills" onclick="toggleMenu()">Skills</a>
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+</div>
+
+<!-- HERO -->
+<div style="border-bottom: 0.5px solid var(--border);">
+  <div class="hero">
+    <div>
+      <div class="hero-eyebrow">Electronics Engineer · Norwich, UK</div>
+      <h1>PCB Design &amp;<br><em>Power Electronics</em></h1>
+      <p class="hero-desc">MSc at Coventry University. Specialist in Altium Designer, high-current PCB design, motor drivers, inverters, and battery systems. Available for freelance projects.</p>
+      <div class="hero-pills">
+        <span class="pill hi">Altium Designer</span>
+        <span class="pill hi">Power Electronics</span>
+        <span class="pill">Motor Drivers</span>
+        <span class="pill">Battery / BMS</span>
+        <span class="pill">IoT Hardware</span>
+        <span class="pill">LTspice</span>
+        <span class="pill">FPGA Design</span>
+      </div>
+      <div class="hero-btns">
+        <a href="#projects" class="btn-primary">View projects</a>
+        <a href="mailto:mustafakamal.mk2017@gmail.com" class="btn-secondary">Get in touch</a>
+      </div>
+    </div>
+    <div class="hero-avatar">MK</div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat"><div class="stat-n" id="stat-projects">8</div><div class="stat-l">PCB projects</div></div>
+    <div class="stat"><div class="stat-n">42V · 15A</div><div class="stat-l">Max power design</div></div>
+    <div class="stat"><div class="stat-n">2+ yrs</div><div class="stat-l">Industry experience</div></div>
+    <div class="stat"><div class="stat-n">MSc</div><div class="stat-l">Coventry University</div></div>
+  </div>
+</div>
+
+<!-- ONGOING PROJECT -->
+<div class="section" id="ongoing">
+  <div class="section-inner">
+    <div class="sec-head">
+      <span class="sec-title">Ongoing project</span>
+    </div>
+    <div id="ongoingContainer"></div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<div class="section" id="projects" style="padding-top:0;border-top:none;">
+  <div class="section-inner">
+    <div class="sec-head">
+      <span class="sec-title">Completed projects</span>
+    </div>
+    <div class="proj-grid" id="projectGrid"></div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<div class="section" id="skills">
+  <div class="section-inner">
+    <div class="sec-head">
+      <span class="sec-title">Skills</span>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h4>
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
+          PCB tools
+        </h4>
+        <div class="skill-items">Altium Designer<br>LTspice<br>Proteus<br>Arduino IDE<br>PlatformIO</div>
+      </div>
+      <div class="skill-card">
+        <h4>
+          <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          Power design
+        </h4>
+        <div class="skill-items">DC-DC converters<br>AC-DC supplies<br>Motor drivers<br>Battery / BMS<br>MOSFET circuits</div>
+      </div>
+      <div class="skill-card">
+        <h4>
+          <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3-3a1 1 0 000-1.4l-1.6-1.6a1 1 0 00-1.4 0l-3 3zM5 13l9 9 2-2-9-9-2 2z"/></svg>
+          Hardware
+        </h4>
+        <div class="skill-items">SMD soldering<br>Through-hole<br>Oscilloscope / DMM<br>Board bring-up<br>Debugging</div>
+      </div>
+      <div class="skill-card">
+        <h4>
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          Embedded
+        </h4>
+        <div class="skill-items">Arduino / Pi<br>GPIO, PWM, UART<br>I2C / SPI<br>Python (Modbus)<br>MySQL</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="section" id="about">
+  <div class="section-inner">
+    <div class="sec-head">
+      <span class="sec-title">Experience &amp; education</span>
+    </div>
+    <div class="about-grid">
+      <div class="about-block">
+        <h3>
+          <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+          Work experience
+        </h3>
+        <div class="about-row"><span class="label">Junior Hardware Engineer</span><span class="value">2023 – 2024</span></div>
+        <div class="about-row"><span class="label">Encore Solutions, Pakistan</span><span class="value">Altium · IoT · BMS</span></div>
+        <div class="about-row"><span class="label">Electronics Intern</span><span class="value">2022</span></div>
+        <div class="about-row"><span class="label">RIMS Pvt Ltd, Pakistan</span><span class="value">PCB · LabVIEW</span></div>
+      </div>
+      <div class="about-block">
+        <h3>
+          <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          Education
+        </h3>
+        <div class="about-row"><span class="label">MSc Electrical &amp; Electronics</span><span class="value">2025 – 2026</span></div>
+        <div class="about-row"><span class="label">Coventry University, UK</span><span class="value">In progress</span></div>
+        <div class="about-row"><span class="label">BS Electrical Engineering</span><span class="value">2019 – 2023</span></div>
+        <div class="about-row"><span class="label">CUST, Pakistan</span><span class="value">Graduated</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="section" id="contact">
+  <div class="section-inner">
+    <div class="contact-bar">
+      <div>
+        <h3>Available for freelance PCB projects</h3>
+        <p>
+          <a href="mailto:mustafakamal.mk2017@gmail.com">mustafakamal.mk2017@gmail.com</a>
+          &nbsp;·&nbsp; +44 (0) 7459 315209 &nbsp;·&nbsp; Norwich, UK
+        </p>
+      </div>
+      <div class="contact-btns">
+        <a href="mailto:mustafakamal.mk2017@gmail.com" class="btn-primary">Send email</a>
+        <a href="https://www.linkedin.com" target="_blank" class="btn-secondary">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Mustafa Kamal · mustafakamal.co.uk</p>
+  <div class="footer-links">
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+    <a href="#" onclick="openAdmin(); return false;">Admin</a>
+  </div>
+</footer>
+
+<!-- ADMIN MODAL -->
+<div class="modal-overlay" id="adminModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>Admin panel</h2>
+      <button class="modal-close" onclick="closeAdmin()">×</button>
+    </div>
+    <div class="modal-body">
+
+      <!-- LOGIN -->
+      <div id="loginPanel">
+        <div class="login-form">
+          <h3>Admin login</h3>
+          <p>Only you can access this panel.</p>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="adminPassword" placeholder="Enter your password" onkeydown="if(event.key==='Enter')checkLogin()">
+          </div>
+          <button class="form-submit" onclick="checkLogin()">Login</button>
+          <p id="loginError" style="color:#A32D2D;font-size:12px;margin-top:10px;display:none;">Incorrect password. Try again.</p>
+          <p style="font-size:11px;color:var(--text-ter);margin-top:16px;text-align:center;">Default password: <strong>mustafa2026</strong><br>Change it in the HTML file.</p>
+        </div>
+      </div>
+
+      <!-- ADMIN PANEL -->
+      <div id="adminPanel" style="display:none;">
+        <div class="modal-tabs">
+          <button class="modal-tab active" onclick="switchTab('add')">Add project</button>
+          <button class="modal-tab" onclick="switchTab('manage')">Manage projects</button>
+          <button class="modal-tab" onclick="switchTab('ongoing')">Ongoing project</button>
+        </div>
+
+        <!-- ADD PROJECT -->
+        <div class="tab-panel active" id="tab-add">
+          <div class="success-msg" id="addSuccess">Project added successfully!</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Project title *</label>
+              <input type="text" id="newTitle" placeholder="e.g. 3-Phase Inverter">
+            </div>
+            <div class="form-group">
+              <label>Category *</label>
+              <select id="newCat">
+                <option value="motor">Motor control</option>
+                <option value="power">Power</option>
+                <option value="iot">IoT / Sensing</option>
+                <option value="usb">USB / High-speed</option>
+                <option value="fpga">FPGA</option>
+                <option value="dsp">Signal processing</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Short description *</label>
+            <textarea id="newDesc" placeholder="Describe what you designed, key features, and results..."></textarea>
+          </div>
+          <div class="form-group">
+            <label>Tools / chips used</label>
+            <input type="text" id="newChips" placeholder="e.g. Altium Designer, LTspice, 42V/15A">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Icon style</label>
+              <select id="newIcon">
+                <option value="motor">Motor / Inverter</option>
+                <option value="power">Power / Battery</option>
+                <option value="iot">IoT / Wireless</option>
+                <option value="usb">USB / Data</option>
+                <option value="board">Circuit board</option>
+                <option value="led">LED / Light</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Mark as featured?</label>
+              <select id="newFeatured">
+                <option value="no">No</option>
+                <option value="yes">Yes (spans 2 columns)</option>
+              </select>
+            </div>
+          </div>
+          <button class="form-submit" onclick="addProject()">Add project</button>
+        </div>
+
+        <!-- MANAGE PROJECTS -->
+        <div class="tab-panel" id="tab-manage">
+          <div class="success-msg" id="deleteSuccess">Project removed.</div>
+          <div class="project-list" id="projectListAdmin"></div>
+        </div>
+
+        <!-- ONGOING PROJECT -->
+        <div class="tab-panel" id="tab-ongoing">
+          <div class="success-msg" id="ongoingSuccess">Ongoing project updated!</div>
+          <div class="form-group">
+            <label>Project title</label>
+            <input type="text" id="ogTitle" value="Custom FPGA Development Board">
+          </div>
+          <div class="form-group">
+            <label>Chip / platform</label>
+            <input type="text" id="ogChip" value="Xilinx / AMD">
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea id="ogDesc">Designing a custom Xilinx-based PCB for signal processing and DSP applications. Board includes power regulation, JTAG programming interface, clock distribution, and I/O headers — fully designed in Altium Designer.</textarea>
+          </div>
+          <div class="form-group">
+            <label>Current stage</label>
+            <select id="ogStage">
+              <option value="0">Schematic design</option>
+              <option value="1">Component selection</option>
+              <option value="2" selected>PCB layout</option>
+              <option value="3">Fabrication</option>
+              <option value="4">Testing</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Tags (comma separated)</label>
+            <input type="text" id="ogTags" value="FPGA, Signal processing, Altium Designer, JTAG, DSP, Clock distribution">
+          </div>
+          <button class="form-submit" onclick="updateOngoing()">Update ongoing project</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const ADMIN_PASSWORD = 'mustafa2026';
+
+const defaultProjects = [
+  { id: 1, title: '3-Phase Inverter for BLDC Motor', cat: 'motor', featured: true, icon: 'motor', desc: 'Full hardware design for Shell Eco-marathon. MOSFET selection, gate drivers, DC bus, current sensing, overcurrent and thermal protection. Validated 120° phase-displaced waveforms on oscilloscope.', chips: ['37–42 V', '15 A', 'Altium Designer', 'LTspice', 'MATLAB'] },
+  { id: 2, title: '37V–42V 15A Battery Pack', cat: 'power', featured: false, icon: 'power', desc: 'High-current Li-ion pack for Shell Eco-marathon. Cell layout, spot welding, BMS integration, balancing, over/under-voltage and short-circuit protection.', chips: ['Li-ion', 'BMS', 'High current'] },
+  { id: 3, title: 'Raspberry Pi Extension Board', cat: 'iot', featured: false, icon: 'iot', desc: 'Custom extension board with dual BNO055 IMU, PA1010D GPS, 6 GPIO LEDs, LM317 LDO regulator, and XL4015 DC-DC converter from 12V input.', chips: ['I2C / SPI', 'GPS + IMU', 'Altium'] },
+  { id: 4, title: 'USB 2.0 Hub', cat: 'usb', featured: false, icon: 'usb', desc: '4-port hub using TUSB2046IBVFR. Impedance-controlled USB differential pair routing, ESD protection on all ports, multi-peripheral power distribution.', chips: ['Diff pairs', 'ESD protection', 'Signal integrity'] },
+  { id: 5, title: 'Custom ESP32 Development Board', cat: 'iot', featured: false, icon: 'iot', desc: 'USB-to-UART connectivity, power regulation, GPIO breakout. Designed following Robert Feranec methodology. Full bring-up and testing completed.', chips: ['ESP32', 'UART', 'IoT'] },
+  { id: 6, title: '3W RGB LED Driver Board', cat: 'power', featured: false, icon: 'led', desc: 'Constant-current PWM driver for high-power RGB LEDs. Switching circuitry optimised for low losses, smooth colour transitions, thermal management.', chips: ['PWM', 'Constant current', 'Thermal design'] },
+  { id: 7, title: '5V Relay Control Board', cat: 'power', featured: false, icon: 'power', desc: 'Transistor driver and flyback diode enabling MCU control of 12V relay. Status LEDs, safe high/low voltage interfacing for competition vehicle.', chips: ['5V logic', '12V relay', 'Protection'] },
+  { id: 8, title: '220V AC to 48V DC Converter', cat: 'power', featured: false, icon: 'power', desc: 'First Altium Designer PCB sent to production. AC-DC step-down with high-voltage clearances and safety spacing. Full design-to-manufacture cycle.', chips: ['220V AC', 'High voltage', 'Production-ready'] },
+];
+
+const defaultOngoing = {
+  title: 'Custom FPGA Development Board',
+  chip: 'Xilinx / AMD',
+  desc: 'Designing a custom Xilinx-based PCB for signal processing and DSP applications. Board includes power regulation, JTAG programming interface, clock distribution, and I/O headers — fully designed in Altium Designer.',
+  stage: 2,
+  tags: ['FPGA', 'Signal processing', 'Altium Designer', 'JTAG', 'DSP', 'Clock distribution']
+};
+
+function loadProjects() {
+  try { return JSON.parse(localStorage.getItem('mk_projects')) || defaultProjects; } catch(e) { return defaultProjects; }
+}
+function saveProjects(p) { try { localStorage.setItem('mk_projects', JSON.stringify(p)); } catch(e) {} }
+function loadOngoing() {
+  try { return JSON.parse(localStorage.getItem('mk_ongoing')) || defaultOngoing; } catch(e) { return defaultOngoing; }
+}
+function saveOngoing(o) { try { localStorage.setItem('mk_ongoing', JSON.stringify(o)); } catch(e) {} }
+
+const catColors = { motor:'tag-motor', power:'tag-power', iot:'tag-iot', usb:'tag-usb', fpga:'tag-fpga', dsp:'tag-dsp' };
+const catLabels = { motor:'Motor control', power:'Power', iot:'IoT / Sensing', usb:'USB / High-speed', fpga:'FPGA', dsp:'Signal processing' };
+const imgColors = { motor:'img-teal', power:'img-amber', iot:'img-blue', usb:'img-purple', board:'img-teal', led:'img-amber' };
+
+const icons = {
+  motor: `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><circle cx="12" cy="12" r="4"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>`,
+  power: `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="2" y="7" width="20" height="11" rx="2"/><path d="M7 7V5M17 7V5M12 11v3M10 13h4"/></svg>`,
+  iot: `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M5 12.55a11 11 0 0114.08 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0"/><circle cx="12" cy="20" r="1"/></svg>`,
+  usb: `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M12 2v10M8 8h8M7 12h10M9 16h6M12 20v2"/><circle cx="12" cy="20" r="1"/></svg>`,
+  board: `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M7 7h2v2H7zM15 7h2v2h-2zM7 15h2v2H7zM15 15h2v2h-2zM9 8h6M8 9v6M16 9v6M9 16h6"/></svg>`,
+  led: `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M12 2a7 7 0 017 7c0 3-2 5-3 7H8c-1-2-3-4-3-7a7 7 0 017-7z"/><path d="M9 21h6M10 17v4M14 17v4"/></svg>`,
+};
+
+function renderProjects() {
+  const projects = loadProjects();
+  const grid = document.getElementById('projectGrid');
+  grid.innerHTML = projects.map(p => `
+    <div class="proj-card${p.featured ? ' span2' : ''}">
+      <div class="proj-card-img ${imgColors[p.icon] || 'img-teal'}">${icons[p.icon] || icons.board}</div>
+      <div class="tag-row"><span class="tag ${catColors[p.cat] || 'tag-motor'}">${catLabels[p.cat] || p.cat}</span></div>
+      <h3>${p.title}</h3>
+      <p>${p.desc}</p>
+      <div class="chips">${p.chips.map(c => `<span class="chip">${c}</span>`).join('')}</div>
+    </div>
+  `).join('');
+  document.getElementById('stat-projects').textContent = projects.length;
+}
+
+function renderOngoing() {
+  const o = loadOngoing();
+  const stages = ['Schematic', 'Component selection', 'PCB layout', 'Fabrication', 'Testing'];
+  const pct = [5, 25, 45, 65, 85];
+  document.getElementById('ongoingContainer').innerHTML = `
+    <div class="ongoing-card">
+      <div class="ongoing-top">
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <span class="tag tag-fpga">FPGA</span>
+          <span class="tag tag-dsp">Signal processing</span>
+        </div>
+        <div class="in-progress"><div class="pulse"></div>In progress</div>
+      </div>
+      <div class="ongoing-img">
+        <svg viewBox="0 0 24 24" fill="none" stroke="${getComputedStyle(document.documentElement).getPropertyValue('--teal') || '#1D9E75'}" stroke-width="1.5">
+          <rect x="2" y="2" width="20" height="20" rx="2"/>
+          <path d="M7 7h2v2H7zM15 7h2v2h-2zM7 15h2v2H7zM15 15h2v2h-2zM9 8h6M8 9v6M16 9v6M9 16h6"/>
+        </svg>
+        <div class="chip-label">${o.chip}</div>
+      </div>
+      <div class="ongoing-body">
+        <h3>${o.title}</h3>
+        <p>${o.desc}</p>
+        <div class="progress-label"><span>Design progress</span><span>${stages[o.stage]}</span></div>
+        <div class="progress-track"><div class="progress-fill" style="width:${pct[o.stage]}%"></div></div>
+        <div class="stages">
+          <div class="stages-line-bg"></div>
+          <div class="stages-line-done" style="width:${o.stage === 0 ? '5%' : o.stage === 1 ? '20%' : o.stage === 2 ? '38%' : o.stage === 3 ? '60%' : '80%'}"></div>
+          ${stages.map((s,i) => `
+            <div class="stage">
+              <div class="stage-dot ${i < o.stage ? 'done' : i === o.stage ? 'active' : ''}"></div>
+              <div class="stage-lbl ${i === o.stage ? 'active' : ''}">${s.replace(' ', '<br>')}</div>
+            </div>
+          `).join('')}
+        </div>
+        <div class="chips">${o.tags.map(t => `<span class="chip">${t}</span>`).join('')}</div>
+      </div>
+    </div>
+  `;
+}
+
+function renderAdminList() {
+  const projects = loadProjects();
+  document.getElementById('projectListAdmin').innerHTML = projects.map(p => `
+    <div class="project-list-item">
+      <div>
+        <div class="proj-name">${p.title}</div>
+        <div class="proj-cat">${catLabels[p.cat] || p.cat}</div>
+      </div>
+      <div class="item-actions">
+        <button class="btn-del" onclick="deleteProject(${p.id})">Remove</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function addProject() {
+  const title = document.getElementById('newTitle').value.trim();
+  const cat = document.getElementById('newCat').value;
+  const desc = document.getElementById('newDesc').value.trim();
+  const chipsRaw = document.getElementById('newChips').value.trim();
+  const icon = document.getElementById('newIcon').value;
+  const featured = document.getElementById('newFeatured').value === 'yes';
+  if (!title || !desc) { alert('Please fill in the title and description.'); return; }
+  const projects = loadProjects();
+  const newId = Math.max(0, ...projects.map(p => p.id)) + 1;
+  projects.push({ id: newId, title, cat, featured, icon, desc, chips: chipsRaw ? chipsRaw.split(',').map(s => s.trim()) : [] });
+  saveProjects(projects);
+  renderProjects();
+  renderAdminList();
+  document.getElementById('newTitle').value = '';
+  document.getElementById('newDesc').value = '';
+  document.getElementById('newChips').value = '';
+  const msg = document.getElementById('addSuccess');
+  msg.style.display = 'block';
+  setTimeout(() => { msg.style.display = 'none'; }, 3000);
+}
+
+function deleteProject(id) {
+  if (!confirm('Remove this project?')) return;
+  const projects = loadProjects().filter(p => p.id !== id);
+  saveProjects(projects);
+  renderProjects();
+  renderAdminList();
+  const msg = document.getElementById('deleteSuccess');
+  msg.style.display = 'block';
+  setTimeout(() => { msg.style.display = 'none'; }, 3000);
+}
+
+function updateOngoing() {
+  const o = {
+    title: document.getElementById('ogTitle').value.trim(),
+    chip: document.getElementById('ogChip').value.trim(),
+    desc: document.getElementById('ogDesc').value.trim(),
+    stage: parseInt(document.getElementById('ogStage').value),
+    tags: document.getElementById('ogTags').value.split(',').map(s => s.trim()).filter(Boolean)
+  };
+  saveOngoing(o);
+  renderOngoing();
+  const msg = document.getElementById('ongoingSuccess');
+  msg.style.display = 'block';
+  setTimeout(() => { msg.style.display = 'none'; }, 3000);
+}
+
+function openAdmin() {
+  document.getElementById('adminModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeAdmin() {
+  document.getElementById('adminModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function checkLogin() {
+  const pw = document.getElementById('adminPassword').value;
+  if (pw === ADMIN_PASSWORD) {
+    document.getElementById('loginPanel').style.display = 'none';
+    document.getElementById('adminPanel').style.display = 'block';
+    renderAdminList();
+    const o = loadOngoing();
+    document.getElementById('ogTitle').value = o.title;
+    document.getElementById('ogChip').value = o.chip;
+    document.getElementById('ogDesc').value = o.desc;
+    document.getElementById('ogStage').value = o.stage;
+    document.getElementById('ogTags').value = o.tags.join(', ');
+  } else {
+    document.getElementById('loginError').style.display = 'block';
+  }
+}
+
+function switchTab(name) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+document.getElementById('adminModal').addEventListener('click', function(e) {
+  if (e.target === this) closeAdmin();
+});
+
+renderProjects();
+renderOngoing();
+</script>
+</body>
+</html>

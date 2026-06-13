@@ -1,0 +1,1763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mustafa Kamal — Electronics & PCB Design Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #111118;
+    --bg3: #16161f;
+    --surface: #1a1a26;
+    --surface2: #1e1e2e;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --accent: #00d4ff;
+    --accent2: #7c3aed;
+    --accent3: #06ffa5;
+    --text: #f0f0f8;
+    --text2: #9090b0;
+    --text3: #5a5a7a;
+    --font: 'Inter', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+    --radius: 12px;
+    --radius-lg: 20px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--accent2); border-radius: 2px; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5vw;
+    height: 64px;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 15px;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 13px;
+    color: var(--text2);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta {
+    font-size: 13px;
+    padding: 8px 20px;
+    background: transparent;
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    color: var(--accent);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+    font-family: var(--font);
+  }
+  .nav-cta:hover { background: rgba(0,212,255,0.08); }
+  .hamburger { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; }
+  .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--text); transition: all 0.3s; }
+  .mobile-menu {
+    display: none; position: fixed; top: 64px; left: 0; right: 0;
+    background: var(--bg2); padding: 1.5rem 5vw; z-index: 99;
+    border-bottom: 1px solid var(--border);
+  }
+  .mobile-menu.open { display: block; }
+  .mobile-menu a { display: block; color: var(--text2); text-decoration: none; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 15px; }
+  .mobile-menu a:last-child { border-bottom: none; }
+
+  /* PAGES */
+  .page { display: none; min-height: 100vh; }
+  .page.active { display: block; }
+
+  /* HERO */
+  #home { padding-top: 64px; }
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 0 5vw;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 70% 50%, rgba(124,58,237,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(0,212,255,0.06) 0%, transparent 60%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0; opacity: 0.03;
+    background-image: linear-gradient(var(--accent) 1px, transparent 1px), linear-gradient(90deg, var(--accent) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-content {
+    position: relative; z-index: 1;
+    max-width: 700px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block; width: 32px; height: 1px;
+    background: var(--accent);
+  }
+  .hero-name {
+    font-size: clamp(52px, 8vw, 96px);
+    font-weight: 700;
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.5rem;
+  }
+  .hero-name span { color: var(--accent); }
+  .hero-role {
+    font-size: clamp(16px, 2.5vw, 22px);
+    color: var(--text2);
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+  }
+  .hero-tagline {
+    font-size: 16px;
+    color: var(--text3);
+    max-width: 520px;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    border-left: 2px solid var(--accent2);
+    padding-left: 1rem;
+  }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary {
+    padding: 14px 28px;
+    background: var(--accent);
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+    font-family: var(--font);
+  }
+  .btn-primary:hover { background: #33dcff; transform: translateY(-1px); }
+  .btn-secondary {
+    padding: 14px 28px;
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border2);
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+    font-family: var(--font);
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+  .hero-image-wrap {
+    position: absolute; right: 5vw; top: 50%; transform: translateY(-50%);
+    z-index: 1;
+    animation: fadeIn 1s ease 0.3s both;
+  }
+  .hero-avatar {
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--surface), var(--surface2));
+    border: 2px solid var(--border2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 96px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-avatar::before {
+    content: '';
+    position: absolute; inset: -2px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, var(--accent), var(--accent2), var(--accent3), var(--accent));
+    z-index: -1;
+    animation: spin 6s linear infinite;
+  }
+  .hero-avatar::after {
+    content: '';
+    position: absolute; inset: 3px;
+    border-radius: 50%;
+    background: var(--bg2);
+  }
+  .avatar-initials {
+    font-size: 72px; font-weight: 700;
+    color: var(--accent);
+    position: relative; z-index: 1;
+    font-family: var(--mono);
+  }
+
+  /* STATS BAR */
+  .stats-bar {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg2);
+    padding: 2rem 5vw;
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .stat-item { text-align: center; }
+  .stat-value {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--accent);
+    font-family: var(--mono);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-label {
+    font-size: 12px;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* SECTIONS */
+  section { padding: 6rem 5vw; }
+  .section-max { max-width: 1200px; margin: 0 auto; }
+  .section-header { margin-bottom: 3rem; }
+  .section-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+  .section-sub {
+    margin-top: 0.75rem;
+    font-size: 15px;
+    color: var(--text2);
+    max-width: 540px;
+  }
+  .divider { width: 40px; height: 2px; background: var(--accent); margin-top: 1rem; }
+
+  /* SKILLS */
+  #skills { background: var(--bg2); }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem;
+  }
+  .skill-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .skill-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+  .skill-card-icon {
+    width: 44px; height: 44px;
+    background: rgba(0,212,255,0.08);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    margin-bottom: 1rem;
+  }
+  .skill-card-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text);
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .skill-tag {
+    font-size: 11px;
+    padding: 4px 10px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text2);
+    font-family: var(--mono);
+  }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+    display: flex; flex-direction: column;
+  }
+  .project-card:hover { border-color: rgba(0,212,255,0.3); transform: translateY(-3px); }
+  .project-thumb {
+    height: 160px;
+    background: linear-gradient(135deg, var(--surface2), var(--bg3));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-thumb::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.5));
+  }
+  .project-body { padding: 1.25rem; flex: 1; display: flex; flex-direction: column; }
+  .project-status {
+    display: inline-block;
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-family: var(--mono);
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+  .status-progress { background: rgba(0,212,255,0.1); color: var(--accent); border: 1px solid rgba(0,212,255,0.2); }
+  .status-done { background: rgba(6,255,165,0.1); color: var(--accent3); border: 1px solid rgba(6,255,165,0.2); }
+  .project-title { font-size: 16px; font-weight: 600; margin-bottom: 0.5rem; }
+  .project-desc { font-size: 13px; color: var(--text2); line-height: 1.6; margin-bottom: 1rem; flex: 1; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1rem; }
+  .project-tag {
+    font-size: 10px;
+    padding: 3px 8px;
+    background: rgba(124,58,237,0.12);
+    border: 1px solid rgba(124,58,237,0.2);
+    border-radius: 4px;
+    color: #a78bfa;
+    font-family: var(--mono);
+  }
+  .btn-outline {
+    padding: 8px 16px;
+    background: transparent;
+    border: 1px solid var(--border2);
+    border-radius: 6px;
+    color: var(--text2);
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: var(--font);
+    align-self: flex-start;
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+  .view-all-wrap { text-align: center; margin-top: 2.5rem; }
+
+  /* EXPERIENCE */
+  #experience { background: var(--bg2); }
+  .exp-total {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(0,212,255,0.06);
+    border: 1px solid rgba(0,212,255,0.15);
+    border-radius: 8px;
+    padding: 8px 16px;
+    margin-bottom: 2.5rem;
+    font-size: 14px;
+    color: var(--accent);
+    font-family: var(--mono);
+  }
+  .timeline { display: flex; flex-direction: column; gap: 1rem; }
+  .exp-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    display: grid;
+    grid-template-columns: 56px 1fr auto;
+    gap: 1rem;
+    align-items: start;
+    transition: border-color 0.2s;
+  }
+  .exp-card:hover { border-color: var(--border2); }
+  .exp-logo {
+    width: 56px; height: 56px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+  }
+  .exp-role { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+  .exp-company { font-size: 13px; color: var(--text2); margin-bottom: 6px; }
+  .exp-duration { font-size: 12px; color: var(--text3); font-family: var(--mono); }
+  .exp-badge {
+    font-size: 10px; padding: 4px 10px;
+    border-radius: 4px;
+    font-family: var(--mono);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .badge-ongoing { background: rgba(0,212,255,0.1); color: var(--accent); border: 1px solid rgba(0,212,255,0.2); }
+  .badge-done { background: rgba(90,90,122,0.2); color: var(--text3); border: 1px solid var(--border); }
+
+  /* EDUCATION */
+  .edu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.25rem;
+  }
+  .edu-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    display: flex; gap: 1rem;
+  }
+  .edu-logo {
+    width: 52px; height: 52px; flex-shrink: 0;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+  }
+  .edu-degree { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+  .edu-uni { font-size: 13px; color: var(--text2); margin-bottom: 4px; }
+  .edu-dates { font-size: 12px; color: var(--text3); font-family: var(--mono); }
+
+  /* CERTIFICATES */
+  #certificates { background: var(--bg2); }
+  .cert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+  .cert-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    display: flex; align-items: center; gap: 1rem;
+    transition: border-color 0.2s;
+  }
+  .cert-card:hover { border-color: var(--accent2); }
+  .cert-icon {
+    width: 44px; height: 44px; flex-shrink: 0;
+    background: rgba(124,58,237,0.1);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+  }
+  .cert-name { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+  .cert-issuer { font-size: 12px; color: var(--text2); }
+  .cert-date { font-size: 11px; color: var(--text3); font-family: var(--mono); margin-top: 2px; }
+  .cert-link {
+    margin-left: auto; flex-shrink: 0;
+    font-size: 11px; padding: 5px 10px;
+    background: rgba(124,58,237,0.1); border: 1px solid rgba(124,58,237,0.2);
+    border-radius: 4px; color: #a78bfa;
+    text-decoration: none; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .cert-link:hover { background: rgba(124,58,237,0.2); }
+
+  /* CONTACT */
+  .contact-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  .contact-info { }
+  .contact-info p { font-size: 15px; color: var(--text2); line-height: 1.8; margin-bottom: 2rem; }
+  .contact-detail {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 1rem;
+    font-size: 14px; color: var(--text2);
+  }
+  .contact-detail-icon {
+    width: 36px; height: 36px;
+    background: rgba(0,212,255,0.06);
+    border: 1px solid rgba(0,212,255,0.15);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+  }
+  .contact-form {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+  }
+  .form-group { margin-bottom: 1.25rem; }
+  .form-label { font-size: 12px; color: var(--text3); font-family: var(--mono); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; display: block; }
+  .form-input, .form-textarea {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-input:focus, .form-textarea:focus { border-color: var(--accent); }
+  .form-textarea { min-height: 120px; resize: vertical; }
+  .file-upload-area {
+    border: 1px dashed var(--border2);
+    border-radius: 8px;
+    padding: 1.25rem;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    position: relative;
+  }
+  .file-upload-area:hover { border-color: var(--accent); }
+  .file-upload-area input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+  .file-upload-text { font-size: 13px; color: var(--text3); }
+  .file-name-display {
+    display: none; margin-top: 8px;
+    font-size: 12px; color: var(--accent);
+    display: flex; align-items: center; gap: 8px;
+    font-family: var(--mono);
+  }
+  .file-remove {
+    background: rgba(255,50,50,0.1);
+    border: 1px solid rgba(255,50,50,0.2);
+    border-radius: 4px;
+    color: #ff6b6b;
+    font-size: 10px;
+    padding: 2px 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .file-remove:hover { background: rgba(255,50,50,0.2); }
+  .form-submit {
+    width: 100%;
+    padding: 14px;
+    background: var(--accent);
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: var(--font);
+  }
+  .form-submit:hover { background: #33dcff; }
+  .form-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 2rem;
+    color: var(--accent3);
+    font-size: 15px;
+  }
+  .form-success-icon { font-size: 40px; margin-bottom: 1rem; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 5vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg);
+  }
+  .footer-copy { font-size: 12px; color: var(--text3); font-family: var(--mono); }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a { font-size: 12px; color: var(--text3); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--accent); }
+
+  /* ADMIN PANEL */
+  .admin-overlay {
+    display: none;
+    position: fixed; inset: 0; z-index: 1000;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(8px);
+    padding: 2rem;
+    overflow-y: auto;
+  }
+  .admin-overlay.open { display: flex; align-items: flex-start; justify-content: center; }
+  .admin-panel {
+    background: var(--bg2);
+    border: 1px solid rgba(0,212,255,0.2);
+    border-radius: var(--radius-lg);
+    width: 100%; max-width: 800px;
+    padding: 2rem;
+    margin: auto;
+  }
+  .admin-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .admin-title {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+  .admin-close {
+    background: none; border: 1px solid var(--border);
+    border-radius: 6px; padding: 6px 12px;
+    color: var(--text2); cursor: pointer; font-size: 13px;
+    font-family: var(--font); transition: all 0.2s;
+  }
+  .admin-close:hover { border-color: #ff6b6b; color: #ff6b6b; }
+  .admin-tabs { display: flex; gap: 8px; margin-bottom: 1.5rem; flex-wrap: wrap; }
+  .admin-tab {
+    padding: 7px 14px;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text2);
+    font-family: var(--font);
+    transition: all 0.2s;
+  }
+  .admin-tab.active, .admin-tab:hover { background: rgba(0,212,255,0.08); border-color: var(--accent); color: var(--accent); }
+  .admin-section { display: none; }
+  .admin-section.active { display: block; }
+  .admin-form-group { margin-bottom: 1rem; }
+  .admin-label { font-size: 11px; color: var(--text3); margin-bottom: 6px; display: block; font-family: var(--mono); letter-spacing: 0.1em; text-transform: uppercase; }
+  .admin-input, .admin-textarea, .admin-select {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .admin-input:focus, .admin-textarea:focus, .admin-select:focus { border-color: var(--accent); }
+  .admin-textarea { min-height: 80px; resize: vertical; }
+  .admin-btn {
+    padding: 9px 18px;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    font-family: var(--font);
+    transition: all 0.2s;
+  }
+  .admin-btn-primary { background: var(--accent); color: #000; border: none; font-weight: 600; }
+  .admin-btn-primary:hover { background: #33dcff; }
+  .admin-btn-danger { background: rgba(255,50,50,0.1); color: #ff6b6b; border: 1px solid rgba(255,50,50,0.2); }
+  .admin-btn-danger:hover { background: rgba(255,50,50,0.2); }
+  .admin-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1.5rem; }
+  .admin-list-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem;
+  }
+  .admin-list-item-info { font-size: 13px; }
+  .admin-list-item-title { font-weight: 500; margin-bottom: 2px; }
+  .admin-list-item-sub { font-size: 11px; color: var(--text3); font-family: var(--mono); }
+  .admin-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  /* PROJECTS PAGE */
+  #projects-page { padding-top: 64px; }
+  .projects-page-hero {
+    background: var(--bg2);
+    padding: 4rem 5vw 3rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  .fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ADMIN HINT */
+  .admin-hint {
+    position: fixed; bottom: 1rem; right: 1rem;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: transparent;
+    user-select: none;
+    z-index: 50;
+  }
+
+  /* TOAST */
+  .toast {
+    position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 13px;
+    color: var(--text);
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+  .toast.show { opacity: 1; }
+
+  /* FILTER TABS */
+  .filter-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 2rem; }
+  .filter-tab {
+    padding: 7px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text2);
+    font-family: var(--mono);
+    transition: all 0.2s;
+  }
+  .filter-tab.active { background: rgba(0,212,255,0.1); border-color: rgba(0,212,255,0.3); color: var(--accent); }
+
+  /* SECTION LABEL for projects page */
+  .section-divider {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text3);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin: 2rem 0 1rem;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-divider::after {
+    content: '';
+    flex: 1; height: 1px; background: var(--border);
+  }
+
+  @media (max-width: 900px) {
+    .hero-image-wrap { display: none; }
+    .contact-wrap { grid-template-columns: 1fr; }
+    .admin-row { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .exp-card { grid-template-columns: 44px 1fr; }
+    .exp-badge { grid-column: 1/-1; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <div class="nav-logo">MK<span style="color:var(--text3)">.</span>dev</div>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#" onclick="showHome(); return false;">Home</a></li>
+    <li><a href="#skills" onclick="showHome(); setTimeout(()=>document.getElementById('skills').scrollIntoView({behavior:'smooth'}),100); return false;">Skills</a></li>
+    <li><a href="#" onclick="showProjects(); return false;">Projects</a></li>
+    <li><a href="#experience" onclick="showHome(); setTimeout(()=>document.getElementById('experience').scrollIntoView({behavior:'smooth'}),100); return false;">Experience</a></li>
+    <li><a href="#contact" onclick="showHome(); setTimeout(()=>document.getElementById('contact').scrollIntoView({behavior:'smooth'}),100); return false;">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta" onclick="showHome(); setTimeout(()=>document.getElementById('contact').scrollIntoView({behavior:'smooth'}),100); return false;">Hire Me</a>
+  <button class="hamburger" onclick="document.getElementById('mobile-menu').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#" onclick="showHome(); document.getElementById('mobile-menu').classList.remove('open'); return false;">Home</a>
+  <a href="#skills" onclick="showHome(); document.getElementById('mobile-menu').classList.remove('open'); setTimeout(()=>document.getElementById('skills').scrollIntoView({behavior:'smooth'}),100); return false;">Skills</a>
+  <a href="#" onclick="showProjects(); document.getElementById('mobile-menu').classList.remove('open'); return false;">Projects</a>
+  <a href="#experience" onclick="showHome(); document.getElementById('mobile-menu').classList.remove('open'); setTimeout(()=>document.getElementById('experience').scrollIntoView({behavior:'smooth'}),100); return false;">Experience</a>
+  <a href="#contact" onclick="showHome(); document.getElementById('mobile-menu').classList.remove('open'); setTimeout(()=>document.getElementById('contact').scrollIntoView({behavior:'smooth'}),100); return false;">Contact</a>
+</div>
+
+<!-- HOME PAGE -->
+<div id="home" class="page active">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Electronics & Hardware Engineer</div>
+      <h1 class="hero-name">Mustafa<br><span>Kamal</span></h1>
+      <p class="hero-role">PCB Design · Embedded Systems · Power Electronics</p>
+      <p class="hero-tagline">Designing reliable embedded systems, power electronics, and PCB solutions for real-world applications.</p>
+      <div class="hero-actions">
+        <a href="#" class="btn-primary" onclick="showProjects(); return false;">View Projects</a>
+        <a href="#contact" class="btn-secondary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'}); return false;">Contact Me</a>
+        <a href="#" class="btn-secondary" id="cv-download-btn" onclick="downloadCV(); return false;">Download CV ↓</a>
+      </div>
+    </div>
+    <div class="hero-image-wrap">
+      <div class="hero-avatar">
+        <span class="avatar-initials">MK</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-value" id="stat-projects">25+</div>
+        <div class="stat-label">PCB Projects</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" id="stat-years">2+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">Power</div>
+        <div class="stat-label">Electronics</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">FPGA</div>
+        <div class="stat-label">& Embedded</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-max">
+      <div class="section-header fade-up">
+        <div class="section-tag">// expertise</div>
+        <h2 class="section-title">Technical Skills</h2>
+        <p class="section-sub">A full-stack hardware engineering toolkit across design, power, and embedded systems.</p>
+        <div class="divider"></div>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-card fade-up">
+          <div class="skill-card-icon">🖥️</div>
+          <div class="skill-card-title">PCB Design</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Altium Designer</span>
+            <span class="skill-tag">KiCad</span>
+            <span class="skill-tag">Schematic Design</span>
+            <span class="skill-tag">2-Layer PCB</span>
+            <span class="skill-tag">4-Layer PCB</span>
+            <span class="skill-tag">DFM Review</span>
+          </div>
+        </div>
+        <div class="skill-card fade-up">
+          <div class="skill-card-icon">⚡</div>
+          <div class="skill-card-title">Power Electronics</div>
+          <div class="skill-tags">
+            <span class="skill-tag">DC-DC Converters</span>
+            <span class="skill-tag">Motor Drivers</span>
+            <span class="skill-tag">Battery Systems</span>
+            <span class="skill-tag">Power Supplies</span>
+            <span class="skill-tag">BMS Design</span>
+          </div>
+        </div>
+        <div class="skill-card fade-up">
+          <div class="skill-card-icon">🔬</div>
+          <div class="skill-card-title">Embedded Systems</div>
+          <div class="skill-tags">
+            <span class="skill-tag">STM32</span>
+            <span class="skill-tag">ESP32</span>
+            <span class="skill-tag">Mbed OS</span>
+            <span class="skill-tag">FreeRTOS</span>
+            <span class="skill-tag">C/C++</span>
+          </div>
+        </div>
+        <div class="skill-card fade-up">
+          <div class="skill-card-icon">🧠</div>
+          <div class="skill-card-title">Advanced Systems</div>
+          <div class="skill-tags">
+            <span class="skill-tag">FPGA (Xilinx)</span>
+            <span class="skill-tag">IoT Hardware</span>
+            <span class="skill-tag">Signal Processing</span>
+            <span class="skill-tag">Industrial Control</span>
+            <span class="skill-tag">VHDL</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS (home – 4 only) -->
+  <section id="projects-home" style="background: var(--bg);">
+    <div class="section-max">
+      <div class="section-header fade-up">
+        <div class="section-tag">// portfolio</div>
+        <h2 class="section-title">Featured Projects</h2>
+        <p class="section-sub">Selected hardware and PCB design work.</p>
+        <div class="divider"></div>
+      </div>
+      <div class="projects-grid" id="home-projects-grid"></div>
+      <div class="view-all-wrap fade-up">
+        <button class="btn-secondary" onclick="showProjects()">View All Projects →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-max">
+      <div class="section-header fade-up">
+        <div class="section-tag">// career</div>
+        <h2 class="section-title">Experience</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="exp-total" id="exp-total-display">
+        <span>⏱</span>
+        <span id="total-exp-text">Calculating...</span>
+      </div>
+      <div class="timeline" id="exp-timeline"></div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education" style="background: var(--bg2);">
+    <div class="section-max">
+      <div class="section-header fade-up">
+        <div class="section-tag">// background</div>
+        <h2 class="section-title">Education</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="edu-grid" id="edu-grid"></div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATES -->
+  <section id="certificates">
+    <div class="section-max">
+      <div class="section-header fade-up">
+        <div class="section-tag">// credentials</div>
+        <h2 class="section-title">Certificates</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="cert-grid" id="cert-grid"></div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" style="background: var(--bg2);">
+    <div class="section-max">
+      <div class="section-header fade-up">
+        <div class="section-tag">// get in touch</div>
+        <h2 class="section-title">Contact Me</h2>
+        <p class="section-sub">Available for freelance PCB design, embedded systems consulting, and hardware projects.</p>
+        <div class="divider"></div>
+      </div>
+      <div class="contact-wrap">
+        <div class="contact-info fade-up">
+          <p>Whether you need a custom PCB layout, power electronics design, or embedded firmware — let's talk about your project requirements.</p>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">✉️</div>
+            <span>mustafakamal.mk2017@gmail.com</span>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">📍</div>
+            <span>Available for remote & on-site work worldwide</span>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">⚡</div>
+            <span>Typical response within 24 hours</span>
+          </div>
+        </div>
+        <div class="contact-form fade-up">
+          <div id="form-content">
+            <div class="form-group">
+              <label class="form-label">Your Name</label>
+              <input type="text" class="form-input" id="contact-name" placeholder="John Smith">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <input type="email" class="form-input" id="contact-email" placeholder="john@company.com">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Message</label>
+              <textarea class="form-textarea" id="contact-message" placeholder="Describe your project or inquiry..."></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Attachment (optional)</label>
+              <div class="file-upload-area">
+                <input type="file" id="contact-file" accept=".pdf,.png,.jpg,.jpeg" onchange="handleFileSelect(this)">
+                <div class="file-upload-text">📎 Drop file or click to upload (PDF / Image)</div>
+              </div>
+              <div class="file-name-display" id="file-display">
+                <span id="file-name-text"></span>
+                <button class="file-remove" onclick="removeFile()">✕ Remove</button>
+              </div>
+            </div>
+            <button class="form-submit" id="send-btn" onclick="sendContactEmail()">Send Message →</button>
+          </div>
+          <div class="form-success" id="form-success">
+            <div class="form-success-icon">✅</div>
+            <p style="font-weight:600; margin-bottom:8px;">Message sent!</p>
+            <p style="font-size:13px; color:var(--text2);">Thanks for reaching out. I'll get back to you within 24 hours.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer ondblclick="openAdmin()">
+    <div class="footer-copy">© 2024 Mustafa Kamal · Electronics & PCB Design Engineer</div>
+    <div class="footer-links">
+      <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+      <a href="https://github.com" target="_blank">GitHub</a>
+      <a href="mailto:mustafakamal.mk2017@gmail.com">Email</a>
+    </div>
+  </footer>
+</div>
+
+<!-- PROJECTS PAGE -->
+<div id="projects-page" class="page">
+  <div class="projects-page-hero">
+    <div class="section-max">
+      <button onclick="showHome()" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:13px;font-family:var(--font);margin-bottom:1rem;display:flex;align-items:center;gap:6px;">← Back to Home</button>
+      <div class="section-tag">// all work</div>
+      <h1 class="section-title">Projects</h1>
+      <p class="section-sub" style="margin-top:0.5rem;">Complete portfolio of hardware, PCB, and embedded systems projects.</p>
+    </div>
+  </div>
+  <section style="padding: 3rem 5vw;">
+    <div class="section-max">
+      <div class="filter-tabs" id="filter-tabs">
+        <button class="filter-tab active" onclick="filterProjects('all', this)">All</button>
+        <button class="filter-tab" onclick="filterProjects('PCB', this)">PCB</button>
+        <button class="filter-tab" onclick="filterProjects('Power', this)">Power</button>
+        <button class="filter-tab" onclick="filterProjects('IoT', this)">IoT</button>
+        <button class="filter-tab" onclick="filterProjects('FPGA', this)">FPGA</button>
+        <button class="filter-tab" onclick="filterProjects('Embedded', this)">Embedded</button>
+      </div>
+      <div class="section-divider" id="ongoing-label">Ongoing</div>
+      <div class="projects-grid" id="all-projects-ongoing"></div>
+      <div class="section-divider" id="completed-label" style="margin-top:3rem;">Completed</div>
+      <div class="projects-grid" id="all-projects-completed"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="admin-overlay" id="admin-overlay">
+  <div class="admin-panel">
+    <div class="admin-header">
+      <div class="admin-title">⚙ ADMIN PANEL // mkadmin</div>
+      <button class="admin-close" onclick="closeAdmin()">✕ Close</button>
+    </div>
+    <div class="admin-tabs">
+      <button class="admin-tab active" onclick="switchAdminTab('projects', this)">Projects</button>
+      <button class="admin-tab" onclick="switchAdminTab('experience', this)">Experience</button>
+      <button class="admin-tab" onclick="switchAdminTab('education', this)">Education</button>
+      <button class="admin-tab" onclick="switchAdminTab('certificates', this)">Certificates</button>
+      <button class="admin-tab" onclick="switchAdminTab('profile', this)">Profile & CV</button>
+    </div>
+
+    <!-- PROJECTS TAB -->
+    <div class="admin-section active" id="admin-projects">
+      <div class="admin-list" id="admin-projects-list"></div>
+      <details style="margin-bottom:1rem;">
+        <summary style="cursor:pointer;font-size:13px;color:var(--text2);margin-bottom:1rem;">+ Add New Project</summary>
+        <div style="margin-top:1rem; padding:1rem; background:var(--bg); border-radius:8px; border:1px solid var(--border);">
+          <div class="admin-row">
+            <div class="admin-form-group">
+              <label class="admin-label">Title</label>
+              <input class="admin-input" id="ap-title" placeholder="Project title">
+            </div>
+            <div class="admin-form-group">
+              <label class="admin-label">Status</label>
+              <select class="admin-select" id="ap-status">
+                <option value="ongoing">In Progress</option>
+                <option value="completed">Completed</option>
+              </select>
+            </div>
+          </div>
+          <div class="admin-form-group">
+            <label class="admin-label">Description</label>
+            <textarea class="admin-textarea" id="ap-desc" placeholder="Short project description"></textarea>
+          </div>
+          <div class="admin-row">
+            <div class="admin-form-group">
+              <label class="admin-label">Tags (comma separated)</label>
+              <input class="admin-input" id="ap-tags" placeholder="PCB, Power, IoT">
+            </div>
+            <div class="admin-form-group">
+              <label class="admin-label">Icon / Emoji</label>
+              <input class="admin-input" id="ap-icon" placeholder="⚡" maxlength="4">
+            </div>
+          </div>
+          <button class="admin-btn admin-btn-primary" onclick="addProject()">Add Project</button>
+        </div>
+      </details>
+    </div>
+
+    <!-- EXPERIENCE TAB -->
+    <div class="admin-section" id="admin-experience">
+      <div class="admin-list" id="admin-exp-list"></div>
+      <details>
+        <summary style="cursor:pointer;font-size:13px;color:var(--text2);margin-bottom:1rem;">+ Add Experience</summary>
+        <div style="margin-top:1rem; padding:1rem; background:var(--bg); border-radius:8px; border:1px solid var(--border);">
+          <div class="admin-row">
+            <div class="admin-form-group">
+              <label class="admin-label">Role Title</label>
+              <input class="admin-input" id="ae-role" placeholder="PCB Design Engineer">
+            </div>
+            <div class="admin-form-group">
+              <label class="admin-label">Company</label>
+              <input class="admin-input" id="ae-company" placeholder="Company Name">
+            </div>
+          </div>
+          <div class="admin-row">
+            <div class="admin-form-group">
+              <label class="admin-label">Start Date</label>
+              <input class="admin-input" type="month" id="ae-start">
+            </div>
+            <div class="admin-form-group">
+              <label class="admin-label">End Date (blank = ongoing)</label>
+              <input class="admin-input" type="month" id="ae-end">
+            </div>
+          </div>
+          <div class="admin-form-group">
+            <label class="admin-label">Icon / Emoji</label>
+            <input class="admin-input" id="ae-icon" placeholder="🏭" maxlength="4">
+          </div>
+          <button class="admin-btn admin-btn-primary" onclick="addExperience()">Add Experience</button>
+        </div>
+      </details>
+    </div>
+
+    <!-- EDUCATION TAB -->
+    <div class="admin-section" id="admin-education">
+      <div class="admin-list" id="admin-edu-list"></div>
+      <details>
+        <summary style="cursor:pointer;font-size:13px;color:var(--text2);margin-bottom:1rem;">+ Add Education</summary>
+        <div style="margin-top:1rem; padding:1rem; background:var(--bg); border-radius:8px; border:1px solid var(--border);">
+          <div class="admin-row">
+            <div class="admin-form-group">
+              <label class="admin-label">Degree</label>
+              <input class="admin-input" id="aedu-degree" placeholder="BSc Electronics Engineering">
+            </div>
+            <div class="admin-form-group">
+              <label class="admin-label">University</label>
+              <input class="admin-input" id="aedu-uni" placeholder="University Name">
+            </div>
+          </div>
+          <div class="admin-row">
+            <div class="admin-form-group">
+              <label class="admin-label">Start Year</label>
+              <input class="admin-input" id="aedu-start" placeholder="2019">
+            </div>
+            <div class="admin-form-group">
+              <label class="admin-label">End Year</label>
+              <input class="admin-input" id="aedu-end" placeholder="2023">
+            </div>
+          </div>
+          <button class="admin-btn admin-btn-primary" onclick="addEducation()">Add Education</button>
+        </div>
+      </details>
+    </div>
+
+    <!-- CERTIFICATES TAB -->
+    <div class="admin-section" id="admin-certificates">
+      <div class="admin-list" id="admin-cert-list"></div>
+      <details>
+        <summary style="cursor:pointer;font-size:13px;color:var(--text2);margin-bottom:1rem;">+ Add Certificate</summary>
+        <div style="margin-top:1rem; padding:1rem; background:var(--bg); border-radius:8px; border:1px solid var(--border);">
+          <div class="admin-row">
+            <div class="admin-form-group">
+              <label class="admin-label">Certificate Name</label>
+              <input class="admin-input" id="ac-name" placeholder="PCB Design Fundamentals">
+            </div>
+            <div class="admin-form-group">
+              <label class="admin-label">Issuer</label>
+              <input class="admin-input" id="ac-issuer" placeholder="Coursera / Udemy / etc">
+            </div>
+          </div>
+          <div class="admin-row">
+            <div class="admin-form-group">
+              <label class="admin-label">Date</label>
+              <input class="admin-input" type="month" id="ac-date">
+            </div>
+            <div class="admin-form-group">
+              <label class="admin-label">Link (optional)</label>
+              <input class="admin-input" id="ac-link" placeholder="https://...">
+            </div>
+          </div>
+          <button class="admin-btn admin-btn-primary" onclick="addCertificate()">Add Certificate</button>
+        </div>
+      </details>
+    </div>
+
+    <!-- PROFILE TAB -->
+    <div class="admin-section" id="admin-profile">
+      <div class="admin-form-group">
+        <label class="admin-label">Display Name</label>
+        <input class="admin-input" id="ap-display-name" value="Mustafa Kamal">
+      </div>
+      <div class="admin-form-group">
+        <label class="admin-label">Role Subtitle</label>
+        <input class="admin-input" id="ap-subtitle" value="PCB Design · Embedded Systems · Power Electronics">
+      </div>
+      <div class="admin-form-group">
+        <label class="admin-label">Tagline</label>
+        <textarea class="admin-textarea" id="ap-tagline">Designing reliable embedded systems, power electronics, and PCB solutions for real-world applications.</textarea>
+      </div>
+      <div class="admin-form-group">
+        <label class="admin-label">Upload CV (PDF) — auto-renames to MustafaKamal_CV.pdf</label>
+        <input type="file" id="cv-file-input" accept=".pdf" style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px;color:var(--text);font-size:13px;" onchange="handleCVUpload(this)">
+      </div>
+      <button class="admin-btn admin-btn-primary" onclick="saveProfile()">Save Profile Info</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- ADMIN HINT (invisible, double-click footer) -->
+<div class="admin-hint">mkadmin</div>
+
+<script>
+// ==================== DATA ====================
+let data = {
+  profile: {
+    name: "Mustafa Kamal",
+    subtitle: "PCB Design · Embedded Systems · Power Electronics",
+    tagline: "Designing reliable embedded systems, power electronics, and PCB solutions for real-world applications.",
+    cvData: null
+  },
+  projects: [
+    {
+      id: 1, title: "3-Phase Inverter PCB",
+      desc: "High-performance 3-phase inverter board with gate driver isolation, current sensing, and thermal management for industrial motor control.",
+      tags: ["PCB", "Power", "Embedded"],
+      icon: "⚡", status: "completed"
+    },
+    {
+      id: 2, title: "Battery Management System",
+      desc: "Multi-cell lithium BMS with active balancing, state-of-charge estimation, over-voltage/under-voltage protection, and CAN bus communication.",
+      tags: ["PCB", "Power"],
+      icon: "🔋", status: "completed"
+    },
+    {
+      id: 3, title: "ESP32 IoT Sensor Board",
+      desc: "Ultra-low-power multi-sensor IoT node with ESP32-S3, environmental sensing, MQTT over WiFi, and deep-sleep power management.",
+      tags: ["PCB", "IoT", "Embedded"],
+      icon: "📡", status: "completed"
+    },
+    {
+      id: 4, title: "FPGA Signal Processing Board",
+      desc: "Xilinx Artix-7 based high-speed signal acquisition and processing board with ADC front-end and HDMI output for real-time data visualization.",
+      tags: ["FPGA", "PCB"],
+      icon: "🧠", status: "ongoing"
+    },
+    {
+      id: 5, title: "STM32 Motor Driver",
+      desc: "4-quadrant DC motor controller using STM32F4 with FOC algorithm, encoder feedback, and CAN communication interface.",
+      tags: ["PCB", "Embedded", "Power"],
+      icon: "⚙️", status: "completed"
+    },
+    {
+      id: 6, title: "Industrial IoT Gateway",
+      desc: "Edge computing gateway with cellular/WiFi connectivity, Modbus RTU bridging, and secure OTA firmware update capability.",
+      tags: ["IoT", "Embedded", "PCB"],
+      icon: "🌐", status: "completed"
+    }
+  ],
+  experience: [
+    {
+      id: 1, role: "Electronics Design Engineer",
+      company: "Freelance / Self-employed",
+      start: "2022-06", end: null,
+      icon: "💼"
+    },
+    {
+      id: 2, role: "PCB Design Intern",
+      company: "Electronics Manufacturing Co.",
+      start: "2021-07", end: "2022-01",
+      icon: "🏭"
+    }
+  ],
+  education: [
+    {
+      id: 1, degree: "BSc Electronics Engineering",
+      uni: "University of Engineering & Technology",
+      start: "2018", end: "2022",
+      icon: "🎓"
+    }
+  ],
+  certificates: [
+    {
+      id: 1, name: "PCB Design with Altium Designer",
+      issuer: "Udemy", date: "2022-03",
+      link: ""
+    },
+    {
+      id: 2, name: "Embedded Systems with STM32",
+      issuer: "Coursera", date: "2021-11",
+      link: ""
+    },
+    {
+      id: 3, name: "FPGA Design with Xilinx",
+      issuer: "edX", date: "2023-05",
+      link: ""
+    }
+  ]
+};
+
+function loadData() {
+  try {
+    const s = localStorage.getItem('mk_portfolio_data');
+    if (s) data = JSON.parse(s);
+  } catch(e) {}
+}
+function saveData() {
+  try { localStorage.setItem('mk_portfolio_data', JSON.stringify(data)); } catch(e) {}
+}
+
+// ==================== RENDER ====================
+function renderAll() {
+  renderHomeProjects();
+  renderExperience();
+  renderEducation();
+  renderCertificates();
+  renderAllProjects();
+  updateStats();
+}
+
+function makeProjectCard(p) {
+  const statusClass = p.status === 'ongoing' ? 'status-progress' : 'status-done';
+  const statusLabel = p.status === 'ongoing' ? '▶ IN PROGRESS' : '✓ COMPLETED';
+  return `
+    <div class="project-card fade-up" data-tags="${p.tags.join(',')}">
+      <div class="project-thumb">${p.icon || '🔌'}</div>
+      <div class="project-body">
+        <span class="project-status ${statusClass}">${statusLabel}</span>
+        <div class="project-title">${p.title}</div>
+        <div class="project-desc">${p.desc}</div>
+        <div class="project-tags">${p.tags.map(t=>`<span class="project-tag">${t}</span>`).join('')}</div>
+        <button class="btn-outline">View Details</button>
+      </div>
+    </div>`;
+}
+
+function renderHomeProjects() {
+  const grid = document.getElementById('home-projects-grid');
+  const featured = data.projects.slice(0, 4);
+  grid.innerHTML = featured.map(makeProjectCard).join('');
+  observeFadeUp();
+}
+
+function renderAllProjects(filter) {
+  const ongoing = data.projects.filter(p => p.status === 'ongoing' && (!filter || filter === 'all' || p.tags.includes(filter)));
+  const completed = data.projects.filter(p => p.status === 'completed' && (!filter || filter === 'all' || p.tags.includes(filter)));
+  document.getElementById('all-projects-ongoing').innerHTML = ongoing.length ? ongoing.map(makeProjectCard).join('') : '<p style="color:var(--text3);font-size:13px;">No ongoing projects in this category.</p>';
+  document.getElementById('all-projects-completed').innerHTML = completed.length ? completed.map(makeProjectCard).join('') : '<p style="color:var(--text3);font-size:13px;">No completed projects in this category.</p>';
+  document.getElementById('ongoing-label').style.display = ongoing.length ? 'flex' : 'none';
+  observeFadeUp();
+}
+
+function filterProjects(tag, btn) {
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  renderAllProjects(tag === 'all' ? null : tag);
+}
+
+function renderExperience() {
+  const timeline = document.getElementById('exp-timeline');
+  timeline.innerHTML = data.experience.map(e => {
+    const start = new Date(e.start + '-01');
+    const end = e.end ? new Date(e.end + '-01') : new Date();
+    const months = Math.round((end - start) / (1000*60*60*24*30));
+    const years = Math.floor(months/12);
+    const rem = months % 12;
+    const dur = years > 0 ? `${years}y ${rem}m` : `${rem}m`;
+    const isOngoing = !e.end;
+    return `
+      <div class="exp-card fade-up">
+        <div class="exp-logo">${e.icon||'🏢'}</div>
+        <div>
+          <div class="exp-role">${e.role}</div>
+          <div class="exp-company">${e.company}</div>
+          <div class="exp-duration">${formatMonthYear(e.start)} → ${isOngoing ? 'Present' : formatMonthYear(e.end)} · ${dur}</div>
+        </div>
+        <span class="exp-badge ${isOngoing ? 'badge-ongoing' : 'badge-done'}">${isOngoing ? 'ONGOING' : 'COMPLETED'}</span>
+      </div>`;
+  }).join('');
+
+  // Calculate total experience
+  const totalMs = data.experience.reduce((sum, e) => {
+    const s = new Date(e.start + '-01');
+    const en = e.end ? new Date(e.end + '-01') : new Date();
+    return sum + (en - s);
+  }, 0);
+  const totalMonths = Math.round(totalMs / (1000*60*60*24*30));
+  const ty = Math.floor(totalMonths/12);
+  const tm = totalMonths % 12;
+  const expStr = ty > 0 ? `${ty}.${Math.round(tm/12*10)}+ Years Experience` : `${tm}+ Months Experience`;
+  document.getElementById('total-exp-text').textContent = expStr;
+  document.getElementById('stat-years').textContent = ty > 0 ? `${ty}+` : `${tm}m`;
+  observeFadeUp();
+}
+
+function formatMonthYear(str) {
+  if (!str) return '';
+  const d = new Date(str + '-01');
+  return d.toLocaleDateString('en-GB', { month: 'short', year: 'numeric' });
+}
+
+function renderEducation() {
+  const grid = document.getElementById('edu-grid');
+  grid.innerHTML = data.education.map(e => `
+    <div class="edu-card fade-up">
+      <div class="edu-logo">${e.icon||'🎓'}</div>
+      <div>
+        <div class="edu-degree">${e.degree}</div>
+        <div class="edu-uni">${e.uni}</div>
+        <div class="edu-dates">${e.start} – ${e.end}</div>
+      </div>
+    </div>`).join('');
+  observeFadeUp();
+}
+
+function renderCertificates() {
+  const grid = document.getElementById('cert-grid');
+  grid.innerHTML = data.certificates.map(c => `
+    <div class="cert-card fade-up">
+      <div class="cert-icon">🏅</div>
+      <div>
+        <div class="cert-name">${c.name}</div>
+        <div class="cert-issuer">${c.issuer}</div>
+        <div class="cert-date">${c.date ? formatMonthYear(c.date) : ''}</div>
+      </div>
+      ${c.link ? `<a href="${c.link}" target="_blank" class="cert-link">View →</a>` : ''}
+    </div>`).join('');
+  observeFadeUp();
+}
+
+function updateStats() {
+  document.getElementById('stat-projects').textContent = data.projects.length + '+';
+}
+
+// ==================== NAVIGATION ====================
+function showHome() {
+  document.getElementById('home').classList.add('active');
+  document.getElementById('projects-page').classList.remove('active');
+  window.scrollTo(0,0);
+}
+function showProjects() {
+  document.getElementById('home').classList.remove('active');
+  document.getElementById('projects-page').classList.add('active');
+  renderAllProjects();
+  window.scrollTo(0,0);
+}
+
+// ==================== ADMIN ====================
+let adminKeyBuffer = '';
+document.addEventListener('keypress', e => {
+  adminKeyBuffer += e.key;
+  if (adminKeyBuffer.includes('mkadmin')) { openAdmin(); adminKeyBuffer = ''; }
+  if (adminKeyBuffer.length > 20) adminKeyBuffer = adminKeyBuffer.slice(-10);
+});
+window.addEventListener('popstate', e => {
+  if (location.search.includes('admin')) openAdmin();
+});
+if (location.search.includes('admin')) openAdmin();
+
+function openAdmin() {
+  document.getElementById('admin-overlay').classList.add('open');
+  renderAdminLists();
+  document.getElementById('ap-display-name').value = data.profile.name;
+  document.getElementById('ap-subtitle').value = data.profile.subtitle;
+  document.getElementById('ap-tagline').value = data.profile.tagline;
+}
+function closeAdmin() {
+  document.getElementById('admin-overlay').classList.remove('open');
+}
+function switchAdminTab(name, btn) {
+  document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('admin-' + name).classList.add('active');
+  renderAdminLists();
+}
+function renderAdminLists() {
+  // Projects
+  document.getElementById('admin-projects-list').innerHTML = data.projects.map((p,i) => `
+    <div class="admin-list-item">
+      <div class="admin-list-item-info">
+        <div class="admin-list-item-title">${p.icon} ${p.title}</div>
+        <div class="admin-list-item-sub">${p.status.toUpperCase()} · ${p.tags.join(', ')}</div>
+      </div>
+      <div style="display:flex;gap:6px;">
+        <button class="admin-btn" style="font-size:11px;padding:5px 10px;border:1px solid var(--border);background:none;color:var(--text2);border-radius:4px;cursor:pointer;" onclick="toggleProjectStatus(${p.id})">${p.status==='ongoing'?'Mark Done':'Reopen'}</button>
+        <button class="admin-btn admin-btn-danger" style="font-size:11px;padding:5px 10px;" onclick="deleteProject(${p.id})">Delete</button>
+      </div>
+    </div>`).join('');
+  // Experience
+  document.getElementById('admin-exp-list').innerHTML = data.experience.map(e => `
+    <div class="admin-list-item">
+      <div class="admin-list-item-info">
+        <div class="admin-list-item-title">${e.icon} ${e.role}</div>
+        <div class="admin-list-item-sub">${e.company} · ${e.start} → ${e.end||'Present'}</div>
+      </div>
+      <button class="admin-btn admin-btn-danger" style="font-size:11px;padding:5px 10px;" onclick="deleteExperience(${e.id})">Delete</button>
+    </div>`).join('');
+  // Education
+  document.getElementById('admin-edu-list').innerHTML = data.education.map(e => `
+    <div class="admin-list-item">
+      <div class="admin-list-item-info">
+        <div class="admin-list-item-title">${e.icon} ${e.degree}</div>
+        <div class="admin-list-item-sub">${e.uni} · ${e.start}–${e.end}</div>
+      </div>
+      <button class="admin-btn admin-btn-danger" style="font-size:11px;padding:5px 10px;" onclick="deleteEducation(${e.id})">Delete</button>
+    </div>`).join('');
+  // Certificates
+  document.getElementById('admin-cert-list').innerHTML = data.certificates.map(c => `
+    <div class="admin-list-item">
+      <div class="admin-list-item-info">
+        <div class="admin-list-item-title">🏅 ${c.name}</div>
+        <div class="admin-list-item-sub">${c.issuer} · ${c.date||''}</div>
+      </div>
+      <button class="admin-btn admin-btn-danger" style="font-size:11px;padding:5px 10px;" onclick="deleteCertificate(${c.id})">Delete</button>
+    </div>`).join('');
+}
+
+function addProject() {
+  const title = document.getElementById('ap-title').value.trim();
+  const desc = document.getElementById('ap-desc').value.trim();
+  const tags = document.getElementById('ap-tags').value.split(',').map(t=>t.trim()).filter(Boolean);
+  const icon = document.getElementById('ap-icon').value.trim() || '🔌';
+  const status = document.getElementById('ap-status').value;
+  if (!title) { showToast('Enter a project title'); return; }
+  const newId = Math.max(0,...data.projects.map(p=>p.id))+1;
+  data.projects.unshift({id:newId, title, desc, tags, icon, status});
+  saveData(); renderAll(); renderAdminLists();
+  document.getElementById('ap-title').value=''; document.getElementById('ap-desc').value=''; document.getElementById('ap-tags').value=''; document.getElementById('ap-icon').value='';
+  showToast('Project added');
+}
+function toggleProjectStatus(id) {
+  const p = data.projects.find(p=>p.id===id);
+  if (p) { p.status = p.status==='ongoing'?'completed':'ongoing'; saveData(); renderAll(); renderAdminLists(); showToast('Status updated'); }
+}
+function deleteProject(id) {
+  if(!confirm('Delete this project?')) return;
+  data.projects = data.projects.filter(p=>p.id!==id);
+  saveData(); renderAll(); renderAdminLists(); showToast('Project deleted');
+}
+function addExperience() {
+  const role = document.getElementById('ae-role').value.trim();
+  const company = document.getElementById('ae-company').value.trim();
+  const start = document.getElementById('ae-start').value;
+  const end = document.getElementById('ae-end').value || null;
+  const icon = document.getElementById('ae-icon').value.trim() || '🏢';
+  if (!role||!start) { showToast('Enter role and start date'); return; }
+  const newId = Math.max(0,...data.experience.map(e=>e.id))+1;
+  data.experience.push({id:newId, role, company, start, end, icon});
+  saveData(); renderAll(); renderAdminLists();
+  showToast('Experience added');
+}
+function deleteExperience(id) {
+  data.experience = data.experience.filter(e=>e.id!==id);
+  saveData(); renderAll(); renderAdminLists(); showToast('Deleted');
+}
+function addEducation() {
+  const degree = document.getElementById('aedu-degree').value.trim();
+  const uni = document.getElementById('aedu-uni').value.trim();
+  const start = document.getElementById('aedu-start').value;
+  const end = document.getElementById('aedu-end').value;
+  if (!degree) { showToast('Enter degree'); return; }
+  const newId = Math.max(0,...data.education.map(e=>e.id))+1;
+  data.education.push({id:newId, degree, uni, start, end, icon:'🎓'});
+  saveData(); renderAll(); renderAdminLists(); showToast('Education added');
+}
+function deleteEducation(id) {
+  data.education = data.education.filter(e=>e.id!==id);
+  saveData(); renderAll(); renderAdminLists(); showToast('Deleted');
+}
+function addCertificate() {
+  const name = document.getElementById('ac-name').value.trim();
+  const issuer = document.getElementById('ac-issuer').value.trim();
+  const date = document.getElementById('ac-date').value;
+  const link = document.getElementById('ac-link').value.trim();
+  if (!name) { showToast('Enter certificate name'); return; }
+  const newId = Math.max(0,...data.certificates.map(c=>c.id))+1;
+  data.certificates.push({id:newId, name, issuer, date, link});
+  saveData(); renderAll(); renderAdminLists(); showToast('Certificate added');
+}
+function deleteCertificate(id) {
+  data.certificates = data.certificates.filter(c=>c.id!==id);
+  saveData(); renderAll(); renderAdminLists(); showToast('Deleted');
+}
+function saveProfile() {
+  data.profile.name = document.getElementById('ap-display-name').value;
+  data.profile.subtitle = document.getElementById('ap-subtitle').value;
+  data.profile.tagline = document.getElementById('ap-tagline').value;
+  document.querySelector('.hero-name').innerHTML = `${data.profile.name.split(' ')[0]}<br><span>${data.profile.name.split(' ').slice(1).join(' ')}</span>`;
+  document.querySelector('.hero-role').textContent = data.profile.subtitle;
+  document.querySelector('.hero-tagline').textContent = data.profile.tagline;
+  saveData(); showToast('Profile saved');
+}
+function handleCVUpload(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    data.profile.cvData = e.target.result;
+    saveData(); showToast('CV uploaded — download button active');
+  };
+  reader.readAsDataURL(file);
+}
+function downloadCV() {
+  if (data.profile.cvData) {
+    const a = document.createElement('a');
+    a.href = data.profile.cvData;
+    a.download = 'MustafaKamal_CV.pdf';
+    a.click();
+  } else {
+    showToast('No CV uploaded yet. Upload via Admin Panel.');
+  }
+}
+
+// ==================== CONTACT FORM ====================
+let uploadedFile = null;
+function handleFileSelect(input) {
+  const file = input.files[0];
+  if (file) {
+    uploadedFile = file;
+    document.getElementById('file-name-text').textContent = file.name;
+    document.getElementById('file-display').style.display = 'flex';
+  }
+}
+function removeFile() {
+  uploadedFile = null;
+  document.getElementById('contact-file').value = '';
+  document.getElementById('file-display').style.display = 'none';
+}
+
+function sendContactEmail() {
+  const name = document.getElementById('contact-name').value.trim();
+  const email = document.getElementById('contact-email').value.trim();
+  const message = document.getElementById('contact-message').value.trim();
+  if (!name||!email||!message) { showToast('Please fill in all fields'); return; }
+
+  const btn = document.getElementById('send-btn');
+  btn.disabled = true; btn.textContent = 'Sending...';
+
+  // EmailJS - user needs to configure their own keys
+  // To activate: replace the placeholders with real EmailJS credentials
+  const EMAILJS_SERVICE = 'YOUR_EMAILJS_SERVICE_ID';
+  const EMAILJS_TEMPLATE = 'YOUR_EMAILJS_TEMPLATE_ID';
+  const EMAILJS_PUBLIC_KEY = 'YOUR_EMAILJS_PUBLIC_KEY';
+
+  if (EMAILJS_SERVICE.includes('YOUR_')) {
+    // Demo mode - simulate success
+    setTimeout(() => {
+      showFormSuccess();
+    }, 1200);
+    return;
+  }
+
+  emailjs.init(EMAILJS_PUBLIC_KEY);
+  emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE, {
+    from_name: name,
+    from_email: email,
+    message: message,
+    to_email: 'mustafakamal.mk2017@gmail.com'
+  }).then(() => {
+    showFormSuccess();
+  }).catch(err => {
+    btn.disabled = false; btn.textContent = 'Send Message →';
+    showToast('Failed to send. Please try emailing directly.');
+    console.error(err);
+  });
+}
+function showFormSuccess() {
+  document.getElementById('form-content').style.display = 'none';
+  document.getElementById('form-success').style.display = 'block';
+}
+
+// ==================== UTILS ====================
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+function observeFadeUp() {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.fade-up:not(.visible)').forEach(el => obs.observe(el));
+}
+
+// ==================== INIT ====================
+loadData();
+renderAll();
+observeFadeUp();
+
+// Close admin on ESC
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeAdmin(); });
+// Close mobile menu on outside click
+document.addEventListener('click', e => {
+  const menu = document.getElementById('mobile-menu');
+  const ham = document.querySelector('.hamburger');
+  if (!menu.contains(e.target) && !ham.contains(e.target)) menu.classList.remove('open');
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,2400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mustafa Kamal — Electronics Engineer & PCB Designer</title>
+<meta name="description" content="Electronics Engineer specialising in PCB design, power electronics, and hardware development. Available for freelance projects.">
+<link rel="prefetch" href="projects.html">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+  /* Page transition — fade out on navigate */
+  body { opacity: 1; transition: opacity 0.15s ease; }
+  body.fading { opacity: 0; }
+  .contact-section-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+  .contact-info-block { background: var(--bg-sec); border-radius: var(--radius-lg); padding: 32px 36px; }
+  .contact-info-block h3 { font-size: 18px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+  .contact-info-block p { font-size: 13px; color: var(--text-sec); margin-bottom: 18px; }
+  .contact-info-block p a { color: var(--teal); text-decoration: none; }
+  .contact-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+  .contact-form-block { background: var(--bg-sec); border-radius: var(--radius-lg); padding: 28px 32px; }
+  .contact-form-block h4 { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 18px; }
+  .cf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+  .cf-group { margin-bottom: 10px; }
+  .cf-group label { display: block; font-size: 12px; font-weight: 500; color: var(--text-sec); margin-bottom: 5px; }
+  .cf-group input, .cf-group textarea { width: 100%; padding: 9px 12px; border: 0.5px solid var(--border-mid); border-radius: var(--radius); font-size: 13px; font-family: inherit; background: var(--bg); color: var(--text); outline: none; transition: border 0.15s; }
+  .cf-group input:focus, .cf-group textarea:focus { border-color: var(--teal); }
+  .cf-group textarea { resize: vertical; min-height: 90px; }
+  .cf-attach-btn { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-sec); background: var(--bg); border: 0.5px dashed var(--border-mid); border-radius: var(--radius); padding: 8px 12px; cursor: pointer; transition: border-color 0.15s; width: 100%; margin-bottom: 8px; }
+  .cf-attach-btn:hover { border-color: var(--teal); color: var(--teal); }
+  .cf-file-list { display: flex; flex-direction: column; gap: 4px; margin-bottom: 10px; }
+  .cf-file-item { display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: var(--text-sec); background: var(--bg-ter); border-radius: 4px; padding: 4px 10px; }
+  .cf-file-remove { background: none; border: none; color: var(--text-ter); cursor: pointer; font-size: 16px; line-height: 1; padding: 0 2px; }
+  .cf-file-remove:hover { color: #A32D2D; }
+  .cf-send-btn { width: 100%; padding: 10px; background: var(--teal); color: #fff; border: none; border-radius: var(--radius); font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit; transition: opacity 0.15s; }
+  .cf-send-btn:hover { opacity: 0.88; }
+  .cf-sent-msg { display: none; background: var(--teal-light); color: var(--teal-dark); border-radius: var(--radius); padding: 10px 14px; font-size: 13px; margin-bottom: 12px; }
+  @media (max-width: 900px) { .contact-section-inner { grid-template-columns: 1fr; } }
+  @media (max-width: 680px) { .cf-row { grid-template-columns: 1fr; } .contact-info-block, .contact-form-block { padding: 22px 18px; } }
+  :root {
+    --teal: #1D9E75;
+    --teal-light: #E1F5EE;
+    --teal-mid: #5DCAA5;
+    --teal-dark: #0F6E56;
+    --teal-deeper: #085041;
+    --amber-light: #FAEEDA;
+    --amber-dark: #854F0B;
+    --blue-light: #E6F1FB;
+    --blue-dark: #185FA5;
+    --purple-light: #EEEDFE;
+    --purple-dark: #534AB7;
+    --text: #1a1a1a;
+    --text-sec: #6b6b6b;
+    --text-ter: #9a9a9a;
+    --bg: #ffffff;
+    --bg-sec: #f7f7f5;
+    --bg-ter: #f0efec;
+    --border: rgba(0,0,0,0.1);
+    --border-mid: rgba(0,0,0,0.18);
+    --radius: 8px;
+    --radius-lg: 12px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+  /* NAV */
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); border-bottom: 0.5px solid var(--border); padding: 0 40px; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .nav-logo { font-size: 15px; font-weight: 600; color: var(--text); letter-spacing: -0.01em; }
+  .nav-logo span { color: var(--teal); }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a { font-size: 13px; color: var(--text-sec); text-decoration: none; transition: color 0.15s; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-right { display: flex; align-items: center; gap: 12px; }
+  .nav-hire { font-size: 13px; padding: 7px 18px; background: var(--text); color: #fff; border-radius: var(--radius); border: none; cursor: pointer; font-weight: 500; text-decoration: none; transition: opacity 0.15s; }
+  .nav-hire:hover { opacity: 0.85; }
+  .nav-admin-btn { font-size: 12px; color: var(--text-ter); cursor: pointer; background: none; border: none; padding: 4px 8px; border-radius: var(--radius); transition: background 0.15s; }
+  .nav-admin-btn:hover { background: var(--bg-sec); color: var(--text-sec); }
+  .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+  .hamburger span { display: block; width: 20px; height: 1.5px; background: var(--text); margin: 4px 0; transition: all 0.2s; }
+  .mobile-menu { display: none; position: fixed; top: 60px; left: 0; right: 0; background: var(--bg); border-bottom: 0.5px solid var(--border); padding: 20px 24px; z-index: 99; flex-direction: column; gap: 16px; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { font-size: 15px; color: var(--text-sec); text-decoration: none; }
+
+  /* HERO */
+  .hero { padding: 72px 40px 64px; border-bottom: 0.5px solid var(--border); display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center; max-width: 1100px; margin: 0 auto; }
+  .hero-eyebrow { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-ter); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+  .hero-eyebrow::before { content: ''; display: inline-block; width: 28px; height: 1.5px; background: var(--teal); }
+  .hero h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; color: var(--text); line-height: 1.12; margin-bottom: 18px; letter-spacing: -0.02em; }
+  .hero h1 em { font-style: normal; color: var(--teal); }
+  .hero-desc { font-size: 15px; color: var(--text-sec); line-height: 1.75; max-width: 460px; margin-bottom: 28px; }
+  .hero-pills { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 32px; }
+  .pill { font-size: 12px; padding: 5px 13px; border-radius: 20px; border: 0.5px solid var(--border-mid); color: var(--text-sec); background: var(--bg); }
+  .pill.hi { border-color: var(--teal-mid); color: var(--teal-dark); background: var(--teal-light); }
+  .hero-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn-primary { font-size: 13px; padding: 10px 24px; background: var(--text); color: #fff; border: none; border-radius: var(--radius); cursor: pointer; font-weight: 500; text-decoration: none; transition: opacity 0.15s; display: inline-block; }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-secondary { font-size: 13px; padding: 10px 24px; background: transparent; color: var(--text); border: 0.5px solid var(--border-mid); border-radius: var(--radius); cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.15s; }
+  .btn-secondary:hover { background: var(--bg-sec); }
+  /* AVATAR */
+  .hero-avatar-wrap { position: relative; flex-shrink: 0; }
+  .hero-avatar { width: 160px; height: 160px; border-radius: 50%; background: var(--teal-light); border: 3px solid var(--teal-mid); display: flex; align-items: center; justify-content: center; font-size: 48px; font-weight: 600; color: var(--teal-dark); flex-shrink: 0; overflow: hidden; }
+  .hero-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* STATS */
+  .stats-bar { border-bottom: 0.5px solid var(--border); }
+  .stats-inner { display: grid; grid-template-columns: repeat(4, 1fr); max-width: 1100px; margin: 0 auto; }
+  .stat { padding: 24px 40px; border-right: 0.5px solid var(--border); }
+  .stat:last-child { border-right: none; }
+  .stat-n { font-size: 24px; font-weight: 600; color: var(--text); letter-spacing: -0.02em; }
+  .stat-l { font-size: 12px; color: var(--text-ter); margin-top: 4px; }
+
+  /* SECTIONS */
+  .section { padding: 56px 40px; border-bottom: 0.5px solid var(--border); }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .sec-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
+  .sec-title { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-ter); display: flex; align-items: center; gap: 10px; }
+  .sec-title::after { content: ''; display: inline-block; width: 40px; height: 0.5px; background: var(--border); }
+  .sec-link { font-size: 13px; color: var(--teal); text-decoration: none; cursor: pointer; }
+
+  /* ONGOING PROJECT */
+  .ongoing-card { border: 2px solid var(--teal); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 16px; }
+  .ongoing-top { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px 0; flex-wrap: wrap; gap: 8px; }
+  .in-progress { display: flex; align-items: center; gap: 7px; font-size: 11px; font-weight: 600; color: var(--teal-dark); background: var(--teal-light); border-radius: 4px; padding: 4px 12px; }
+  .pulse { width: 7px; height: 7px; border-radius: 50%; background: var(--teal); animation: pulse 1.6s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  .ongoing-img { margin: 14px 24px 0; height: 160px; background: var(--teal-light); border-radius: var(--radius); border: 0.5px solid var(--teal-mid); display: flex; align-items: center; justify-content: center; gap: 20px; overflow: hidden; }
+  .ongoing-img img { width: 100%; height: 100%; object-fit: contain; }
+  .ongoing-img svg { width: 40px; height: 40px; stroke: var(--teal); fill: none; stroke-width: 1.5; }
+  .chip-label { font-size: 12px; font-weight: 500; color: var(--teal-dark); background: #fff; border: 0.5px solid var(--teal-mid); border-radius: 4px; padding: 5px 12px; }
+  .ongoing-body { padding: 18px 24px 24px; }
+  .ongoing-body h3 { font-size: 18px; font-weight: 600; color: var(--text); margin-bottom: 10px; }
+  .ongoing-body p { font-size: 14px; color: var(--text-sec); line-height: 1.7; margin-bottom: 20px; }
+  .progress-label { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-ter); margin-bottom: 7px; }
+  .progress-track { height: 4px; background: var(--bg-sec); border-radius: 2px; overflow: hidden; margin-bottom: 20px; }
+  .progress-fill { height: 100%; background: var(--teal); border-radius: 2px; }
+  .stages { display: flex; justify-content: space-between; position: relative; margin-bottom: 20px; }
+  .stages-line-bg { position: absolute; top: 5px; left: 5%; right: 5%; height: 1.5px; background: var(--border); z-index: 0; }
+  .stages-line-done { position: absolute; top: 5px; left: 5%; height: 1.5px; background: var(--teal); z-index: 1; }
+  .stage { display: flex; flex-direction: column; align-items: center; gap: 7px; flex: 1; position: relative; z-index: 2; }
+  .stage-dot { width: 11px; height: 11px; border-radius: 50%; background: var(--bg-sec); border: 1.5px solid var(--border-mid); }
+  .stage-dot.done { background: var(--teal); border-color: var(--teal); }
+  .stage-dot.active { background: #fff; border: 2.5px solid var(--teal); box-shadow: 0 0 0 3px var(--teal-light); }
+  .stage-lbl { font-size: 10px; color: var(--text-ter); text-align: center; line-height: 1.3; }
+  .stage-lbl.active { color: var(--teal-dark); font-weight: 600; }
+  .tag-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+  .tag { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase; padding: 3px 9px; border-radius: 4px; font-weight: 500; }
+  .tag-motor { background: var(--teal-light); color: var(--teal-dark); }
+  .tag-power { background: var(--amber-light); color: var(--amber-dark); }
+  .tag-iot { background: var(--blue-light); color: var(--blue-dark); }
+  .tag-usb { background: var(--purple-light); color: var(--purple-dark); }
+  .tag-fpga { background: var(--purple-light); color: var(--purple-dark); }
+  .tag-dsp { background: var(--teal-light); color: var(--teal-dark); }
+  .btn-complete { font-size: 12px; padding: 6px 14px; background: var(--teal); color: #fff; border: none; border-radius: var(--radius); cursor: pointer; font-weight: 500; transition: opacity 0.15s; }
+  .btn-complete:hover { opacity: 0.85; }
+
+  /* PROJECT GRID — homepage always 2×2 equal cards */
+  .proj-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 0.5px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+  .proj-card { background: var(--bg); padding: 22px; cursor: pointer; transition: background 0.12s; display: flex; flex-direction: column; grid-column: span 1 !important; }
+  .proj-card:hover { background: var(--bg-sec); }
+  .proj-card-img { height: 140px; border-radius: var(--radius); margin-bottom: 16px; display: flex; align-items: center; justify-content: center; border: 0.5px solid var(--border); overflow: hidden; flex-shrink: 0; background: var(--bg-sec); }
+  .proj-card-img img { width: 100%; height: 100%; object-fit: contain; }
+  .proj-card-img svg { width: 32px; height: 32px; stroke-width: 1.5; fill: none; }
+  .img-teal { background: var(--teal-light); border-color: var(--teal-mid) !important; }
+  .img-teal svg { stroke: var(--teal); }
+  .img-amber { background: var(--amber-light); }
+  .img-amber svg { stroke: var(--amber-dark); }
+  .img-blue { background: var(--blue-light); }
+  .img-blue svg { stroke: var(--blue-dark); }
+  .img-purple { background: var(--purple-light); }
+  .img-purple svg { stroke: var(--purple-dark); }
+  .proj-card h3 { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 7px; line-height: 1.4; }
+  .proj-card p { font-size: 12px; color: var(--text-sec); line-height: 1.65; margin-bottom: 14px; flex: 1; }
+  .chips { display: flex; flex-wrap: wrap; gap: 4px; }
+  .chip { font-size: 10px; color: var(--text-ter); background: var(--bg-sec); border-radius: 4px; padding: 2px 8px; border: 0.5px solid var(--border); }
+
+  /* PROJECT DETAIL MODAL */
+  .pdm-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.6); z-index:900; align-items:center; justify-content:center; padding:20px; }
+  .pdm-overlay.open { display:flex; }
+  .pdm-box { background:var(--bg); border-radius:var(--radius-lg); width:100%; max-width:820px; max-height:92vh; overflow-y:auto; }
+  .pdm-header { padding:20px 24px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:flex-start; gap:16px; position:sticky; top:0; background:var(--bg); z-index:2; }
+  .pdm-close { background:var(--bg-sec); border:none; cursor:pointer; font-size:18px; color:var(--text-sec); line-height:1; padding:6px 10px; border-radius:8px; flex-shrink:0; }
+  .pdm-close:hover { background:var(--bg-ter); }
+  .pdm-body { padding:24px; }
+  .pdm-gallery { display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:10px; margin-bottom:20px; }
+  .pdm-gallery-item { height:130px; border-radius:var(--radius); border:1px solid var(--border); background:var(--bg-sec); display:flex; align-items:center; justify-content:center; overflow:hidden; cursor:zoom-in; }
+  .pdm-gallery-item img { width:100%; height:100%; object-fit:contain; }
+  .pdm-cover-badge { position:absolute; }
+  .pdm-desc { font-size:14px; color:var(--text-sec); line-height:1.75; margin-bottom:16px; }
+
+  /* LIGHTBOX */
+  .lightbox-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.92); z-index:1100; align-items:center; justify-content:center; padding:40px; }
+  .lightbox-overlay.open { display:flex; }
+  .lightbox-overlay img { max-width:100%; max-height:100%; object-fit:contain; border-radius:4px; }
+  .lightbox-close { position:fixed; top:20px; right:28px; background:rgba(255,255,255,.12); border:none; color:#fff; font-size:22px; width:44px; height:44px; border-radius:50%; cursor:pointer; z-index:1101; display:flex; align-items:center; justify-content:center; }
+  .lightbox-close:hover { background:rgba(255,255,255,.22); }
+
+  /* MULTI-IMAGE UPLOAD (admin) */
+  .multi-img-list { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:10px; }
+  .multi-img-item { position:relative; width:72px; height:72px; border-radius:8px; overflow:hidden; border:1.5px solid var(--border-mid); }
+  .multi-img-item img { width:100%; height:100%; object-fit:cover; }
+  .multi-img-item .cover-tag { position:absolute; bottom:0; left:0; right:0; background:rgba(29,158,117,.9); color:#fff; font-size:9px; font-weight:700; text-align:center; padding:2px 0; }
+  .multi-img-remove { position:absolute; top:2px; right:2px; width:18px; height:18px; border-radius:50%; background:rgba(0,0,0,.65); color:#fff; border:none; font-size:12px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0; }
+  .multi-img-remove:hover { background:#c0392b; }
+  .multi-img-add-btn { width:72px; height:72px; border-radius:8px; border:1.5px dashed var(--border-mid); background:var(--bg-sec); color:var(--text-ter); font-size:22px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+  .multi-img-add-btn:hover { border-color:var(--teal); color:var(--teal); }
+
+  /* EXPERIENCE & EDUCATION */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .about-block { background: var(--bg-sec); border-radius: var(--radius-lg); padding: 22px; }
+  .about-block h3 { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .about-block h3 svg { width: 16px; height: 16px; stroke: var(--teal); fill: none; stroke-width: 2; }
+  /* Experience/Education cards */
+  .exp-card { display: flex; gap: 14px; padding: 14px 0; border-bottom: 0.5px solid var(--border); align-items: flex-start; }
+  .exp-card:last-child { border-bottom: none; padding-bottom: 0; }
+  .exp-logo { width: 40px; height: 40px; border-radius: 8px; background: #fff; border: 0.5px solid var(--border-mid); display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden; font-size: 11px; font-weight: 700; color: var(--teal-dark); letter-spacing: -0.03em; }
+  .exp-logo img { width: 100%; height: 100%; object-fit: cover; border-radius: 7px; }
+  .exp-info { flex: 1; min-width: 0; }
+  .exp-position { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.3; }
+  .exp-company { font-size: 12px; color: var(--text-sec); margin-top: 2px; }
+  .exp-meta { display: flex; align-items: center; gap: 8px; margin-top: 5px; flex-wrap: wrap; }
+  .exp-duration { font-size: 11px; color: var(--teal-dark); background: var(--teal-light); border-radius: 4px; padding: 2px 7px; font-weight: 500; }
+  .exp-period { font-size: 11px; color: var(--text-ter); }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .skill-card { background: var(--bg-sec); border-radius: var(--radius-lg); padding: 18px; }
+  .skill-card h4 { font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 10px; display: flex; align-items: center; gap: 7px; }
+  .skill-card h4 svg { width: 15px; height: 15px; stroke: var(--teal); fill: none; stroke-width: 2; }
+  .skill-items { font-size: 12px; color: var(--text-sec); line-height: 2; }
+
+  /* CERTIFICATES */
+  .cert-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .cert-card { background: var(--bg-sec); border-radius: var(--radius-lg); padding: 18px 20px; display: flex; flex-direction: column; gap: 8px; border: 0.5px solid var(--border); transition: background 0.12s; }
+  .cert-card:hover { background: var(--bg-ter); }
+  .cert-issuer { font-size: 11px; color: var(--teal-dark); background: var(--teal-light); border-radius: 4px; padding: 2px 8px; display: inline-block; align-self: flex-start; font-weight: 500; }
+  .cert-name { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.35; }
+  .cert-date { font-size: 11px; color: var(--text-ter); }
+  .cert-link { font-size: 11px; color: var(--teal); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; }
+  .cert-link:hover { text-decoration: underline; }
+  .cert-empty { font-size: 13px; color: var(--text-ter); text-align: center; padding: 32px; grid-column: 1/-1; }
+
+  /* CONTACT */
+  .contact-bar { background: var(--bg-sec); border-radius: var(--radius-lg); padding: 32px 36px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+  .contact-bar h3 { font-size: 18px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .contact-bar p { font-size: 13px; color: var(--text-sec); }
+  .contact-bar p a { color: var(--teal); text-decoration: none; }
+  .contact-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  /* FOOTER */
+  footer { padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  footer p { font-size: 12px; color: var(--text-ter); }
+  .footer-links { display: flex; gap: 20px; }
+  .footer-links a { font-size: 12px; color: var(--text-ter); text-decoration: none; }
+  .footer-links a:hover { color: var(--text-sec); }
+
+  /* ADMIN MODAL */
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
+  .modal-overlay.open { display: flex; }
+  .modal { background: var(--bg); border-radius: var(--radius-lg); width: 100%; max-width: 820px; max-height: 92vh; overflow-y: auto; }
+  .modal-header { padding: 20px 24px; border-bottom: 0.5px solid var(--border); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: var(--bg); z-index: 2; }
+  .modal-header h2 { font-size: 15px; font-weight: 600; }
+  .modal-close { background: none; border: none; cursor: pointer; font-size: 20px; color: var(--text-sec); line-height: 1; padding: 2px 6px; }
+  .modal-body { padding: 24px; }
+  .modal-tabs { display: flex; flex-wrap: wrap; gap: 0; border: 0.5px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 24px; }
+  .modal-tab { flex: 1; padding: 9px 6px; font-size: 11px; font-weight: 500; background: var(--bg); border: none; cursor: pointer; color: var(--text-sec); transition: all 0.15s; white-space: nowrap; min-width: 0; }
+  .modal-tab.active { background: var(--text); color: #fff; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+  .form-group { margin-bottom: 16px; }
+  .form-group label { display: block; font-size: 12px; font-weight: 500; color: var(--text-sec); margin-bottom: 6px; }
+  .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 9px 12px; border: 0.5px solid var(--border-mid); border-radius: var(--radius); font-size: 13px; font-family: inherit; background: var(--bg); color: var(--text); outline: none; transition: border 0.15s; }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--teal); }
+  .form-group textarea { resize: vertical; min-height: 80px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .form-submit { width: 100%; padding: 11px; background: var(--teal); color: #fff; border: none; border-radius: var(--radius); font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; transition: opacity 0.15s; }
+  .form-submit:hover { opacity: 0.88; }
+  .project-list { display: flex; flex-direction: column; gap: 8px; }
+  .project-list-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; background: var(--bg-sec); border-radius: var(--radius); font-size: 13px; }
+  .project-list-item .proj-name { font-weight: 500; color: var(--text); }
+  .project-list-item .proj-cat { font-size: 11px; color: var(--text-ter); margin-top: 2px; }
+  .item-actions { display: flex; gap: 6px; }
+  .btn-del { font-size: 11px; padding: 4px 10px; background: #FCEBEB; color: #A32D2D; border: none; border-radius: 4px; cursor: pointer; font-family: inherit; }
+  .btn-del:hover { background: #F7C1C1; }
+  .btn-sm { font-size: 11px; padding: 4px 10px; background: var(--bg-ter); color: var(--text-sec); border: none; border-radius: 4px; cursor: pointer; font-family: inherit; }
+  .btn-sm:hover { background: var(--border); }
+  .login-form { max-width: 320px; margin: 0 auto; }
+  .login-form h3 { font-size: 15px; font-weight: 600; margin-bottom: 6px; text-align: center; }
+  .login-form p { font-size: 13px; color: var(--text-sec); text-align: center; margin-bottom: 24px; }
+  .success-msg { font-size: 13px; color: var(--teal-dark); background: var(--teal-light); border-radius: var(--radius); padding: 10px 14px; margin-bottom: 16px; display: none; }
+  .ongoing-badge { font-size: 10px; font-weight: 600; background: var(--teal-light); color: var(--teal-dark); border-radius: 4px; padding: 2px 7px; margin-left: 8px; vertical-align: middle; }
+  .section-divider { border: none; border-top: 0.5px solid var(--border); margin: 20px 0; }
+  .img-upload-row { display: flex; align-items: center; gap: 10px; }
+  .img-preview { width: 48px; height: 48px; border-radius: var(--radius); object-fit: cover; border: 0.5px solid var(--border-mid); display: none; }
+  .list-item-row { display: flex; gap: 8px; margin-bottom: 8px; align-items: center; }
+  .list-item-row input { flex: 1; }
+  .badge-ongoing { font-size: 10px; font-weight: 600; background: #E6F1FB; color: #185FA5; border-radius: 4px; padding: 2px 7px; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .skills-grid { grid-template-columns: repeat(2, 1fr); }
+    .proj-grid { grid-template-columns: repeat(2, 1fr); }
+    .proj-card.span2 { grid-column: span 2; }
+    .cert-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 680px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .hamburger { display: block; }
+    .hero { grid-template-columns: 1fr; padding: 40px 20px; }
+    .stats-inner { grid-template-columns: repeat(2, 1fr); }
+    .stat { padding: 18px 20px; }
+    .section { padding: 40px 20px; }
+    .proj-grid { grid-template-columns: 1fr; }
+    .proj-card.span2 { grid-column: span 1; }
+    .about-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: repeat(2, 1fr); }
+    .cert-grid { grid-template-columns: 1fr; }
+    .contact-bar { padding: 24px 20px; }
+    footer { padding: 16px 20px; }
+    .ongoing-img { gap: 12px; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 420px) {
+    .skills-grid { grid-template-columns: 1fr; }
+    .stats-inner { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo" id="nav-name-display">Mustafa <span>Kamal</span></div>
+  <div class="nav-links">
+    <a href="projects.html">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#about">About</a>
+    <a href="#certificates">Certificates</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="nav-right">
+    <a href="#contact" class="nav-hire">Hire me</a>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="projects.html" onclick="toggleMenu()">Projects</a>
+  <a href="#skills" onclick="toggleMenu()">Skills</a>
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#certificates" onclick="toggleMenu()">Certificates</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+</div>
+
+<!-- HERO -->
+<div style="border-bottom: 0.5px solid var(--border);">
+  <div class="hero">
+    <div>
+      <div class="hero-eyebrow" id="hero-eyebrow-display">Electronics Engineer · Norwich, UK</div>
+      <h1 id="hero-title-display">PCB Design &amp;<br><em>Power Electronics</em></h1>
+      <p class="hero-desc" id="hero-desc-display">MSc at Coventry University. Specialist in Altium Designer, high-current PCB design, motor drivers, inverters, and battery systems. Available for freelance projects.</p>
+      <div class="hero-pills" id="hero-pills-display"></div>
+      <div class="hero-btns">
+        <a href="#projects" class="btn-primary">View projects</a>
+        <a id="hero-email-btn" href="mailto:mustafakamal.mk2017@gmail.com" class="btn-secondary">Get in touch</a>
+        <a id="cv-download-btn" href="#" class="btn-secondary" download style="display:none;">⬇ Download CV</a>
+      </div>
+    </div>
+    <div class="hero-avatar-wrap">
+      <div class="hero-avatar" id="heroAvatar">MK</div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat"><div class="stat-n" id="stat-projects">0</div><div class="stat-l">PCB projects</div></div>
+    <div class="stat"><div class="stat-n" id="stat-power">42V · 15A</div><div class="stat-l">Max power design</div></div>
+    <div class="stat"><div class="stat-n" id="stat-exp">2+ yrs</div><div class="stat-l">Industry experience</div></div>
+    <div class="stat"><div class="stat-n" id="stat-edu">MSc</div><div class="stat-l">Coventry University</div></div>
+  </div>
+</div>
+
+<!-- ONGOING PROJECT -->
+<div class="section" id="ongoing">
+  <div class="section-inner">
+    <div class="sec-head">
+      <span class="sec-title">Ongoing projects</span>
+      <a href="projects.html#ongoing" class="sec-link">View all ongoing →</a>
+    </div>
+    <div id="ongoingContainer"></div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<div class="section" id="projects" style="padding-top:0;border-top:none;">
+  <div class="section-inner">
+    <div class="sec-head">
+      <span class="sec-title">Completed projects</span>
+      <a href="projects.html" class="sec-link">View all projects →</a>
+    </div>
+    <div class="proj-grid" id="projectGrid"></div>
+    <div id="proj-more-row" style="display:none;text-align:center;margin-top:20px;">
+      <a href="projects.html" class="btn-secondary" style="display:inline-block;">See all projects →</a>
+    </div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<div class="section" id="skills">
+  <div class="section-inner">
+    <div class="sec-head">
+      <span class="sec-title">Skills</span>
+    </div>
+    <div class="skills-grid" id="skillsGrid"></div>
+  </div>
+</div>
+
+<!-- ABOUT: Experience & Education -->
+<div class="section" id="about">
+  <div class="section-inner">
+    <div class="sec-head">
+      <span class="sec-title">Experience &amp; education</span>
+    </div>
+    <div class="about-grid">
+      <div class="about-block">
+        <h3>
+          <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+          Work experience
+        </h3>
+        <div id="expList"></div>
+      </div>
+      <div class="about-block">
+        <h3>
+          <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          Education
+        </h3>
+        <div id="eduList"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CERTIFICATES -->
+<div class="section" id="certificates">
+  <div class="section-inner">
+    <div class="sec-head">
+      <span class="sec-title">Certificates</span>
+    </div>
+    <div class="cert-grid" id="certGrid"></div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="section" id="contact">
+  <div class="section-inner">
+    <div class="contact-section-inner">
+      <!-- Left: info -->
+      <div class="contact-info-block">
+        <h3 id="contact-title-display">Available for freelance PCB projects</h3>
+        <p>
+          <a id="contact-email-display" href="mailto:mustafakamal.mk2017@gmail.com">mustafakamal.mk2017@gmail.com</a><br>
+          <span id="contact-phone-display">+44 (0) 7459 315209</span><br>
+          <span id="contact-location-display">Norwich, UK</span>
+        </p>
+        <div class="contact-btns">
+          <a id="contact-email-btn" href="mailto:mustafakamal.mk2017@gmail.com" class="btn-primary">Send email</a>
+          <a id="contact-linkedin-btn" href="https://www.linkedin.com" target="_blank" class="btn-secondary">LinkedIn</a>
+        </div>
+      </div>
+      <!-- Right: message form -->
+      <div class="contact-form-block">
+        <h4>Send a message</h4>
+
+        <!-- Status: shown only when EmailJS is not yet configured (you see this, visitors don't) -->
+        <div id="ejsNotConnectedBanner" style="display:none;background:#FFF8E7;border:1.5px solid #F0C040;border-radius:8px;padding:10px 14px;font-size:12px;color:#7A5800;margin-bottom:14px;">
+          ⚠️ <strong>Email not connected yet.</strong> Messages will open your local email client. Set up EmailJS in the Admin panel → <strong>Email Setup</strong> tab to send directly to Gmail.
+        </div>
+        <div id="ejsConnectedBanner" style="display:none;background:#E1F5EE;border:1.5px solid #5DCAA5;border-radius:8px;padding:10px 14px;font-size:12px;color:#0F6E56;margin-bottom:14px;">
+          ✅ <strong>Gmail connected.</strong> Messages go directly to mustafakamal.mk2017@gmail.com.
+        </div>
+
+        <div class="cf-sent-msg" id="cfSentMsg" style="display:none;">✓ Message sent to Mustafa's Gmail! He'll get back to you soon.</div>
+        <div id="cfErrorMsg" style="display:none;background:#FCEBEB;color:#A32D2D;border-radius:8px;padding:10px 14px;font-size:13px;margin-bottom:12px;"></div>
+        <div class="cf-row">
+          <div class="cf-group">
+            <label>Your name</label>
+            <input type="text" id="cfName" placeholder="John Smith">
+          </div>
+          <div class="cf-group">
+            <label>Your email</label>
+            <input type="email" id="cfEmail" placeholder="john@email.com">
+          </div>
+        </div>
+        <div class="cf-group">
+          <label>Message</label>
+          <textarea id="cfMessage" placeholder="Describe your project or question..."></textarea>
+        </div>
+        <!-- File attachment note -->
+        <button type="button" class="cf-attach-btn" onclick="document.getElementById('cfFileInput').click()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/></svg>
+          Attach files (listed in email — reply to send them)
+        </button>
+        <input type="file" id="cfFileInput" multiple accept="image/*,.pdf,.doc,.docx,.txt" style="display:none" onchange="cfAddFiles(this)">
+        <div class="cf-file-list" id="cfFileList"></div>
+        <button class="cf-send-btn" id="cfSendBtn" onclick="cfSend()">Send message →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p id="footer-copy" title="" ondblclick="openAdmin()" style="cursor:default;user-select:none;">© 2026 Mustafa Kamal · mustafakamal.co.uk</p>
+  <div class="footer-links">
+    <a href="projects.html">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<!-- =================== PROJECT DETAIL MODAL =================== -->
+<div class="pdm-overlay" id="pdmOverlay" onclick="if(event.target===this)closePdm()">
+  <div class="pdm-box">
+    <div class="pdm-header">
+      <div>
+        <div class="tag-row" id="pdmTagRow"></div>
+        <h2 id="pdmTitle" style="font-size:18px;font-weight:700;color:var(--text);"></h2>
+      </div>
+      <button class="pdm-close" onclick="closePdm()">✕</button>
+    </div>
+    <div class="pdm-body">
+      <div class="pdm-gallery" id="pdmGallery"></div>
+      <p class="pdm-desc" id="pdmDesc"></p>
+      <div class="chips" id="pdmChips"></div>
+    </div>
+  </div>
+</div>
+
+<!-- =================== LIGHTBOX =================== -->
+<div class="lightbox-overlay" id="lightboxOverlay" onclick="if(event.target===this)closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<!-- =================== ADMIN MODAL =================== -->
+<div class="modal-overlay" id="adminModal">
+
+  <div class="modal">
+    <div class="modal-header">
+      <h2>Admin panel</h2>
+      <button class="modal-close" onclick="closeAdmin()">×</button>
+    </div>
+    <div class="modal-body">
+
+      <!-- LOGIN -->
+      <div id="loginPanel">
+        <div class="login-form">
+          <h3>Admin login</h3>
+          <p>Only you can access this panel.</p>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="adminPassword" placeholder="Enter your password" onkeydown="if(event.key==='Enter')checkLogin()">
+          </div>
+          <button class="form-submit" onclick="checkLogin()">Login</button>
+          <p id="loginError" style="color:#A32D2D;font-size:12px;margin-top:10px;display:none;">Incorrect password. Try again.</p>
+        </div>
+      </div>
+
+      <!-- ADMIN PANEL -->
+      <div id="adminPanel" style="display:none;">
+        <div class="modal-tabs">
+          <button class="modal-tab active" onclick="switchTab('profile', event)">Profile</button>
+          <button class="modal-tab" onclick="switchTab('add', event)">Add project</button>
+          <button class="modal-tab" onclick="switchTab('manage', event)">Manage</button>
+          <button class="modal-tab" onclick="switchTab('ongoing', event)">Ongoing</button>
+          <button class="modal-tab" onclick="switchTab('skills', event)">Skills</button>
+          <button class="modal-tab" onclick="switchTab('exp', event)">Experience</button>
+          <button class="modal-tab" onclick="switchTab('edu', event)">Education</button>
+          <button class="modal-tab" onclick="switchTab('certs', event)">Certificates</button>
+          <button class="modal-tab" onclick="switchTab('password', event)">Password</button>
+          <button class="modal-tab" onclick="switchTab('emailsetup', event)">Email Setup</button>
+          <button class="modal-tab" onclick="switchTab('cloudsetup', event)">☁ Cloud Sync</button>
+        </div>
+
+        <!-- PROFILE TAB -->
+        <div class="tab-panel active" id="tab-profile">
+          <div class="success-msg" id="profileSuccess">Profile updated!</div>
+          <div class="form-group">
+            <label>Profile photo</label>
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+              <img id="profilePhotoPreview" src="" alt="Preview" style="width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid var(--teal-mid);display:none;">
+              <div style="display:flex;flex-direction:column;gap:6px;">
+                <input type="file" id="profilePhotoInput" accept="image/*" onchange="previewProfilePhoto(this)">
+                <button class="btn-del" id="removePhotoBtn" style="display:none;width:fit-content;" onclick="removeProfilePhoto()">✕ Remove photo</button>
+              </div>
+            </div>
+            <p style="font-size:11px;color:var(--text-ter);margin-top:6px;">Tip: use a square image (e.g. 400×400 px) for best results. To resize the avatar, change the size below.</p>
+          </div>
+          <div class="form-group">
+            <label>Avatar size on homepage</label>
+            <select id="pAvatarSize">
+              <option value="120">Small (120px)</option>
+              <option value="160" selected>Medium (160px)</option>
+              <option value="200">Large (200px)</option>
+              <option value="240">Extra large (240px)</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Full name</label>
+              <input type="text" id="pName" placeholder="Mustafa Kamal">
+            </div>
+            <div class="form-group">
+              <label>Job title / eyebrow</label>
+              <input type="text" id="pEyebrow" placeholder="Electronics Engineer · Norwich, UK">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Hero headline (use | for line break)</label>
+            <input type="text" id="pHeadline" placeholder="PCB Design & | Power Electronics">
+          </div>
+          <div class="form-group">
+            <label>Bio / description</label>
+            <textarea id="pBio"></textarea>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" id="pEmail" placeholder="you@email.com">
+            </div>
+            <div class="form-group">
+              <label>Phone</label>
+              <input type="text" id="pPhone" placeholder="+44 7xxx xxxxxx">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Location</label>
+              <input type="text" id="pLocation" placeholder="Norwich, UK">
+            </div>
+            <div class="form-group">
+              <label>LinkedIn URL</label>
+              <input type="text" id="pLinkedin" placeholder="https://linkedin.com/in/...">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>CV file (PDF — for Download CV button)</label>
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+              <input type="file" id="cvFileInput" accept=".pdf" onchange="loadCVFile(this)">
+              <button class="btn-del" id="removeCVBtn" style="display:none;" onclick="removeCV()">✕ Remove CV</button>
+            </div>
+            <p id="cvCurrentLabel" style="font-size:11px;color:var(--teal-dark);margin-top:4px;display:none;">✓ CV uploaded</p>
+          </div>
+          <div class="form-group">
+            <label>Highlighted pills (comma-separated, prefix with * to highlight)</label>
+            <input type="text" id="pPills" placeholder="*Altium Designer, *Power Electronics, Motor Drivers, Battery / BMS">
+          </div>
+          <div class="form-group">
+            <label>Contact section tagline</label>
+            <input type="text" id="pContactTitle" placeholder="Available for freelance PCB projects">
+          </div>
+          <button class="form-submit" onclick="saveProfile()">Save profile</button>
+        </div>
+
+        <!-- ADD PROJECT TAB -->
+        <div class="tab-panel" id="tab-add">
+          <div class="success-msg" id="addSuccess">Project added successfully!</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Project title *</label>
+              <input type="text" id="newTitle" placeholder="e.g. 3-Phase Inverter">
+            </div>
+            <div class="form-group">
+              <label>Category *</label>
+              <select id="newCat">
+                <option value="motor">Motor control</option>
+                <option value="power">Power</option>
+                <option value="iot">IoT / Sensing</option>
+                <option value="usb">USB / High-speed</option>
+                <option value="fpga">FPGA</option>
+                <option value="dsp">Signal processing</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Short description *</label>
+            <textarea id="newDesc" placeholder="Describe what you designed, key features, and results..."></textarea>
+          </div>
+          <div class="form-group">
+            <label>Tools / chips used</label>
+            <input type="text" id="newChips" placeholder="e.g. Altium Designer, LTspice, 42V/15A">
+          </div>
+          <div class="form-group">
+            <label>Project images (first image = cover photo)</label>
+            <div class="multi-img-list" id="newProjImgList"></div>
+            <button type="button" class="multi-img-add-btn" onclick="document.getElementById('newProjImgInput').click()" style="width:auto;height:auto;padding:8px 16px;font-size:12px;border-radius:8px;">+ Add images</button>
+            <input type="file" id="newProjImgInput" accept="image/*" multiple style="display:none" onchange="newProjAddImages(this)">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Icon style</label>
+              <select id="newIcon">
+                <option value="motor">Motor / Inverter</option>
+                <option value="power">Power / Battery</option>
+                <option value="iot">IoT / Wireless</option>
+                <option value="usb">USB / Data</option>
+                <option value="board">Circuit board</option>
+                <option value="led">LED / Light</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Mark as featured?</label>
+              <select id="newFeatured">
+                <option value="no">No</option>
+                <option value="yes">Yes (spans 2 columns)</option>
+              </select>
+            </div>
+          </div>
+          <button class="form-submit" onclick="addProject()">Add project</button>
+        </div>
+
+        <!-- MANAGE PROJECTS TAB -->
+        <div class="tab-panel" id="tab-manage">
+          <div class="success-msg" id="deleteSuccess">Project removed.</div>
+          <div class="project-list" id="projectListAdmin"></div>
+        </div>
+
+        <!-- ONGOING PROJECT TAB -->
+        <div class="tab-panel" id="tab-ongoing">
+          <div class="success-msg" id="ongoingSuccess">Ongoing project updated!</div>
+          <div class="form-group">
+            <label>Project title</label>
+            <input type="text" id="ogTitle">
+          </div>
+          <div class="form-group">
+            <label>Chip / platform</label>
+            <input type="text" id="ogChip">
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea id="ogDesc"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Current stage</label>
+            <select id="ogStage">
+              <option value="0">Schematic design</option>
+              <option value="1">Component selection</option>
+              <option value="2">PCB layout</option>
+              <option value="3">Fabrication</option>
+              <option value="4">Testing</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Tags (comma-separated)</label>
+            <input type="text" id="ogTags">
+          </div>
+          <div class="form-group">
+            <label>Project image (optional)</label>
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+              <img id="ogImgPreview" class="img-preview" src="" alt="">
+              <div style="display:flex;flex-direction:column;gap:6px;">
+                <input type="file" id="ogImgInput" accept="image/*" onchange="previewImg(this,'ogImgPreview','removeOgImg')">
+                <button class="btn-del" id="removeOgImg" style="display:none;" onclick="clearImgField('ogImgInput','ogImgPreview','removeOgImg')">✕ Remove image</button>
+              </div>
+            </div>
+          </div>
+          <button class="form-submit" onclick="updateOngoing()">Save ongoing project</button>
+          <hr class="section-divider">
+          <button class="form-submit" style="background:var(--text);" onclick="markOngoingComplete()">✓ Mark as Completed — move to project list</button>
+        </div>
+
+        <!-- SKILLS TAB -->
+        <div class="tab-panel" id="tab-skills">
+          <div class="success-msg" id="skillsSuccess">Skills updated!</div>
+          <p style="font-size:12px;color:var(--text-ter);margin-bottom:16px;">Edit each skill category name and items. Items are comma-separated.</p>
+          <div id="skillsAdminList"></div>
+          <button class="btn-sm" onclick="addSkillCategory()" style="margin-bottom:16px;">+ Add category</button>
+          <button class="form-submit" onclick="saveSkills()">Save skills</button>
+        </div>
+
+        <!-- EXPERIENCE TAB -->
+        <div class="tab-panel" id="tab-exp">
+          <div class="success-msg" id="expSuccess">Experience updated!</div>
+          <div id="expAdminList"></div>
+          <button class="btn-sm" onclick="addExpEntry()" style="margin-bottom:16px;">+ Add job</button>
+          <button class="form-submit" onclick="saveExp()">Save experience</button>
+        </div>
+
+        <!-- EDUCATION TAB -->
+        <div class="tab-panel" id="tab-edu">
+          <div class="success-msg" id="eduSuccess">Education updated!</div>
+          <div id="eduAdminList"></div>
+          <button class="btn-sm" onclick="addEduEntry()" style="margin-bottom:16px;">+ Add education</button>
+          <button class="form-submit" onclick="saveEdu()">Save education</button>
+        </div>
+
+        <!-- CERTIFICATES TAB -->
+        <div class="tab-panel" id="tab-certs">
+          <div class="success-msg" id="certsSuccess">Certificates updated!</div>
+          <div id="certsAdminList"></div>
+          <button class="btn-sm" onclick="addCertEntry()" style="margin-bottom:16px;">+ Add certificate</button>
+          <button class="form-submit" onclick="saveCerts()">Save certificates</button>
+        </div>
+
+        <!-- PASSWORD TAB -->
+        <div class="tab-panel" id="tab-password">
+          <div class="success-msg" id="pwSuccess">Password changed successfully!</div>
+          <div class="form-group">
+            <label>New password</label>
+            <input type="password" id="newPw1" placeholder="New password">
+          </div>
+          <div class="form-group">
+            <label>Confirm new password</label>
+            <input type="password" id="newPw2" placeholder="Confirm new password">
+          </div>
+          <p id="pwError" style="color:#A32D2D;font-size:12px;margin-bottom:12px;display:none;"></p>
+          <button class="form-submit" onclick="changePassword()">Change password</button>
+        </div>
+
+        <!-- EMAIL SETUP TAB -->
+        <div class="tab-panel" id="tab-emailsetup">
+          <div id="ejsAdminStatus"></div>
+          <p style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px;">Connect contact form → Gmail</p>
+          <p style="font-size:12px;color:var(--text-sec);margin-bottom:20px;">Free service — 200 emails/month. One-time setup takes 5 minutes.</p>
+
+          <div style="background:var(--bg-sec);border-radius:var(--radius);padding:16px;margin-bottom:20px;font-size:12px;color:var(--text-sec);line-height:1.9;">
+            <strong style="color:var(--text);display:block;margin-bottom:8px;">Step-by-step:</strong>
+            <b>1.</b> Go to <a href="https://www.emailjs.com" target="_blank" style="color:var(--teal);">emailjs.com</a> → Sign up free<br>
+            <b>2.</b> Dashboard → <b>Email Services</b> → <b>Add New Service</b> → select <b>Gmail</b> → connect your Gmail → copy the <b>Service ID</b><br>
+            <b>3.</b> Dashboard → <b>Email Templates</b> → <b>Create New Template</b><br>
+            &nbsp;&nbsp;&nbsp;Set <b>To email</b>: <code style="background:var(--bg-ter);padding:1px 5px;border-radius:3px;">mustafakamal.mk2017@gmail.com</code><br>
+            &nbsp;&nbsp;&nbsp;Subject: <code style="background:var(--bg-ter);padding:1px 5px;border-radius:3px;">Portfolio enquiry from {{from_name}}</code><br>
+            &nbsp;&nbsp;&nbsp;Body: <code style="background:var(--bg-ter);padding:1px 5px;border-radius:3px;">From: {{from_name}} ({{from_email}})<br>{{message}}</code><br>
+            &nbsp;&nbsp;&nbsp;Save → copy the <b>Template ID</b><br>
+            <b>4.</b> Dashboard → <b>Account</b> → copy your <b>Public Key</b><br>
+            <b>5.</b> Paste all three below and click Save ✅
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Service ID</label>
+              <input type="text" id="ejsServiceId" placeholder="service_xxxxxxx" style="font-family:monospace;font-size:12px;">
+            </div>
+            <div class="form-group">
+              <label>Template ID</label>
+              <input type="text" id="ejsTemplateId" placeholder="template_xxxxxxx" style="font-family:monospace;font-size:12px;">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Public Key</label>
+            <input type="text" id="ejsPublicKey" placeholder="AbCdEfGhIjKlMnOpQ" style="font-family:monospace;font-size:12px;">
+          </div>
+          <button class="form-submit" onclick="ejsSaveConfig()">Save &amp; connect Gmail</button>
+          <button class="btn-sm" onclick="ejsReconfigure()" style="margin-top:10px;width:100%;text-align:center;">Reset / change settings</button>
+        </div>
+
+        <!-- CLOUD SYNC TAB -->
+        <div class="tab-panel" id="tab-cloudsetup">
+          <div id="sbAdminStatus"></div>
+          <p style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px;">GitHub as your database</p>
+          <p style="font-size:12px;color:var(--text-sec);margin-bottom:20px;">All data lives in <code style="background:var(--bg-ter);padding:1px 5px;border-radius:3px;">data.json</code> in your GitHub repo. Every browser in the world reads from there — free forever, no server needed.</p>
+
+          <div style="background:var(--bg-sec);border-radius:var(--radius);padding:16px;margin-bottom:20px;font-size:12px;color:var(--text-sec);line-height:2;">
+            <strong style="color:var(--text);display:block;margin-bottom:6px;">One-time setup:</strong>
+            <b>1.</b> Go to <a href="https://github.com/new" target="_blank" style="color:var(--teal);font-weight:600;">github.com/new</a> → create a <b>public</b> repo (e.g. <em>mustafa-portfolio</em>)<br>
+            <b>2.</b> Go to <a href="https://github.com/settings/tokens/new" target="_blank" style="color:var(--teal);font-weight:600;">github.com/settings/tokens/new</a><br>
+            &nbsp;&nbsp;&nbsp;• Note: <em>portfolio admin</em> · Expiration: <em>No expiration</em><br>
+            &nbsp;&nbsp;&nbsp;• Tick <b>repo</b> (full repo access) → click <b>Generate token</b> → copy it<br>
+            <b>3.</b> Paste your GitHub username, repo name, and token below → click <b>Save &amp; push data</b><br>
+            <b>4.</b> Done! ✅ Every save you make in admin writes to GitHub automatically.
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>GitHub username</label>
+              <input type="text" id="ghOwner" placeholder="e.g. mustafakamal" style="font-family:monospace;font-size:12px;">
+            </div>
+            <div class="form-group">
+              <label>Repository name</label>
+              <input type="text" id="ghRepo" placeholder="e.g. mustafa-portfolio" style="font-family:monospace;font-size:12px;">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Branch (usually main)</label>
+              <input type="text" id="ghBranch" placeholder="main" style="font-family:monospace;font-size:12px;">
+            </div>
+            <div class="form-group">
+              <label>Personal Access Token <span style="color:var(--text-ter)">(stored only in this browser)</span></label>
+              <input type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" style="font-family:monospace;font-size:12px;">
+            </div>
+          </div>
+          <button class="form-submit" onclick="ghSetupSave()">Save &amp; push data to GitHub</button>
+          <div style="margin-top:10px;display:flex;gap:8px;">
+            <button class="btn-sm" style="flex:1;text-align:center;" onclick="ghForcePush()">⬆ Push local → GitHub</button>
+            <button class="btn-sm" style="flex:1;text-align:center;" onclick="ghForcePull()">⬇ Pull GitHub → local</button>
+          </div>
+          <p style="font-size:11px;color:var(--text-ter);margin-top:10px;">⚠️ Your token is stored only in <em>this browser's</em> localStorage — never in the HTML or GitHub. Other browsers can <em>read</em> data without it. Only your browser (with the token) can write.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ========== DEFAULT DATA ==========
+const DEFAULT_PASSWORD = 'mustafa2026';
+
+const defaultProfile = {
+  name: 'Mustafa Kamal',
+  eyebrow: 'Electronics Engineer · Norwich, UK',
+  headline: 'PCB Design & |Power Electronics',
+  bio: 'MSc at Coventry University. Specialist in Altium Designer, high-current PCB design, motor drivers, inverters, and battery systems. Available for freelance projects.',
+  email: 'mustafakamal.mk2017@gmail.com',
+  phone: '+44 (0) 7459 315209',
+  location: 'Norwich, UK',
+  linkedin: 'https://www.linkedin.com',
+  pills: '*Altium Designer,*Power Electronics,Motor Drivers,Battery / BMS,IoT Hardware,LTspice,FPGA Design',
+  contactTitle: 'Available for freelance PCB projects',
+  photo: '',
+  cv: ''
+};
+
+const defaultProjects = [
+  { id:1, title:'3-Phase Inverter for BLDC Motor', cat:'motor', featured:true, icon:'motor', desc:'Full hardware design for Shell Eco-marathon. MOSFET selection, gate drivers, DC bus, current sensing, overcurrent and thermal protection. Validated 120° phase-displaced waveforms on oscilloscope.', chips:['37–42 V','15 A','Altium Designer','LTspice','MATLAB'], image:'' },
+  { id:2, title:'37V–42V 15A Battery Pack', cat:'power', featured:false, icon:'power', desc:'High-current Li-ion pack for Shell Eco-marathon. Cell layout, spot welding, BMS integration, balancing, over/under-voltage and short-circuit protection.', chips:['Li-ion','BMS','High current'], image:'' },
+  { id:3, title:'Raspberry Pi Extension Board', cat:'iot', featured:false, icon:'iot', desc:'Custom extension board with dual BNO055 IMU, PA1010D GPS, 6 GPIO LEDs, LM317 LDO regulator, and XL4015 DC-DC converter from 12V input.', chips:['I2C / SPI','GPS + IMU','Altium'], image:'' },
+  { id:4, title:'USB 2.0 Hub', cat:'usb', featured:false, icon:'usb', desc:'4-port hub using TUSB2046IBVFR. Impedance-controlled USB differential pair routing, ESD protection on all ports, multi-peripheral power distribution.', chips:['Diff pairs','ESD protection','Signal integrity'], image:'' },
+  { id:5, title:'Custom ESP32 Development Board', cat:'iot', featured:false, icon:'iot', desc:'USB-to-UART connectivity, power regulation, GPIO breakout. Designed following Robert Feranec methodology. Full bring-up and testing completed.', chips:['ESP32','UART','IoT'], image:'' },
+  { id:6, title:'3W RGB LED Driver Board', cat:'power', featured:false, icon:'led', desc:'Constant-current PWM driver for high-power RGB LEDs. Switching circuitry optimised for low losses, smooth colour transitions, thermal management.', chips:['PWM','Constant current','Thermal design'], image:'' },
+  { id:7, title:'5V Relay Control Board', cat:'power', featured:false, icon:'power', desc:'Transistor driver and flyback diode enabling MCU control of 12V relay. Status LEDs, safe high/low voltage interfacing for competition vehicle.', chips:['5V logic','12V relay','Protection'], image:'' },
+  { id:8, title:'220V AC to 48V DC Converter', cat:'power', featured:false, icon:'power', desc:'First Altium Designer PCB sent to production. AC-DC step-down with high-voltage clearances and safety spacing. Full design-to-manufacture cycle.', chips:['220V AC','High voltage','Production-ready'], image:'' },
+];
+
+const defaultOngoing = {
+  title: 'Custom FPGA Development Board',
+  chip: 'Xilinx / AMD',
+  desc: 'Designing a custom Xilinx-based PCB for signal processing and DSP applications. Board includes power regulation, JTAG programming interface, clock distribution, and I/O headers — fully designed in Altium Designer.',
+  stage: 2,
+  tags: ['FPGA','Signal processing','Altium Designer','JTAG','DSP','Clock distribution'],
+  image: ''
+};
+
+const defaultSkills = [
+  { id:1, name:'PCB tools', icon:'pcb', items:'Altium Designer,LTspice,Proteus,Arduino IDE,PlatformIO' },
+  { id:2, name:'Power design', icon:'power', items:'DC-DC converters,AC-DC supplies,Motor drivers,Battery / BMS,MOSFET circuits' },
+  { id:3, name:'Hardware', icon:'hardware', items:'SMD soldering,Through-hole,Oscilloscope / DMM,Board bring-up,Debugging' },
+  { id:4, name:'Embedded', icon:'embedded', items:'Arduino / Pi,GPIO / PWM / UART,I2C / SPI,Python (Modbus),MySQL' },
+];
+
+const defaultExp = [
+  { id:1, position:'Junior Hardware Engineer', company:'Encore Solutions, Pakistan', startYear:2023, startMonth:1, endYear:2024, endMonth:12, ongoing:false, skills:'Altium · IoT · BMS', logo:'' },
+  { id:2, position:'Electronics Intern', company:'RIMS Pvt Ltd, Pakistan', startYear:2022, startMonth:6, endYear:2022, endMonth:12, ongoing:false, skills:'PCB · LabVIEW', logo:'' },
+];
+
+const defaultEdu = [
+  { id:1, degree:'MSc Electrical & Electronics', institution:'Coventry University, UK', startYear:2025, endYear:2026, ongoing:true, logo:'' },
+  { id:2, degree:'BS Electrical Engineering', institution:'CUST, Pakistan', startYear:2019, endYear:2023, ongoing:false, logo:'' },
+];
+
+const defaultCerts = [];
+
+// ========== GITHUB DATA STORE ==========
+// Config stored only in YOUR browser's localStorage (never in the HTML)
+function ghLoadConfig() {
+  try { return JSON.parse(localStorage.getItem('mk_gh_cfg')) || {}; } catch(e) { return {}; }
+}
+function ghSaveConfig(cfg) {
+  localStorage.setItem('mk_gh_cfg', JSON.stringify(cfg));
+}
+
+// Build raw URL to fetch data.json — raw.githubusercontent.com respects cache-busting;
+// jsDelivr's CDN strips query strings and can serve stale data for up to 24h, which was
+// causing "changes don't show in another browser" — switched to raw GitHub + no-store.
+function ghRawUrl() {
+  const c = ghLoadConfig();
+  if (!c.owner || !c.repo) return null;
+  const branch = c.branch || 'main';
+  return `https://raw.githubusercontent.com/${c.owner}/${c.repo}/${branch}/data.json`;
+}
+function ghJsdelivrUrl() {
+  const c = ghLoadConfig();
+  if (!c.owner || !c.repo) return null;
+  const branch = c.branch || 'main';
+  return `https://cdn.jsdelivr.net/gh/${c.owner}/${c.repo}@${branch}/data.json`;
+}
+
+// Fetch latest data.json from GitHub (world-readable, no token needed)
+async function ghFetch() {
+  const url = ghRawUrl();
+  if (!url) return null;
+  try {
+    const res = await fetch(url + '?t=' + Date.now(), { cache: 'no-store' });
+    if (res.ok) return await res.json();
+  } catch(e) {}
+  // Fallback to jsDelivr if raw.githubusercontent is blocked/unavailable
+  try {
+    const url2 = ghJsdelivrUrl();
+    const res2 = await fetch(url2 + '?t=' + Date.now(), { cache: 'no-store' });
+    if (res2.ok) return await res2.json();
+  } catch(e) {}
+  return null;
+}
+
+// Write data.json to GitHub via API (requires token, only stored in your browser)
+async function ghPush(dataObj) {
+  const c = ghLoadConfig();
+  if (!c.owner || !c.repo || !c.token) return { ok: false, error: 'Not configured' };
+  const branch = c.branch || 'main';
+  const path = 'data.json';
+  const apiBase = `https://api.github.com/repos/${c.owner}/${c.repo}/contents/${path}`;
+
+  // Get current SHA (needed for update)
+  let sha = null;
+  try {
+    const r = await fetch(apiBase + '?ref=' + branch, {
+      headers: { 'Authorization': 'token ' + c.token, 'Accept': 'application/vnd.github.v3+json' }
+    });
+    if (r.ok) { const j = await r.json(); sha = j.sha; }
+  } catch(e) {}
+
+  // Encode content as base64
+  const content = btoa(unescape(encodeURIComponent(JSON.stringify(dataObj, null, 2))));
+  const body = { message: 'Update portfolio data', content, branch };
+  if (sha) body.sha = sha;
+
+  try {
+    const res = await fetch(apiBase, {
+      method: 'PUT',
+      headers: {
+        'Authorization': 'token ' + c.token,
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    });
+    if (res.ok) return { ok: true };
+    const err = await res.json();
+    return { ok: false, error: err.message || res.status };
+  } catch(e) { return { ok: false, error: e.message }; }
+}
+
+// Load all data from localStorage cache
+function ghAllLocal() {
+  return {
+    profile:  ls('mk_profile',  defaultProfile),
+    projects: ls('mk_projects', defaultProjects),
+    ongoing:  ls('mk_ongoing',  defaultOngoing),
+    skills:   ls('mk_skills',   defaultSkills),
+    exp:      ls('mk_exp',      defaultExp),
+    edu:      ls('mk_edu',      defaultEdu),
+    certs:    ls('mk_certs',    defaultCerts),
+  };
+}
+
+// Write remote data.json to localStorage cache — ONLY if value is non-empty
+function ghCacheLocal(data) {
+  if (!data) return;
+  const map = {
+    profile:'mk_profile', projects:'mk_projects', ongoing:'mk_ongoing',
+    skills:'mk_skills', exp:'mk_exp', edu:'mk_edu', certs:'mk_certs'
+  };
+  Object.entries(map).forEach(([dataKey, lsKey]) => {
+    const val = data[dataKey];
+    // Only overwrite if value is truthy and (for arrays) non-empty
+    if (val === undefined || val === null) return;
+    if (Array.isArray(val) && val.length === 0 && dataKey !== 'certs') return; // don't wipe with empty array unless it's certs
+    localStorage.setItem(lsKey, JSON.stringify(val));
+  });
+}
+
+// Save one key and push entire data.json to GitHub
+async function saveToCloud(key, value) {
+  // 1. Save to localStorage immediately (instant UI update)
+  localStorage.setItem(key, JSON.stringify(value));
+  // 2. Push full data object to GitHub if configured
+  const c = ghLoadConfig();
+  if (!c.owner || !c.repo || !c.token) return;
+  const all = ghAllLocal();
+  // Map localStorage key → object key
+  const keyMap = {
+    mk_profile:'profile', mk_projects:'projects', mk_ongoing:'ongoing',
+    mk_skills:'skills', mk_exp:'exp', mk_edu:'edu', mk_certs:'certs'
+  };
+  if (keyMap[key]) all[keyMap[key]] = value;
+  const result = await ghPush(all);
+  if (!result.ok) console.warn('GitHub push failed:', result.error);
+}
+
+// Sync FROM GitHub → localStorage
+async function syncFromCloud() {
+  const c = ghLoadConfig();
+  if (!c.owner || !c.repo) return false;
+  const data = await ghFetch();
+  if (!data) return false;
+  ghCacheLocal(data);
+  return true;
+}
+
+// ========== STORAGE HELPERS ==========
+function ls(key, def) { try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : def; } catch(e) { return def; } }
+
+function loadProfile() { return ls('mk_profile', defaultProfile); }
+function saveProfileData(p) { saveToCloud('mk_profile', p); }
+function loadProjects() { return ls('mk_projects', defaultProjects); }
+function saveProjects(p) { saveToCloud('mk_projects', p); }
+function loadOngoing() { return ls('mk_ongoing', defaultOngoing); }
+function saveOngoing(o) { saveToCloud('mk_ongoing', o); }
+function loadSkills() { return ls('mk_skills', defaultSkills); }
+function saveSkillsData(s) { saveToCloud('mk_skills', s); }
+function loadExp() { return ls('mk_exp', defaultExp); }
+function saveExpData(e) { saveToCloud('mk_exp', e); }
+function loadEdu() { return ls('mk_edu', defaultEdu); }
+function saveEduData(e) { saveToCloud('mk_edu', e); }
+function loadCerts() { return ls('mk_certs', defaultCerts); }
+function saveCertsData(c) { saveToCloud('mk_certs', c); }
+function getPassword() { return ls('mk_password', DEFAULT_PASSWORD); }
+function setPassword(p) { try { localStorage.setItem('mk_password', JSON.stringify(p)); } catch(e) {} saveToCloud('mk_password', p); }
+
+// ========== CATEGORY HELPERS ==========
+const catColors = { motor:'tag-motor', power:'tag-power', iot:'tag-iot', usb:'tag-usb', fpga:'tag-fpga', dsp:'tag-dsp' };
+const catLabels = { motor:'Motor control', power:'Power', iot:'IoT / Sensing', usb:'USB / High-speed', fpga:'FPGA', dsp:'Signal processing' };
+const imgColors = { motor:'img-teal', power:'img-amber', iot:'img-blue', usb:'img-purple', board:'img-teal', led:'img-amber' };
+const icons = {
+  motor: `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><circle cx="12" cy="12" r="4"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>`,
+  power: `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="2" y="7" width="20" height="11" rx="2"/><path d="M7 7V5M17 7V5M12 11v3M10 13h4"/></svg>`,
+  iot: `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M5 12.55a11 11 0 0114.08 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0"/><circle cx="12" cy="20" r="1"/></svg>`,
+  usb: `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M12 2v10M8 8h8M7 12h10M9 16h6M12 20v2"/><circle cx="12" cy="20" r="1"/></svg>`,
+  board: `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M7 7h2v2H7zM15 7h2v2h-2zM7 15h2v2H7zM15 15h2v2h-2zM9 8h6M8 9v6M16 9v6M9 16h6"/></svg>`,
+  led: `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M12 2a7 7 0 017 7c0 3-2 5-3 7H8c-1-2-3-4-3-7a7 7 0 017-7z"/><path d="M9 21h6M10 17v4M14 17v4"/></svg>`,
+  pcb: `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>`,
+  hardware: `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3-3a1 1 0 000-1.4l-1.6-1.6a1 1 0 00-1.4 0l-3 3zM5 13l9 9 2-2-9-9-2 2z"/></svg>`,
+  embedded: `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>`,
+};
+
+// ========== DURATION CALCULATOR ==========
+function calcDuration(startYear, startMonth, endYear, endMonth, ongoing) {
+  const now = new Date();
+  const sy = startYear, sm = startMonth || 1;
+  const ey = ongoing ? now.getFullYear() : (endYear || now.getFullYear());
+  const em = ongoing ? (now.getMonth() + 1) : (endMonth || 12);
+  let months = (ey - sy) * 12 + (em - sm);
+  if (months < 0) months = 0;
+  const years = Math.floor(months / 12);
+  const rem = months % 12;
+  if (years === 0) return rem + ' mo';
+  if (rem === 0) return years + ' yr';
+  return years + '.' + rem + ' yrs';
+}
+
+// ========== RENDER PROFILE ==========
+function renderProfile() {
+  const p = loadProfile();
+  // Nav
+  document.getElementById('nav-name-display').innerHTML = p.name.split(' ').map((w,i) => i===1 ? `<span>${w}</span>` : w).join(' ');
+  // Eyebrow
+  document.getElementById('hero-eyebrow-display').textContent = p.eyebrow;
+  // Headline
+  const parts = p.headline.split('|');
+  document.getElementById('hero-title-display').innerHTML = parts.map((part, i) => {
+    const trimmed = part.trim();
+    if (i === parts.length - 1) return `<em>${trimmed}</em>`;
+    return trimmed + '<br>';
+  }).join('');
+  // Bio
+  document.getElementById('hero-desc-display').textContent = p.bio;
+  // Pills
+  const pillsContainer = document.getElementById('hero-pills-display');
+  pillsContainer.innerHTML = (p.pills || '').split(',').map(pill => {
+    const trimmed = pill.trim();
+    const hi = trimmed.startsWith('*');
+    const label = hi ? trimmed.slice(1) : trimmed;
+    return `<span class="pill${hi?' hi':''}">${label}</span>`;
+  }).join('');
+  // Email btn
+  const emailBtn = document.getElementById('hero-email-btn');
+  emailBtn.href = 'mailto:' + p.email;
+  // CV button
+  const cvBtn = document.getElementById('cv-download-btn');
+  if (p.cv) {
+    cvBtn.href = p.cv;
+    const safeName = (p.name || 'CV').replace(/\s+/g,'') + '_CV.pdf';
+    cvBtn.setAttribute('download', safeName);
+    cvBtn.style.display = 'inline-block';
+  } else { cvBtn.style.display = 'none'; }
+  // Avatar
+  const avatar = document.getElementById('heroAvatar');
+  const sz = p.avatarSize || 160;
+  avatar.style.width = sz + 'px';
+  avatar.style.height = sz + 'px';
+  if (p.photo) {
+    avatar.style.fontSize = '0';
+    avatar.innerHTML = `<img src="${p.photo}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:50%;">`;
+  } else {
+    avatar.style.fontSize = Math.round(sz * 0.3) + 'px';
+    avatar.innerHTML = p.name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+  }
+  // Contact
+  document.getElementById('contact-title-display').textContent = p.contactTitle;
+  const emailEl = document.getElementById('contact-email-display');
+  emailEl.textContent = p.email;
+  emailEl.href = 'mailto:' + p.email;
+  document.getElementById('contact-phone-display').textContent = p.phone;
+  document.getElementById('contact-location-display').textContent = p.location;
+  document.getElementById('contact-email-btn').href = 'mailto:' + p.email;
+  document.getElementById('contact-linkedin-btn').href = p.linkedin || '#';
+  // Footer
+  document.getElementById('footer-copy').textContent = `© ${new Date().getFullYear()} ${p.name}`;
+}
+
+// ========== RENDER PROJECTS ==========
+function renderProjects() {
+  const projects = loadProjects();
+  const grid = document.getElementById('projectGrid');
+  if (!grid) return;
+  // Always 4 max on homepage, NEVER span2 — all cards equal size
+  const preview = projects.slice(0, 4);
+  grid.innerHTML = preview.map(p => {
+    const imgs = getProjectImages(p);
+    const cover = imgs[0] || '';
+    const imgHtml = cover
+      ? `<img src="${cover}" alt="${p.title}">`
+      : (icons[p.icon] || icons.board);
+    return `<div class="proj-card" onclick="openPdm(${p.id})">
+      <div class="proj-card-img ${cover ? '' : (imgColors[p.icon]||'img-teal')}">${imgHtml}</div>
+      <div class="tag-row"><span class="tag ${catColors[p.cat]||'tag-motor'}">${catLabels[p.cat]||p.cat}</span></div>
+      <h3>${p.title}</h3>
+      <p>${p.desc}</p>
+      <div class="chips">${(p.chips||[]).map(c=>`<span class="chip">${c}</span>`).join('')}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('stat-projects').textContent = projects.length;
+  const moreRow = document.getElementById('proj-more-row');
+  if (moreRow) moreRow.style.display = projects.length > 4 ? 'block' : 'none';
+}
+
+// ========== PROJECT DETAIL MODAL & LIGHTBOX ==========
+function openPdm(id) {
+  const projects = loadProjects();
+  const p = projects.find(x => x.id === id);
+  if (!p) return;
+  const imgs = getProjectImages(p);
+  document.getElementById('pdmTitle').textContent = p.title;
+  document.getElementById('pdmDesc').textContent = p.desc;
+  document.getElementById('pdmTagRow').innerHTML = `<span class="tag ${catColors[p.cat]||'tag-motor'}">${catLabels[p.cat]||p.cat}</span>`;
+  document.getElementById('pdmChips').innerHTML = (p.chips||[]).map(c=>`<span class="chip">${c}</span>`).join('');
+  const gallery = document.getElementById('pdmGallery');
+  if (imgs.length) {
+    gallery.innerHTML = imgs.map((src,i) => `<div class="pdm-gallery-item" onclick="openLightbox('${src.replace(/'/g,"\\'")}')"><img src="${src}" alt="${p.title} image ${i+1}"></div>`).join('');
+    gallery.style.display = 'grid';
+  } else {
+    gallery.innerHTML = `<div class="pdm-gallery-item" style="cursor:default">${icons[p.icon]||icons.board}</div>`;
+  }
+  document.getElementById('pdmOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closePdm() {
+  document.getElementById('pdmOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function openLightbox(src) {
+  document.getElementById('lightboxImg').src = src;
+  document.getElementById('lightboxOverlay').classList.add('open');
+}
+function closeLightbox() {
+  document.getElementById('lightboxOverlay').classList.remove('open');
+  document.getElementById('lightboxImg').src = '';
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') { closeLightbox(); closePdm(); }
+});
+
+// ========== RENDER ONGOING ==========
+function renderOngoing() {
+  const o = loadOngoing();
+  const container = document.getElementById('ongoingContainer');
+  if (!o || !o.title) { container.innerHTML = '<p style="color:var(--text-ter);font-size:13px;">No ongoing project set.</p>'; return; }
+  const stages = ['Schematic','Component sel.','PCB layout','Fabrication','Testing'];
+  const pct = [5, 25, 45, 65, 85];
+  const lineW = o.stage === 0 ? '5%' : o.stage === 1 ? '20%' : o.stage === 2 ? '38%' : o.stage === 3 ? '60%' : '80%';
+  const imgContent = o.image
+    ? `<img src="${o.image}" alt="${o.title}">`
+    : `<svg viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M7 7h2v2H7zM15 7h2v2h-2zM7 15h2v2H7zM15 15h2v2h-2zM9 8h6M8 9v6M16 9v6M9 16h6"/></svg><div class="chip-label">${o.chip}</div>`;
+  container.innerHTML = `
+    <div class="ongoing-card">
+      <div class="ongoing-top">
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          ${(o.tags||[]).slice(0,2).map(t=>`<span class="tag tag-fpga">${t}</span>`).join('')}
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div class="in-progress"><div class="pulse"></div>In progress</div>
+        </div>
+      </div>
+      <div class="ongoing-img">${imgContent}</div>
+      <div class="ongoing-body">
+        <h3>${o.title}</h3>
+        <p>${o.desc}</p>
+        <div class="progress-label"><span>Design progress</span><span>${stages[o.stage]||''}</span></div>
+        <div class="progress-track"><div class="progress-fill" style="width:${pct[o.stage]||5}%"></div></div>
+        <div class="stages">
+          <div class="stages-line-bg"></div>
+          <div class="stages-line-done" style="width:${lineW}"></div>
+          ${stages.map((s,i) => `
+            <div class="stage">
+              <div class="stage-dot ${i < o.stage ? 'done' : i === o.stage ? 'active' : ''}"></div>
+              <div class="stage-lbl ${i === o.stage ? 'active' : ''}">${s}</div>
+            </div>`).join('')}
+        </div>
+        <div class="chips">${(o.tags||[]).map(t=>`<span class="chip">${t}</span>`).join('')}</div>
+      </div>
+    </div>`;
+}
+
+// ========== RENDER SKILLS ==========
+function renderSkills() {
+  const skills = loadSkills();
+  const skillIconSvgs = {
+    pcb: icons.pcb,
+    power: `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>`,
+    hardware: icons.hardware,
+    embedded: icons.embedded,
+  };
+  document.getElementById('skillsGrid').innerHTML = skills.map(s => `
+    <div class="skill-card">
+      <h4>${skillIconSvgs[s.icon]||icons.pcb} ${s.name}</h4>
+      <div class="skill-items">${s.items.split(',').map(i=>i.trim()).join('<br>')}</div>
+    </div>`).join('');
+}
+
+// ========== TOTAL EXPERIENCE STAT ==========
+function calcTotalExp() {
+  const exp = loadExp();
+  const now = new Date();
+  let totalMonths = 0;
+  exp.forEach(e => {
+    const sm = (e.startYear * 12) + ((e.startMonth || 1) - 1);
+    const em = e.ongoing
+      ? (now.getFullYear() * 12 + now.getMonth())
+      : ((e.endYear || now.getFullYear()) * 12 + ((e.endMonth || 12) - 1));
+    const diff = em - sm;
+    if (diff > 0) totalMonths += diff;
+  });
+  const years = Math.floor(totalMonths / 12);
+  const rem = totalMonths % 12;
+  if (years === 0) return rem + ' mo';
+  if (rem === 0) return years + ' yrs';
+  return years + '.' + rem + ' yrs';
+}
+
+// ========== RENDER EXPERIENCE ==========
+function renderExp() {
+  const exp = loadExp();
+  // Update total experience stat
+  document.getElementById('stat-exp').textContent = calcTotalExp();
+  document.getElementById('expList').innerHTML = exp.map(e => {
+    const dur = calcDuration(e.startYear, e.startMonth, e.endYear, e.endMonth, e.ongoing);
+    const period = e.ongoing ? `${e.startYear} – Present` : `${e.startYear} – ${e.endYear}`;
+    const initials = e.company.split(/[\s,]+/).filter(Boolean).map(w=>w[0]).join('').toUpperCase().slice(0,2);
+    const logoHtml = e.logo ? `<img src="${e.logo}" alt="${e.company}">` : initials;
+    return `<div class="exp-card">
+      <div class="exp-logo">${logoHtml}</div>
+      <div class="exp-info">
+        <div class="exp-position">${e.position}</div>
+        <div class="exp-company">${e.company}</div>
+        <div class="exp-meta">
+          <span class="exp-duration">${dur}</span>
+          <span class="exp-period">${period}</span>
+          ${e.ongoing ? '<span class="badge-ongoing">Ongoing</span>' : ''}
+          ${e.skills ? `<span style="font-size:11px;color:var(--text-ter)">${e.skills}</span>` : ''}
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ========== RENDER EDUCATION ==========
+function renderEdu() {
+  const edu = loadEdu();
+  document.getElementById('eduList').innerHTML = edu.map(e => {
+    const period = e.ongoing ? `${e.startYear} – Present` : `${e.startYear} – ${e.endYear}`;
+    const status = e.ongoing ? 'In progress' : 'Graduated';
+    const initials = e.institution.split(/[\s,]+/).filter(Boolean).map(w=>w[0]).join('').toUpperCase().slice(0,2);
+    const logoHtml = e.logo ? `<img src="${e.logo}" alt="${e.institution}">` : initials;
+    return `<div class="exp-card">
+      <div class="exp-logo">${logoHtml}</div>
+      <div class="exp-info">
+        <div class="exp-position">${e.degree}</div>
+        <div class="exp-company">${e.institution}</div>
+        <div class="exp-meta">
+          <span class="exp-period">${period}</span>
+          <span class="exp-duration">${status}</span>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ========== RENDER CERTIFICATES ==========
+function renderCerts() {
+  const certs = loadCerts();
+  const grid = document.getElementById('certGrid');
+  if (!certs.length) {
+    grid.innerHTML = '<div class="cert-empty">No certificates added yet. Add them from the Admin panel.</div>';
+    return;
+  }
+  grid.innerHTML = certs.map(c => `
+    <div class="cert-card">
+      <span class="cert-issuer">${c.issuer}</span>
+      <div class="cert-name">${c.name}</div>
+      <div class="cert-date">${c.date || ''}</div>
+      ${c.url ? `<a href="${c.url}" target="_blank" class="cert-link">View certificate ↗</a>` : ''}
+    </div>`).join('');
+}
+
+// ========== RENDER ADMIN LIST ==========
+function renderAdminList() {
+  const projects = loadProjects();
+  document.getElementById('projectListAdmin').innerHTML = projects.map(p => `
+    <div class="project-list-item" id="pli-${p.id}">
+      <div style="flex:1;min-width:0;">
+        <div class="proj-name">${p.title}</div>
+        <div class="proj-cat">${catLabels[p.cat]||p.cat}</div>
+      </div>
+      <div class="item-actions">
+        <button class="btn-sm" onclick="toggleEditProject(${p.id})">Edit</button>
+        <button class="btn-del" onclick="deleteProject(${p.id})">Remove</button>
+      </div>
+    </div>
+    <div id="pedit-${p.id}" style="display:none;background:var(--bg-ter);border-radius:var(--radius);padding:14px;margin-bottom:4px;">
+      <div class="form-row">
+        <div class="form-group"><label>Title</label><input type="text" id="pe_title_${p.id}" value="${p.title.replace(/"/g,'&quot;')}"></div>
+        <div class="form-group"><label>Category</label>
+          <select id="pe_cat_${p.id}">
+            ${Object.entries(catLabels).map(([v,l])=>`<option value="${v}"${p.cat===v?' selected':''}>${l}</option>`).join('')}
+          </select>
+        </div>
+      </div>
+      <div class="form-group"><label>Description</label><textarea id="pe_desc_${p.id}" style="min-height:64px;">${p.desc}</textarea></div>
+      <div class="form-group"><label>Tools / chips (comma-separated)</label><input type="text" id="pe_chips_${p.id}" value="${(p.chips||[]).join(', ')}"></div>
+      <div class="form-group"><label>Images (first = cover photo)</label>
+        <div class="multi-img-list" id="pe_imglist_${p.id}"></div>
+        <button type="button" class="multi-img-add-btn" onclick="document.getElementById('pe_imginput_${p.id}').click()" style="width:auto;height:auto;padding:8px 16px;font-size:12px;border-radius:8px;">+ Add images</button>
+        <input type="file" id="pe_imginput_${p.id}" accept="image/*" multiple style="display:none" onchange="peAddImages(${p.id},this)">
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Icon</label>
+          <select id="pe_icon_${p.id}">
+            ${['motor','power','iot','usb','board','led'].map(v=>`<option value="${v}"${p.icon===v?' selected':''}>${v}</option>`).join('')}
+          </select>
+        </div>
+        <div class="form-group"><label>Featured (2 cols)?</label>
+          <select id="pe_feat_${p.id}">
+            <option value="no"${!p.featured?' selected':''}>No</option>
+            <option value="yes"${p.featured?' selected':''}>Yes</option>
+          </select>
+        </div>
+      </div>
+      <button class="form-submit" style="margin-top:4px;" onclick="saveEditProject(${p.id})">Save changes</button>
+    </div>`).join('');
+  // Populate each edit panel's image list from stored images
+  projects.forEach(p => { peImgState[p.id] = getProjectImages(p).slice(); renderPeImgList(p.id); });
+}
+
+// Working state for multi-image editors, keyed by project id / 'new'
+let peImgState = {};
+let newProjImgState = [];
+
+function getProjectImages(p) {
+  // Backward-compat: old projects had single `image` string; new ones have `images` array
+  if (p.images && p.images.length) return p.images;
+  if (p.image) return [p.image];
+  return [];
+}
+
+function renderPeImgList(id) {
+  const list = document.getElementById('pe_imglist_'+id);
+  if (!list) return;
+  const imgs = peImgState[id] || [];
+  list.innerHTML = imgs.map((src,i) => `
+    <div class="multi-img-item">
+      <img src="${src}" alt="">
+      ${i===0 ? '<div class="cover-tag">Cover</div>' : ''}
+      <button class="multi-img-remove" onclick="peRemoveImage(${id},${i})">✕</button>
+    </div>`).join('');
+}
+function peAddImages(id, input) {
+  const files = Array.from(input.files || []);
+  if (!peImgState[id]) peImgState[id] = [];
+  let pending = files.length;
+  if (!pending) return;
+  files.forEach(f => fileToBase64(f, data => {
+    peImgState[id].push(data);
+    pending--;
+    if (pending === 0) renderPeImgList(id);
+  }));
+  input.value = '';
+}
+function peRemoveImage(id, idx) {
+  peImgState[id].splice(idx, 1);
+  renderPeImgList(id);
+}
+
+function toggleEditProject(id) {
+  const el = document.getElementById('pedit-'+id);
+  el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}
+
+function saveEditProject(id) {
+  const projects = loadProjects();
+  const idx = projects.findIndex(p=>p.id===id);
+  if (idx === -1) return;
+  const p = projects[idx];
+  p.title = document.getElementById('pe_title_'+id).value.trim() || p.title;
+  p.cat = document.getElementById('pe_cat_'+id).value;
+  p.desc = document.getElementById('pe_desc_'+id).value.trim() || p.desc;
+  p.chips = document.getElementById('pe_chips_'+id).value.split(',').map(s=>s.trim()).filter(Boolean);
+  p.icon = document.getElementById('pe_icon_'+id).value;
+  p.featured = document.getElementById('pe_feat_'+id).value === 'yes';
+  p.images = (peImgState[id] || []).slice();
+  p.image = p.images[0] || ''; // keep for backward compat with old code paths
+  saveProjects(projects);
+  renderProjects();
+  renderAdminList();
+  const el = document.getElementById('pedit-'+id);
+  if (el) el.style.display = 'none';
+  showMsg('deleteSuccess');
+  document.getElementById('deleteSuccess').textContent = 'Project updated!';
+  setTimeout(()=>{ document.getElementById('deleteSuccess').textContent = 'Project removed.'; }, 3100);
+}
+
+// ========== ADD / DELETE PROJECT ==========
+function newProjAddImages(input) {
+  const files = Array.from(input.files || []);
+  let pending = files.length;
+  if (!pending) return;
+  files.forEach(f => fileToBase64(f, data => {
+    newProjImgState.push(data);
+    pending--;
+    if (pending === 0) renderNewProjImgList();
+  }));
+  input.value = '';
+}
+function renderNewProjImgList() {
+  const list = document.getElementById('newProjImgList');
+  if (!list) return;
+  list.innerHTML = newProjImgState.map((src,i) => `
+    <div class="multi-img-item">
+      <img src="${src}" alt="">
+      ${i===0 ? '<div class="cover-tag">Cover</div>' : ''}
+      <button class="multi-img-remove" onclick="newProjRemoveImage(${i})">✕</button>
+    </div>`).join('');
+}
+function newProjRemoveImage(idx) {
+  newProjImgState.splice(idx, 1);
+  renderNewProjImgList();
+}
+function addProject() {
+  const title = document.getElementById('newTitle').value.trim();
+  const cat = document.getElementById('newCat').value;
+  const desc = document.getElementById('newDesc').value.trim();
+  const chipsRaw = document.getElementById('newChips').value.trim();
+  const icon = document.getElementById('newIcon').value;
+  const featured = document.getElementById('newFeatured').value === 'yes';
+  if (!title || !desc) { alert('Please fill in the title and description.'); return; }
+  const projects = loadProjects();
+  const newId = Math.max(0, ...projects.map(p => p.id)) + 1;
+  const images = newProjImgState.slice();
+  projects.push({ id: newId, title, cat, featured, icon, desc, chips: chipsRaw ? chipsRaw.split(',').map(s=>s.trim()) : [], images, image: images[0]||'' });
+  saveProjects(projects);
+  renderProjects();
+  renderAdminList();
+  document.getElementById('newTitle').value = '';
+  document.getElementById('newDesc').value = '';
+  document.getElementById('newChips').value = '';
+  newProjImgState = [];
+  renderNewProjImgList();
+  showMsg('addSuccess');
+}
+
+function deleteProject(id) {
+  if (!confirm('Remove this project?')) return;
+  const projects = loadProjects().filter(p => p.id !== id);
+  saveProjects(projects);
+  renderProjects();
+  renderAdminList();
+  showMsg('deleteSuccess');
+}
+
+// ========== UPDATE ONGOING ==========
+function updateOngoing() {
+  const imgFile = document.getElementById('ogImgInput').files[0];
+  function doSave(imgData) {
+    const existing = loadOngoing();
+    const o = {
+      title: document.getElementById('ogTitle').value.trim(),
+      chip: document.getElementById('ogChip').value.trim(),
+      desc: document.getElementById('ogDesc').value.trim(),
+      stage: parseInt(document.getElementById('ogStage').value),
+      tags: document.getElementById('ogTags').value.split(',').map(s=>s.trim()).filter(Boolean),
+      image: imgData !== undefined ? imgData : (existing.image || '')
+    };
+    saveOngoing(o);
+    renderOngoing();
+    showMsg('ongoingSuccess');
+  }
+  if (imgFile) { fileToBase64(imgFile, doSave); } else { doSave(undefined); }
+}
+
+function markOngoingComplete() {
+  if (!confirm('Mark this project as completed and add it to the project list?')) return;
+  const o = loadOngoing();
+  const projects = loadProjects();
+  const newId = Math.max(0, ...projects.map(p=>p.id)) + 1;
+  projects.push({ id: newId, title: o.title, cat: 'fpga', featured: false, icon: 'board', desc: o.desc, chips: o.tags||[], image: o.image||'' });
+  saveProjects(projects);
+  saveOngoing({ title:'', chip:'', desc:'', stage:0, tags:[], image:'' });
+  renderProjects();
+  renderOngoing();
+  renderAdminList();
+  showMsg('ongoingSuccess');
+}
+
+// ========== PROFILE SAVE ==========
+function saveProfile() {
+  const photoFile = document.getElementById('profilePhotoInput').files[0];
+  function doSave(photoData) {
+    const existing = loadProfile();
+    const p = {
+      name: document.getElementById('pName').value.trim() || existing.name,
+      eyebrow: document.getElementById('pEyebrow').value.trim() || existing.eyebrow,
+      headline: document.getElementById('pHeadline').value.trim() || existing.headline,
+      bio: document.getElementById('pBio').value.trim() || existing.bio,
+      email: document.getElementById('pEmail').value.trim() || existing.email,
+      phone: document.getElementById('pPhone').value.trim() || existing.phone,
+      location: document.getElementById('pLocation').value.trim() || existing.location,
+      linkedin: document.getElementById('pLinkedin').value.trim() || existing.linkedin,
+      pills: document.getElementById('pPills').value.trim() || existing.pills,
+      contactTitle: document.getElementById('pContactTitle').value.trim() || existing.contactTitle,
+      // Only update photo if a new file was chosen; keep existing otherwise
+      photo: photoData !== null ? photoData : (existing.photo || ''),
+      cv: existing.cv || '',
+      avatarSize: parseInt(document.getElementById('pAvatarSize').value) || 160
+    };
+    saveProfileData(p);
+    renderProfile();
+    showMsg('profileSuccess');
+  }
+  if (photoFile) {
+    fileToBase64(photoFile, function(data) { doSave(data); });
+  } else {
+    doSave(null); // null = keep existing photo
+  }
+}
+
+function removeProfilePhoto() {
+  const p = loadProfile();
+  p.photo = '';
+  saveProfileData(p);
+  const prev = document.getElementById('profilePhotoPreview');
+  prev.src = ''; prev.style.display = 'none';
+  document.getElementById('removePhotoBtn').style.display = 'none';
+  document.getElementById('profilePhotoInput').value = '';
+  renderProfile();
+}
+
+function removeCV() {
+  const p = loadProfile();
+  p.cv = '';
+  saveProfileData(p);
+  document.getElementById('removeCVBtn').style.display = 'none';
+  document.getElementById('cvCurrentLabel').style.display = 'none';
+  document.getElementById('cvFileInput').value = '';
+  const cvBtn = document.getElementById('cv-download-btn');
+  if (cvBtn) cvBtn.style.display = 'none';
+}
+
+function loadCVFile(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const p = loadProfile();
+    p.cv = e.target.result;
+    saveProfileData(p);
+    const cvBtn = document.getElementById('cv-download-btn');
+    if (cvBtn) { cvBtn.href = e.target.result; cvBtn.style.display = 'inline-block'; }
+    const rb = document.getElementById('removeCVBtn');
+    if (rb) rb.style.display = 'inline-block';
+    const lbl = document.getElementById('cvCurrentLabel');
+    if (lbl) lbl.style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+}
+
+// ========== SKILLS ADMIN ==========
+function renderSkillsAdmin() {
+  const skills = loadSkills();
+  document.getElementById('skillsAdminList').innerHTML = skills.map((s,i) => `
+    <div style="background:var(--bg-sec);border-radius:var(--radius);padding:14px;margin-bottom:10px;">
+      <div class="form-row" style="margin-bottom:8px;">
+        <div class="form-group" style="margin-bottom:0;">
+          <label>Category name</label>
+          <input type="text" id="sk_name_${i}" value="${s.name}">
+        </div>
+        <div style="display:flex;align-items:flex-end;padding-bottom:0;">
+          <button class="btn-del" onclick="removeSkillCategory(${i})" style="height:36px;">Remove</button>
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom:0;">
+        <label>Items (comma-separated)</label>
+        <input type="text" id="sk_items_${i}" value="${s.items}">
+      </div>
+    </div>`).join('');
+}
+
+function addSkillCategory() {
+  const skills = loadSkills();
+  skills.push({ id: Date.now(), name: 'New category', icon: 'pcb', items: 'Skill 1, Skill 2' });
+  saveSkillsData(skills);
+  renderSkillsAdmin();
+}
+
+function removeSkillCategory(i) {
+  const skills = loadSkills();
+  skills.splice(i, 1);
+  saveSkillsData(skills);
+  renderSkillsAdmin();
+}
+
+function saveSkills() {
+  const skills = loadSkills();
+  skills.forEach((s,i) => {
+    const nameEl = document.getElementById('sk_name_'+i);
+    const itemsEl = document.getElementById('sk_items_'+i);
+    if (nameEl) s.name = nameEl.value.trim();
+    if (itemsEl) s.items = itemsEl.value.trim();
+  });
+  saveSkillsData(skills);
+  renderSkills();
+  showMsg('skillsSuccess');
+}
+
+// ========== EXPERIENCE ADMIN ==========
+function renderExpAdmin() {
+  const exp = loadExp();
+  document.getElementById('expAdminList').innerHTML = exp.map((e,i) => `
+    <div style="background:var(--bg-sec);border-radius:var(--radius);padding:14px;margin-bottom:12px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+        <strong style="font-size:13px;">${e.position || 'New entry'}</strong>
+        <button class="btn-del" onclick="removeExpEntry(${i})">Remove</button>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Position</label><input type="text" id="ex_pos_${i}" value="${e.position}"></div>
+        <div class="form-group"><label>Company</label><input type="text" id="ex_co_${i}" value="${e.company}"></div>
+      </div>
+      <div class="form-group"><label>Skills / tags shown</label><input type="text" id="ex_sk_${i}" value="${e.skills||''}"></div>
+      <div class="form-row">
+        <div class="form-group"><label>Start year</label><input type="number" id="ex_sy_${i}" value="${e.startYear}" min="2000" max="2040"></div>
+        <div class="form-group"><label>Start month (1-12)</label><input type="number" id="ex_sm_${i}" value="${e.startMonth||1}" min="1" max="12"></div>
+      </div>
+      <div class="form-group">
+        <label><input type="checkbox" id="ex_og_${i}" ${e.ongoing?'checked':''} onchange="toggleExpOngoing(${i})"> Currently working here</label>
+      </div>
+      <div id="ex_end_${i}" ${e.ongoing?'style="display:none"':''}>
+        <div class="form-row">
+          <div class="form-group"><label>End year</label><input type="number" id="ex_ey_${i}" value="${e.endYear||''}" min="2000" max="2040"></div>
+          <div class="form-group"><label>End month (1-12)</label><input type="number" id="ex_em_${i}" value="${e.endMonth||''}" min="1" max="12"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Company logo image</label>
+        <div class="img-upload-row">
+          ${e.logo ? `<img src="${e.logo}" style="width:40px;height:40px;border-radius:8px;object-fit:cover;" alt="">` : ''}
+          <input type="file" id="ex_logo_${i}" accept="image/*">
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function toggleExpOngoing(i) {
+  const cb = document.getElementById('ex_og_'+i);
+  const endDiv = document.getElementById('ex_end_'+i);
+  endDiv.style.display = cb.checked ? 'none' : '';
+}
+
+function addExpEntry() {
+  const exp = loadExp();
+  exp.unshift({ id:Date.now(), position:'', company:'', startYear:new Date().getFullYear(), startMonth:1, endYear:'', endMonth:'', ongoing:true, skills:'', logo:'' });
+  saveExpData(exp);
+  renderExpAdmin();
+}
+
+function removeExpEntry(i) {
+  const exp = loadExp();
+  exp.splice(i, 1);
+  saveExpData(exp);
+  renderExpAdmin();
+}
+
+function saveExp() {
+  const exp = loadExp();
+  if (!exp.length) { saveExpData([]); renderExp(); showMsg('expSuccess'); return; }
+  exp.forEach((e,i) => {
+    e.position = (document.getElementById('ex_pos_'+i)||{value:e.position}).value.trim();
+    e.company = (document.getElementById('ex_co_'+i)||{value:e.company}).value.trim();
+    e.skills = (document.getElementById('ex_sk_'+i)||{value:e.skills}).value.trim();
+    e.startYear = parseInt((document.getElementById('ex_sy_'+i)||{value:e.startYear}).value)||e.startYear;
+    e.startMonth = parseInt((document.getElementById('ex_sm_'+i)||{value:e.startMonth}).value)||1;
+    const og = document.getElementById('ex_og_'+i);
+    e.ongoing = og ? og.checked : e.ongoing;
+    if (!e.ongoing) {
+      e.endYear = parseInt((document.getElementById('ex_ey_'+i)||{value:e.endYear}).value)||e.endYear;
+      e.endMonth = parseInt((document.getElementById('ex_em_'+i)||{value:e.endMonth}).value)||12;
+    }
+  });
+  const promises = exp.map((e,i) => new Promise(function(resolve) {
+    const f = document.getElementById('ex_logo_'+i);
+    if (f && f.files[0]) { fileToBase64(f.files[0], function(data) { e.logo = data; resolve(); }); }
+    else { resolve(); }
+  }));
+  Promise.all(promises).then(function() { saveExpData(exp); renderExp(); showMsg('expSuccess'); });
+}
+
+// ========== EDUCATION ADMIN ==========
+function renderEduAdmin() {
+  const edu = loadEdu();
+  document.getElementById('eduAdminList').innerHTML = edu.map((e,i) => `
+    <div style="background:var(--bg-sec);border-radius:var(--radius);padding:14px;margin-bottom:12px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+        <strong style="font-size:13px;">${e.degree||'New entry'}</strong>
+        <button class="btn-del" onclick="removeEduEntry(${i})">Remove</button>
+      </div>
+      <div class="form-group"><label>Degree / qualification</label><input type="text" id="edu_deg_${i}" value="${e.degree}"></div>
+      <div class="form-group"><label>Institution</label><input type="text" id="edu_inst_${i}" value="${e.institution}"></div>
+      <div class="form-row">
+        <div class="form-group"><label>Start year</label><input type="number" id="edu_sy_${i}" value="${e.startYear}" min="2000" max="2040"></div>
+        <div class="form-group"><label>End year</label><input type="number" id="edu_ey_${i}" value="${e.endYear||''}" min="2000" max="2040"></div>
+      </div>
+      <div class="form-group">
+        <label><input type="checkbox" id="edu_og_${i}" ${e.ongoing?'checked':''}> Currently studying here</label>
+      </div>
+      <div class="form-group">
+        <label>Institution logo image</label>
+        <div class="img-upload-row">
+          ${e.logo ? `<img src="${e.logo}" style="width:40px;height:40px;border-radius:8px;object-fit:cover;" alt="">` : ''}
+          <input type="file" id="edu_logo_${i}" accept="image/*">
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function addEduEntry() {
+  const edu = loadEdu();
+  edu.unshift({ id:Date.now(), degree:'', institution:'', startYear:new Date().getFullYear(), endYear:'', ongoing:true, logo:'' });
+  saveEduData(edu);
+  renderEduAdmin();
+}
+
+function removeEduEntry(i) {
+  const edu = loadEdu();
+  edu.splice(i, 1);
+  saveEduData(edu);
+  renderEduAdmin();
+}
+
+function saveEdu() {
+  const edu = loadEdu();
+  if (!edu.length) { saveEduData([]); renderEdu(); showMsg('eduSuccess'); return; }
+  edu.forEach((e,i) => {
+    e.degree = (document.getElementById('edu_deg_'+i)||{value:e.degree}).value.trim();
+    e.institution = (document.getElementById('edu_inst_'+i)||{value:e.institution}).value.trim();
+    e.startYear = parseInt((document.getElementById('edu_sy_'+i)||{value:e.startYear}).value)||e.startYear;
+    e.endYear = parseInt((document.getElementById('edu_ey_'+i)||{value:e.endYear}).value)||e.endYear;
+    const og = document.getElementById('edu_og_'+i);
+    e.ongoing = og ? og.checked : e.ongoing;
+  });
+  const promises = edu.map((e,i) => new Promise(function(resolve) {
+    const f = document.getElementById('edu_logo_'+i);
+    if (f && f.files[0]) { fileToBase64(f.files[0], function(data) { e.logo = data; resolve(); }); }
+    else { resolve(); }
+  }));
+  Promise.all(promises).then(function() { saveEduData(edu); renderEdu(); showMsg('eduSuccess'); });
+}
+
+// ========== CERTIFICATES ADMIN ==========
+function renderCertsAdmin() {
+  const certs = loadCerts();
+  document.getElementById('certsAdminList').innerHTML = certs.length === 0 ? '<p style="font-size:12px;color:var(--text-ter);margin-bottom:12px;">No certificates yet. Click + Add certificate below.</p>' : certs.map((c,i) => `
+    <div style="background:var(--bg-sec);border-radius:var(--radius);padding:14px;margin-bottom:12px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+        <strong style="font-size:13px;">${c.name||'New certificate'}</strong>
+        <button class="btn-del" onclick="removeCertEntry(${i})">Remove</button>
+      </div>
+      <div class="form-group"><label>Certificate name</label><input type="text" id="cert_name_${i}" value="${c.name}"></div>
+      <div class="form-row">
+        <div class="form-group"><label>Issuer (e.g. Coursera, Udemy)</label><input type="text" id="cert_issuer_${i}" value="${c.issuer}"></div>
+        <div class="form-group"><label>Date (e.g. Jan 2024)</label><input type="text" id="cert_date_${i}" value="${c.date||''}"></div>
+      </div>
+      <div class="form-group"><label>Certificate URL (optional)</label><input type="url" id="cert_url_${i}" value="${c.url||''}" placeholder="https://..."></div>
+    </div>`).join('');
+}
+
+function addCertEntry() {
+  const certs = loadCerts();
+  certs.push({ id:Date.now(), name:'', issuer:'', date:'', url:'' });
+  saveCertsData(certs);
+  renderCertsAdmin();
+}
+
+function removeCertEntry(i) {
+  const certs = loadCerts();
+  certs.splice(i, 1);
+  saveCertsData(certs);
+  renderCertsAdmin();
+}
+
+function saveCerts() {
+  const certs = loadCerts();
+  certs.forEach((c,i) => {
+    c.name = (document.getElementById('cert_name_'+i)||{value:c.name}).value.trim();
+    c.issuer = (document.getElementById('cert_issuer_'+i)||{value:c.issuer}).value.trim();
+    c.date = (document.getElementById('cert_date_'+i)||{value:c.date}).value.trim();
+    c.url = (document.getElementById('cert_url_'+i)||{value:c.url}).value.trim();
+  });
+  saveCertsData(certs);
+  renderCerts();
+  showMsg('certsSuccess');
+}
+
+// ========== PASSWORD ==========
+function changePassword() {
+  const p1 = document.getElementById('newPw1').value;
+  const p2 = document.getElementById('newPw2').value;
+  const errEl = document.getElementById('pwError');
+  if (!p1 || p1.length < 6) { errEl.textContent = 'Password must be at least 6 characters.'; errEl.style.display='block'; return; }
+  if (p1 !== p2) { errEl.textContent = 'Passwords do not match.'; errEl.style.display='block'; return; }
+  errEl.style.display = 'none';
+  setPassword(p1);
+  document.getElementById('newPw1').value = '';
+  document.getElementById('newPw2').value = '';
+  showMsg('pwSuccess');
+}
+
+// ========== LOGIN / ADMIN ==========
+function openAdmin() {
+  document.getElementById('adminModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeAdmin() {
+  document.getElementById('adminModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function checkLogin() {
+  const pw = document.getElementById('adminPassword').value;
+  if (pw === getPassword()) {
+    document.getElementById('loginPanel').style.display = 'none';
+    document.getElementById('adminPanel').style.display = 'block';
+    // Populate profile fields
+    const p = loadProfile();
+    document.getElementById('pName').value = p.name;
+    document.getElementById('pEyebrow').value = p.eyebrow;
+    document.getElementById('pHeadline').value = p.headline;
+    document.getElementById('pBio').value = p.bio;
+    document.getElementById('pEmail').value = p.email;
+    document.getElementById('pPhone').value = p.phone;
+    document.getElementById('pLocation').value = p.location;
+    document.getElementById('pLinkedin').value = p.linkedin||'';
+    document.getElementById('pPills').value = p.pills||'';
+    document.getElementById('pContactTitle').value = p.contactTitle||'';
+    const sizeEl = document.getElementById('pAvatarSize');
+    if (sizeEl) sizeEl.value = p.avatarSize || 160;
+    if (p.photo) {
+      const prev = document.getElementById('profilePhotoPreview');
+      prev.src = p.photo; prev.style.display = 'block';
+      const rb = document.getElementById('removePhotoBtn');
+      if (rb) rb.style.display = 'inline-block';
+    }
+    if (p.cv) {
+      const rb = document.getElementById('removeCVBtn');
+      if (rb) rb.style.display = 'inline-block';
+      const lbl = document.getElementById('cvCurrentLabel');
+      if (lbl) lbl.style.display = 'block';
+    }
+    // Populate ongoing
+    const o = loadOngoing();
+    document.getElementById('ogTitle').value = o.title||'';
+    document.getElementById('ogChip').value = o.chip||'';
+    document.getElementById('ogDesc').value = o.desc||'';
+    document.getElementById('ogStage').value = o.stage||0;
+    document.getElementById('ogTags').value = (o.tags||[]).join(', ');
+    if (o.image) { const prev = document.getElementById('ogImgPreview'); prev.src=o.image; prev.style.display='block'; }
+    renderAdminList();
+    renderSkillsAdmin();
+    renderExpAdmin();
+    renderEduAdmin();
+    renderCertsAdmin();
+    // Populate GitHub fields
+    const ghCfg = ghLoadConfig();
+    const ghOwnerEl = document.getElementById('ghOwner'); if(ghOwnerEl) ghOwnerEl.value = ghCfg.owner||'';
+    const ghRepoEl  = document.getElementById('ghRepo');  if(ghRepoEl)  ghRepoEl.value  = ghCfg.repo||'';
+    const ghBranchEl= document.getElementById('ghBranch');if(ghBranchEl)ghBranchEl.value= ghCfg.branch||'main';
+    // Don't pre-fill token for security — user must re-enter if needed
+    if (ghCfg.owner && ghCfg.repo) {
+      const el = document.getElementById('sbAdminStatus');
+      if (el) el.innerHTML = `<div style="background:#E1F5EE;color:#0F6E56;border-radius:8px;padding:10px 14px;font-size:13px;font-weight:500;margin-bottom:16px;">☁ GitHub connected: <a href="https://github.com/${ghCfg.owner}/${ghCfg.repo}" target="_blank" style="color:var(--teal);">${ghCfg.owner}/${ghCfg.repo}</a> — all saves push to GitHub automatically.</div>`;
+    }
+    const si = document.getElementById('ejsServiceId'); if(si) si.value = ejsCfg.serviceId||'';
+    const ti = document.getElementById('ejsTemplateId'); if(ti) ti.value = ejsCfg.templateId||'';
+    const pk = document.getElementById('ejsPublicKey'); if(pk) pk.value = ejsCfg.publicKey||'';
+    const ejsStatus = document.getElementById('ejsAdminStatus');
+    if (ejsStatus && ejsCfg.serviceId && ejsCfg.templateId && ejsCfg.publicKey) {
+      ejsStatus.innerHTML = '<div style="background:#E1F5EE;color:#0F6E56;border-radius:8px;padding:10px 14px;font-size:13px;font-weight:500;margin-bottom:16px;">✅ Gmail connected! Contact form sends directly to your inbox.</div>';
+    }
+  } else {
+    document.getElementById('loginError').style.display = 'block';
+  }
+}
+
+function switchTab(name, event) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  if (event && event.target) event.target.classList.add('active');
+}
+
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+// ========== UTILS ==========
+function fileToBase64(file, cb) {
+  const reader = new FileReader();
+  reader.onload = e => cb(e.target.result);
+  reader.readAsDataURL(file);
+}
+function previewImg(input, previewId, removeBtnId) {
+  const file = input.files[0];
+  if (!file) return;
+  fileToBase64(file, function(data) {
+    const img = document.getElementById(previewId);
+    img.src = data; img.style.display = 'block';
+    if (removeBtnId) { const rb = document.getElementById(removeBtnId); if (rb) rb.style.display = 'inline-block'; }
+  });
+}
+function clearImgField(inputId, previewId, removeBtnId) {
+  const inp = document.getElementById(inputId);
+  const prev = document.getElementById(previewId);
+  const rb = document.getElementById(removeBtnId);
+  if (inp) inp.value = '';
+  if (prev) { prev.src = ''; prev.style.display = 'none'; }
+  if (rb) rb.style.display = 'none';
+}
+function previewProfilePhoto(input) {
+  const file = input.files[0];
+  if (!file) return;
+  fileToBase64(file, function(data) {
+    const prev = document.getElementById('profilePhotoPreview');
+    prev.src = data; prev.style.display = 'block';
+    const rb = document.getElementById('removePhotoBtn');
+    if (rb) rb.style.display = 'inline-block';
+  });
+}
+function showMsg(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.style.display = 'block';
+  setTimeout(() => { el.style.display = 'none'; }, 3000);
+}
+
+document.getElementById('adminModal').addEventListener('click', function(e) {
+  if (e.target === this) closeAdmin();
+});
+
+// ========== SECRET ADMIN ACCESS ==========
+// THREE ways to open admin (all invisible to visitors):
+// 1. Add ?admin to the URL:  yoursite.com/index.html?admin
+// 2. Triple-click the footer copyright text
+// 3. Type "mkadmin" anywhere (not in an input)
+
+// Method 1: URL parameter — most reliable, works everywhere
+if (window.location.search.includes('admin') || window.location.hash === '#admin') {
+  history.replaceState({}, '', window.location.pathname);
+  openAdmin();
+}
+
+// Method 2: Triple-click footer copyright
+(function() {
+  var clicks = 0, timer = null;
+  var footer = document.getElementById('footer-copy');
+  if (footer) {
+    footer.style.cursor = 'default';
+    footer.addEventListener('click', function() {
+      clicks++;
+      clearTimeout(timer);
+      timer = setTimeout(function() { clicks = 0; }, 600);
+      if (clicks >= 3) { clicks = 0; clearTimeout(timer); openAdmin(); }
+    });
+  }
+})();
+
+// Method 3: Type "mkadmin" anywhere (keydown, works in all modern browsers)
+(function() {
+  var secret = 'mkadmin';
+  var buf = '';
+  var timer = null;
+  document.addEventListener('keydown', function(e) {
+    var tag = (document.activeElement || {}).tagName || '';
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+    if (e.ctrlKey || e.altKey || e.metaKey) return;
+    if (!e.key || e.key.length !== 1) return;
+    buf += e.key.toLowerCase();
+    if (buf.length > secret.length) buf = buf.slice(-secret.length);
+    clearTimeout(timer);
+    timer = setTimeout(function() { buf = ''; }, 3000);
+    if (buf === secret) { buf = ''; clearTimeout(timer); openAdmin(); }
+  });
+})();
+
+// ========== AUTO-UPDATE ONGOING DURATIONS ==========
+// Refresh experience durations every minute for ongoing jobs
+setInterval(function() {
+  renderExp();
+  renderOngoing();
+}, 60000);
+
+// ========== GITHUB ADMIN FUNCTIONS ==========
+function ghUpdateStatus(msg, type) {
+  const el = document.getElementById('sbAdminStatus');
+  if (!el) return;
+  const colors = { ok:['#E1F5EE','#0F6E56'], err:['#FCEBEB','#A32D2D'], info:['#E6F1FB','#185FA5'] };
+  const c = colors[type]||colors.info;
+  el.innerHTML = `<div style="background:${c[0]};color:${c[1]};border-radius:8px;padding:10px 14px;font-size:13px;font-weight:500;margin-bottom:16px;">${msg}</div>`;
+}
+
+async function ghSetupSave() {
+  const owner = (document.getElementById('ghOwner')||{value:''}).value.trim();
+  const repo  = (document.getElementById('ghRepo')||{value:''}).value.trim();
+  const branch= (document.getElementById('ghBranch')||{value:'main'}).value.trim()||'main';
+  const token = (document.getElementById('ghToken')||{value:''}).value.trim();
+  if (!owner||!repo||!token) { ghUpdateStatus('⚠️ Please fill in username, repo name, and token.','err'); return; }
+  ghSaveConfig({owner,repo,branch,token});
+  ghUpdateStatus('Testing connection and pushing data…','info');
+  const result = await ghForcePush(true);
+  if (result) {
+    ghUpdateStatus(`✅ Connected! Data pushed to <a href="https://github.com/${owner}/${repo}/blob/${branch}/data.json" target="_blank" style="color:var(--teal);">github.com/${owner}/${repo}</a> — every save now updates GitHub automatically.`,'ok');
+  } else {
+    ghUpdateStatus('❌ Failed. Check your username, repo name, and token permissions (needs <b>repo</b> scope).','err');
+  }
+}
+
+async function ghForcePush(silent) {
+  const c = ghLoadConfig();
+  if (!c.owner||!c.repo||!c.token) { if(!silent) ghUpdateStatus('⚠️ No GitHub config saved yet.','err'); return false; }
+  if (!silent) ghUpdateStatus('Pushing all data to GitHub…','info');
+  const all = ghAllLocal();
+  const result = await ghPush(all);
+  if (result.ok) {
+    if (!silent) ghUpdateStatus('✅ All data pushed to GitHub successfully.','ok');
+    return true;
+  } else {
+    if (!silent) ghUpdateStatus('❌ Push failed: ' + result.error,'err');
+    return false;
+  }
+}
+
+async function ghForcePull() {
+  const c = ghLoadConfig();
+  if (!c.owner||!c.repo) { ghUpdateStatus('⚠️ No GitHub config saved yet.','err'); return; }
+  ghUpdateStatus('Pulling latest data from GitHub…','info');
+  const ok = await syncFromCloud();
+  if (ok) {
+    ghUpdateStatus('✅ Data pulled from GitHub. Refreshing…','ok');
+    setTimeout(()=>location.reload(), 1200);
+  } else {
+    ghUpdateStatus('❌ Pull failed. Make sure the repo is public and data.json exists.','err');
+  }
+}
+renderProfile();
+renderProjects();
+renderOngoing();
+renderSkills();
+renderExp();
+renderEdu();
+renderCerts();
+
+// Auto-open admin if redirected from projects page
+if (window.location.search.includes('admin=1')) {
+  openAdmin();
+  history.replaceState({}, '', window.location.pathname);
+}
+
+// ========== FAST PAGE NAVIGATION ==========
+// Prefetch projects.html on hover, navigate instantly on click with fade
+(function() {
+  var prefetched = false;
+  function prefetchProjects() {
+    if (prefetched) return;
+    prefetched = true;
+    var link = document.createElement('link');
+    link.rel = 'prefetch'; link.href = 'projects.html';
+    document.head.appendChild(link);
+  }
+  document.querySelectorAll('a[href="projects.html"], a[href*="projects.html"]').forEach(function(a) {
+    a.addEventListener('mouseenter', prefetchProjects);
+    a.addEventListener('click', function(e) {
+      var href = this.getAttribute('href');
+      if (!href || href.startsWith('mailto') || href.startsWith('#') || this.target === '_blank') return;
+      e.preventDefault();
+      document.body.classList.add('fading');
+      setTimeout(function() { window.location.href = href; }, 140);
+    });
+  });
+  // Also handle back navigation — remove fade on pageshow
+  window.addEventListener('pageshow', function() { document.body.classList.remove('fading'); });
+})();
+
+// ========== EMAILJS CONFIG ==========
+function ejsLoadConfig() {
+  try { return JSON.parse(localStorage.getItem('mk_ejs_config')) || {}; } catch(e) { return {}; }
+}
+function ejsSaveConfig() {
+  const cfg = {
+    serviceId:  (document.getElementById('ejsServiceId')||{value:''}).value.trim(),
+    templateId: (document.getElementById('ejsTemplateId')||{value:''}).value.trim(),
+    publicKey:  (document.getElementById('ejsPublicKey')||{value:''}).value.trim()
+  };
+  if (!cfg.serviceId || !cfg.templateId || !cfg.publicKey) { alert('Please fill in all three fields.'); return; }
+  localStorage.setItem('mk_ejs_config', JSON.stringify(cfg));
+  initEmailJS(cfg.publicKey);
+  updateEjsBanners();
+  // Show success in admin
+  const status = document.getElementById('ejsAdminStatus');
+  if (status) {
+    status.innerHTML = '<div style="background:#E1F5EE;color:#0F6E56;border-radius:8px;padding:10px 14px;font-size:13px;font-weight:500;margin-bottom:16px;">✅ Gmail connected! The contact form will now send directly to your inbox.</div>';
+  }
+}
+function ejsReconfigure() {
+  localStorage.removeItem('mk_ejs_config');
+  updateEjsBanners();
+  const status = document.getElementById('ejsAdminStatus');
+  if (status) status.innerHTML = '';
+  // Clear fields
+  const si = document.getElementById('ejsServiceId'); if(si) si.value='';
+  const ti = document.getElementById('ejsTemplateId'); if(ti) ti.value='';
+  const pk = document.getElementById('ejsPublicKey'); if(pk) pk.value='';
+}
+function initEmailJS(publicKey) {
+  if (publicKey && typeof emailjs !== 'undefined') {
+    emailjs.init({ publicKey: publicKey });
+  }
+}
+function updateEjsBanners() {
+  const cfg = ejsLoadConfig();
+  const connected = !!(cfg.publicKey && cfg.serviceId && cfg.templateId);
+  const nb = document.getElementById('ejsNotConnectedBanner');
+  const cb = document.getElementById('ejsConnectedBanner');
+  if (nb) nb.style.display = connected ? 'none' : 'block';
+  if (cb) cb.style.display = connected ? 'block' : 'none';
+}
+// Init on page load
+(function() {
+  const cfg = ejsLoadConfig();
+  if (cfg.publicKey && cfg.serviceId && cfg.templateId) {
+    initEmailJS(cfg.publicKey);
+  }
+  updateEjsBanners();
+})();
+
+// ========== CONTACT FORM ==========
+const cfAttachedFiles = [];
+
+function cfAddFiles(input) {
+  const newFiles = Array.from(input.files);
+  newFiles.forEach(function(file) {
+    if (!cfAttachedFiles.find(function(f){ return f.name === file.name; })) {
+      cfAttachedFiles.push(file);
+    }
+  });
+  input.value = '';
+  cfRenderFiles();
+}
+
+function cfRenderFiles() {
+  const list = document.getElementById('cfFileList');
+  if (!list) return;
+  list.innerHTML = cfAttachedFiles.map(function(f, i) {
+    return '<div class="cf-file-item">' +
+      '<span>📎 ' + f.name + ' <span style="color:var(--text-ter)">(' + (f.size > 1024*1024 ? (f.size/1024/1024).toFixed(1)+'MB' : Math.round(f.size/1024)+'KB') + ')</span></span>' +
+      '<button class="cf-file-remove" onclick="cfRemoveFile(' + i + ')" title="Remove">×</button>' +
+      '</div>';
+  }).join('');
+}
+
+function cfRemoveFile(i) {
+  cfAttachedFiles.splice(i, 1);
+  cfRenderFiles();
+}
+
+function cfShowError(msg) {
+  const el = document.getElementById('cfErrorMsg');
+  if (!el) return;
+  el.textContent = msg;
+  el.style.display = 'block';
+  setTimeout(function(){ el.style.display='none'; }, 6000);
+}
+
+function cfSend() {
+  const name    = (document.getElementById('cfName')||{value:''}).value.trim();
+  const email   = (document.getElementById('cfEmail')||{value:''}).value.trim();
+  const message = (document.getElementById('cfMessage')||{value:''}).value.trim();
+
+  if (!name || !email || !message) {
+    cfShowError('Please fill in your name, email, and message.');
+    return;
+  }
+  if (!/\S+@\S+\.\S+/.test(email)) {
+    cfShowError('Please enter a valid email address.');
+    return;
+  }
+
+  const cfg = ejsLoadConfig();
+  if (!cfg.serviceId || !cfg.templateId || !cfg.publicKey) {
+    cfShowError('The contact form is not yet connected to Gmail. Please use the email address below to get in touch directly.');
+    return;
+  }
+
+  // Build attachment list note
+  let attachNote = '';
+  if (cfAttachedFiles.length > 0) {
+    attachNote = '\n\n📎 Attached files (please reply to this email to receive them):\n' +
+      cfAttachedFiles.map(function(f){ return '• ' + f.name + ' (' + (f.size > 1024*1024 ? (f.size/1024/1024).toFixed(1)+'MB' : Math.round(f.size/1024)+'KB') + ')'; }).join('\n');
+  }
+
+  const btn = document.getElementById('cfSendBtn');
+  if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+
+  const templateParams = {
+    from_name:    name,
+    from_email:   email,
+    message:      message + attachNote,
+    reply_to:     email,
+    to_email:     'mustafakamal.mk2017@gmail.com'
+  };
+
+  emailjs.send(cfg.serviceId, cfg.templateId, templateParams)
+    .then(function() {
+      // Success
+      const sentMsg = document.getElementById('cfSentMsg');
+      if (sentMsg) { sentMsg.style.display = 'block'; setTimeout(function(){ sentMsg.style.display='none'; }, 6000); }
+      // Clear form
+      const n = document.getElementById('cfName'); if(n) n.value='';
+      const e = document.getElementById('cfEmail'); if(e) e.value='';
+      const m = document.getElementById('cfMessage'); if(m) m.value='';
+      cfAttachedFiles.length = 0;
+      cfRenderFiles();
+      if (btn) { btn.disabled = false; btn.textContent = 'Send message →'; }
+    }, function(err) {
+      // Failure
+      cfShowError('Failed to send: ' + (err.text || JSON.stringify(err)) + '. Check your EmailJS config.');
+      if (btn) { btn.disabled = false; btn.textContent = 'Send message →'; }
+    });
+}
+
+// ========== INIT ==========
+// Safety: if localStorage has been corrupted or wiped, defaults kick in automatically
+// via the ls() helper (it returns defaultX if the key is missing or unparseable).
+
+// Step 1: render immediately from localStorage cache (or defaults if empty)
+renderProfile();
+renderProjects();
+renderOngoing();
+renderSkills();
+renderExp();
+renderEdu();
+renderCerts();
+
+// Step 2: sync from GitHub in background ONLY if configured, then re-render
+(async function initCloudSync() {
+  const cfg = ghLoadConfig();
+  if (!cfg.owner || !cfg.repo) return; // Not configured — skip entirely
+  try {
+    const data = await ghFetch();
+    if (!data) return; // GitHub fetch failed or repo not set up yet — keep local data
+    // Validate: only update if GitHub data has actual content
+    const hasContent = (data.projects && data.projects.length > 0) ||
+                       (data.exp && data.exp.length > 0) ||
+                       (data.profile && data.profile.name);
+    if (!hasContent) return; // Empty data.json — don't overwrite good local data
+    ghCacheLocal(data);
+    renderProfile(); renderProjects(); renderOngoing();
+    renderSkills(); renderExp(); renderEdu(); renderCerts();
+  } catch(e) { /* silently fail — local data stays */ }
+})();
+</script>
+</body>
+</html>

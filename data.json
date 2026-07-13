@@ -1,7 +1,7 @@
 {
   "profile": {
     "name": "Mustafa Kamal",
-    "eyebrow": "Electronics Engineer \u00b7 Norwich, UK",
+    "eyebrow": "Electronics Engineer · Norwich, UK",
     "headline": "PCB Design & |Power Electronics",
     "bio": "MSc at Coventry University. Specialist in Altium Designer, high-current PCB design, motor drivers, inverters, and battery systems. Available for freelance projects.",
     "email": "mustafakamal.mk2017@gmail.com",
@@ -22,7 +22,7 @@
       "icon": "motor",
       "desc": "Full hardware design for Shell Eco-marathon. MOSFET selection, gate drivers, DC bus, current sensing, overcurrent and thermal protection.",
       "chips": [
-        "37\u201342 V",
+        "37–42 V",
         "15 A",
         "Altium Designer",
         "LTspice",
@@ -33,7 +33,7 @@
     },
     {
       "id": 2,
-      "title": "37V\u201342V 15A Battery Pack",
+      "title": "37V–42V 15A Battery Pack",
       "cat": "power",
       "featured": false,
       "icon": "power",
@@ -188,7 +188,7 @@
       "endYear": 2024,
       "endMonth": 12,
       "ongoing": false,
-      "skills": "Altium \u00b7 IoT \u00b7 BMS",
+      "skills": "Altium · IoT · BMS",
       "logo": ""
     },
     {
@@ -200,7 +200,7 @@
       "endYear": 2022,
       "endMonth": 12,
       "ongoing": false,
-      "skills": "PCB \u00b7 LabVIEW",
+      "skills": "PCB · LabVIEW",
       "logo": ""
     }
   ],

@@ -256,19 +256,65 @@
 <!-- ========================================== -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-import { getFirestore, doc, setDoc, getDoc, onSnapshot, collection, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+import { getFirestore, doc, setDoc, onSnapshot, collection, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-// Standard Environment Variables
-const appId = typeof __app_id !== 'undefined' ? __app_id : 'mk-portfolio-spa';
-const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+// YOUR CORRECTED CONFIGURATION FOR GITHUB
+const appId = 'mk-portfolio-spa';
+const firebaseConfig = {
+  apiKey: "AIzaSyA-YBAxdk8IbuSIOx0Zhst9fbF_XEoO-f4",
+  authDomain: "website-b2c66.firebaseapp.com",
+  projectId: "website-b2c66",
+  storageBucket: "website-b2c66.firebasestorage.app",
+  messagingSenderId: "91106469906",
+  appId: "1:91106469906:web:52e25c34598082cff410cb"
+};
+
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-// Strict Standard Paths required by environment
+// Strict Database Paths
 const pathState = collection(db, 'artifacts', appId, 'public', 'data', 'app_state');
 const pathProjects = collection(db, 'artifacts', appId, 'public', 'data', 'projects');
+
+// Initialize Connection
+async function initDB() {
+    try {
+        await signInAnonymously(auth);
+        setupListeners();
+    } catch(err) {
+        console.error("Firebase Auth Error:", err);
+    }
+}
+
+function setupListeners() {
+    // Listen to Profile
+    onSnapshot(pathState, (snap) => {
+        snap.forEach(d => {
+            if (d.id === 'profile') window.appData.profile = d.data();
+            if (d.id === 'skills') window.appData.skills = d.data().items || [];
+        });
+        if (window.renderApp) window.renderApp();
+    });
+
+    // Listen to Projects
+    onSnapshot(pathProjects, (snap) => {
+        const projs = [];
+        snap.forEach(d => { projs.push({ id: d.id, ...d.data() }); });
+        window.appData.projects = projs.sort((a, b) => parseInt(b.id) - parseInt(a.id));
+        if (window.renderProjects) window.renderProjects();
+        if (window.isAdminOpen && window.renderAdminProjects) window.renderAdminProjects();
+    });
+}
+
+// Global functions for Admin Panel
+window.dbSaveProfile = async (data) => await setDoc(doc(pathState, 'profile'), data);
+window.dbSaveProject = async (id, data) => await setDoc(doc(pathProjects, id.toString()), data);
+window.dbDeleteProject = async (id) => await deleteDoc(doc(pathProjects, id.toString()));
+
+initDB();
+</script>
 
 // Global State
 window.appData = {
